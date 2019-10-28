@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ThingsWeNeed.Models;
 
 namespace ThingsWeNeed.Controllers {
     public class HomeController : Controller {
@@ -19,6 +20,16 @@ namespace ThingsWeNeed.Controllers {
 
         public ActionResult Contact() {
             ViewBag.Message = "Your contact page.";
+
+            AppUser user = new AppUser() {
+                Email = "eriksters@gmail.com",
+                FName = "Eriks",
+                LName = "Petersons",
+                UserId = 12,
+                PhoneNumber = "81917581",
+            };
+
+
 
             return View();
         }

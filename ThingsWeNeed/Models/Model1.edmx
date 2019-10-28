@@ -52,8 +52,7 @@
     <Property Name="ThingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Needed" Type="bit" Nullable="false" />
-    <Property Name="HouseholdHouseholdId" Type="int" Nullable="false" />
-    <Property Name="PurchaseThing_Thing_PurchaseId" Type="int" Nullable="false" />
+    <Property Name="HouseholdId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Households">
     <Key>
@@ -82,6 +81,7 @@
     <Property Name="Paid" Type="float" Nullable="false" />
     <Property Name="AppUser_UserId" Type="int" Nullable="false" />
     <Property Name="Household_HouseholdId" Type="int" Nullable="false" />
+    <Property Name="Thing_ThingId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Wishes">
     <Key>
@@ -112,7 +112,7 @@
         <PropertyRef Name="HouseholdId" />
       </Principal>
       <Dependent Role="Thing">
-        <PropertyRef Name="HouseholdHouseholdId" />
+        <PropertyRef Name="HouseholdId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -141,14 +141,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="PurchaseThing">
-    <End Role="Purchase" Type="Model.Store.Purchases" Multiplicity="1" />
-    <End Role="Thing" Type="Model.Store.Things" Multiplicity="*" />
+    <End Role="Purchase" Type="Model.Store.Purchases" Multiplicity="*" />
+    <End Role="Thing" Type="Model.Store.Things" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="Purchase">
-        <PropertyRef Name="PurchaseId" />
+      <Principal Role="Thing">
+        <PropertyRef Name="ThingId" />
       </Principal>
-      <Dependent Role="Thing">
-        <PropertyRef Name="PurchaseThing_Thing_PurchaseId" />
+      <Dependent Role="Purchase">
+        <PropertyRef Name="Thing_ThingId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -246,7 +246,7 @@
           <Property Name="ThingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="Needed" Type="Boolean" Nullable="false" />
-          <Property Name="HouseholdHouseholdId" Type="Int32" Nullable="false" />
+          <Property Name="HouseholdId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Household">
           <Key>
@@ -255,9 +255,9 @@
           <Property Name="HouseholdId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Address" Type="String" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <NavigationProperty Name="Things" Relationship="Model.ThingHousehold" FromRole="Household" ToRole="Thing" />
-          <NavigationProperty Name="AppUsers" Relationship="Model.HouseholdAppUser" FromRole="Household" ToRole="AppUser" />
-          <NavigationProperty Name="Purchases" Relationship="Model.PurchaseHousehold" FromRole="Household" ToRole="Purchase" />
+          <NavigationProperty Name="Things" Relationship="Model.ThingHousehold" FromRole="Household" ToRole="Thing" cg:SetterAccess="Private" />
+          <NavigationProperty Name="AppUsers" Relationship="Model.HouseholdAppUser" FromRole="Household" ToRole="AppUser" cg:SetterAccess="Private" />
+          <NavigationProperty Name="Purchases" Relationship="Model.PurchaseHousehold" FromRole="Household" ToRole="Purchase" cg:SetterAccess="Private" />
         </EntityType>
         <EntityType Name="AppUser">
           <Key>
@@ -268,10 +268,10 @@
           <Property Name="LName" Type="String" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" Nullable="false" />
           <Property Name="Email" Type="String" Nullable="false" />
-          <NavigationProperty Name="Purchases" Relationship="Model.PurchaseAppUser" FromRole="AppUser" ToRole="Purchase" />
-          <NavigationProperty Name="Households" Relationship="Model.HouseholdAppUser" FromRole="AppUser" ToRole="Household" />
-          <NavigationProperty Name="MadeWishes" Relationship="Model.AppUserWish" FromRole="GrantedBy" ToRole="Wish" />
-          <NavigationProperty Name="GrantedWishes" Relationship="Model.WishAppUser" FromRole="AppUser" ToRole="Wish" />
+          <NavigationProperty Name="Purchases" Relationship="Model.PurchaseAppUser" FromRole="AppUser" ToRole="Purchase" cg:SetterAccess="Private" />
+          <NavigationProperty Name="Households" Relationship="Model.HouseholdAppUser" FromRole="AppUser" ToRole="Household" cg:SetterAccess="Private" />
+          <NavigationProperty Name="MadeWishes" Relationship="Model.AppUserWish" FromRole="GrantedBy" ToRole="Wish" cg:SetterAccess="Private" />
+          <NavigationProperty Name="GrantedWishes" Relationship="Model.WishAppUser" FromRole="AppUser" ToRole="Wish" cg:SetterAccess="Private" />
         </EntityType>
         <EntityType Name="Purchase">
           <Key>
@@ -280,9 +280,9 @@
           <Property Name="PurchaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MadeOn" Type="DateTime" Nullable="false" />
           <Property Name="Paid" Type="Double" Nullable="false" />
-          <NavigationProperty Name="AppUser" Relationship="Model.PurchaseAppUser" FromRole="Purchase" ToRole="AppUser" />
-          <NavigationProperty Name="Household" Relationship="Model.PurchaseHousehold" FromRole="Purchase" ToRole="Household" />
-          <NavigationProperty Name="Thing" Relationship="Model.PurchaseThing" FromRole="Purchase" ToRole="Thing" />
+          <NavigationProperty Name="AppUser" Relationship="Model.PurchaseAppUser" FromRole="Purchase" ToRole="AppUser" cg:SetterAccess="Private" />
+          <NavigationProperty Name="Household" Relationship="Model.PurchaseHousehold" FromRole="Purchase" ToRole="Household" cg:SetterAccess="Private" />
+          <NavigationProperty Name="Thing" Relationship="Model.PurchaseThing" FromRole="Purchase" ToRole="Thing" cg:SetterAccess="Private" />
         </EntityType>
         <EntityType Name="Wish">
           <Key>
@@ -294,9 +294,9 @@
           <Property Name="MadeOn" Type="DateTime" Nullable="false" />
           <Property Name="BoughtOn" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Model.Status" Nullable="false" />
-          <NavigationProperty Name="MadeBy" Relationship="Model.AppUserWish" FromRole="Wish" ToRole="GrantedBy" />
+          <NavigationProperty Name="MadeBy" Relationship="Model.AppUserWish" FromRole="Wish" ToRole="GrantedBy" cg:SetterAccess="Private" />
           <Property Name="MadeByUserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="GrantedBy" Relationship="Model.WishAppUser" FromRole="Wish" ToRole="AppUser" />
+          <NavigationProperty Name="GrantedBy" Relationship="Model.WishAppUser" FromRole="Wish" ToRole="AppUser" cg:SetterAccess="Private" />
           <Property Name="GrantedByUserId" Type="Int32" Nullable="false" />
         </EntityType>
         <EnumType Name="Status" UnderlyingType="Byte">
@@ -313,7 +313,7 @@
               <PropertyRef Name="HouseholdId" />
             </Principal>
             <Dependent Role="Thing">
-              <PropertyRef Name="HouseholdHouseholdId" />
+              <PropertyRef Name="HouseholdId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -330,8 +330,8 @@
           <End Type="Model.Household" Role="Household" Multiplicity="1" />
         </Association>
         <Association Name="PurchaseThing">
-          <End Type="Model.Purchase" Role="Purchase" Multiplicity="1" />
-          <End Type="Model.Thing" Role="Thing" Multiplicity="*" />
+          <End Type="Model.Purchase" Role="Purchase" Multiplicity="*" />
+          <End Type="Model.Thing" Role="Thing" Multiplicity="1" />
         </Association>
         <Association Name="AppUserWish">
           <End Type="Model.AppUser" Role="GrantedBy" Multiplicity="1" />
@@ -369,7 +369,7 @@
           <ScalarProperty Name="ThingId" ColumnName="ThingId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Needed" ColumnName="Needed" />
-          <ScalarProperty Name="HouseholdHouseholdId" ColumnName="HouseholdHouseholdId" />
+          <ScalarProperty Name="HouseholdId" ColumnName="HouseholdId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -440,12 +440,12 @@
         <ScalarProperty Name="PurchaseId" ColumnName="PurchaseId" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="PurchaseThing" TypeName="Model.PurchaseThing" StoreEntitySet="Things">
-      <EndProperty Name="Purchase">
-        <ScalarProperty Name="PurchaseId" ColumnName="PurchaseThing_Thing_PurchaseId" />
-      </EndProperty>
+    <AssociationSetMapping Name="PurchaseThing" TypeName="Model.PurchaseThing" StoreEntitySet="Purchases">
       <EndProperty Name="Thing">
-        <ScalarProperty Name="ThingId" ColumnName="ThingId" />
+        <ScalarProperty Name="ThingId" ColumnName="Thing_ThingId" />
+      </EndProperty>
+      <EndProperty Name="Purchase">
+        <ScalarProperty Name="PurchaseId" ColumnName="PurchaseId" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

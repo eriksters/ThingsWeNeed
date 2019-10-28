@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/27/2019 16:00:34
--- Generated from EDMX file: C:\Repos\ThingsWeNeed\ThingsWeNeed\Models\Model1.edmx
+-- Date Created: 10/28/2019 11:05:50
+-- Generated from EDMX file: G:\Repos\ThingsWeNeed\Models\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -33,7 +33,7 @@ IF OBJECT_ID(N'[dbo].[FK_PurchaseHousehold]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Purchases] DROP CONSTRAINT [FK_PurchaseHousehold];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PurchaseThing]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Things] DROP CONSTRAINT [FK_PurchaseThing];
+    ALTER TABLE [dbo].[Purchases] DROP CONSTRAINT [FK_PurchaseThing];
 GO
 IF OBJECT_ID(N'[dbo].[FK_AppUserWish]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Wishes] DROP CONSTRAINT [FK_AppUserWish];
@@ -74,8 +74,7 @@ CREATE TABLE [dbo].[Things] (
     [ThingId] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Needed] bit  NOT NULL,
-    [HouseholdHouseholdId] int  NOT NULL,
-    [PurchaseThing_Thing_PurchaseId] int  NOT NULL
+    [HouseholdId] int  NOT NULL
 );
 GO
 
@@ -103,7 +102,8 @@ CREATE TABLE [dbo].[Purchases] (
     [MadeOn] datetime  NOT NULL,
     [Paid] float  NOT NULL,
     [AppUser_UserId] int  NOT NULL,
-    [Household_HouseholdId] int  NOT NULL
+    [Household_HouseholdId] int  NOT NULL,
+    [Thing_ThingId] int  NOT NULL
 );
 GO
 
@@ -171,10 +171,10 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [HouseholdHouseholdId] in table 'Things'
+-- Creating foreign key on [HouseholdId] in table 'Things'
 ALTER TABLE [dbo].[Things]
 ADD CONSTRAINT [FK_ThingHousehold]
-    FOREIGN KEY ([HouseholdHouseholdId])
+    FOREIGN KEY ([HouseholdId])
     REFERENCES [dbo].[Households]
         ([HouseholdId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -183,7 +183,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_ThingHousehold'
 CREATE INDEX [IX_FK_ThingHousehold]
 ON [dbo].[Things]
-    ([HouseholdHouseholdId]);
+    ([HouseholdId]);
 GO
 
 -- Creating foreign key on [AppUser_UserId] in table 'Purchases'
@@ -240,19 +240,19 @@ ON [dbo].[Purchases]
     ([Household_HouseholdId]);
 GO
 
--- Creating foreign key on [PurchaseThing_Thing_PurchaseId] in table 'Things'
-ALTER TABLE [dbo].[Things]
+-- Creating foreign key on [Thing_ThingId] in table 'Purchases'
+ALTER TABLE [dbo].[Purchases]
 ADD CONSTRAINT [FK_PurchaseThing]
-    FOREIGN KEY ([PurchaseThing_Thing_PurchaseId])
-    REFERENCES [dbo].[Purchases]
-        ([PurchaseId])
+    FOREIGN KEY ([Thing_ThingId])
+    REFERENCES [dbo].[Things]
+        ([ThingId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PurchaseThing'
 CREATE INDEX [IX_FK_PurchaseThing]
-ON [dbo].[Things]
-    ([PurchaseThing_Thing_PurchaseId]);
+ON [dbo].[Purchases]
+    ([Thing_ThingId]);
 GO
 
 -- Creating foreign key on [MadeByUserId] in table 'Wishes'
