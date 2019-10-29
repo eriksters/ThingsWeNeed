@@ -7,16 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace ThingsWeNeed.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Thing
     {
         public int ThingId { get; set; }
         public string Name { get; set; }
         public bool Needed { get; set; }
         public int HouseholdId { get; set; }
+        [NotMapped]
+        public Purchase LastPurchase { get; set; }
     }
 }

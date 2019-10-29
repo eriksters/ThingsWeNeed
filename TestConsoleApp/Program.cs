@@ -47,9 +47,14 @@ namespace TestConsoleApp {
 
             //Console.WriteLine(user.Email);
 
-            addUser("Erisk", "ASdasd", "ers@gs.ss", "81917581");
+            //addUser("Erisk", "ASdasd", "ers@gs.ss", "81917581");
 
+            //createHousehold("CrazzyHouse", "Rostrupsvej 1");
+            //createHousehold("Crackhouse", "Rostrupsvej 7");
 
+            addThingToHousehold(1, "Dorritos");
+            addThingToHousehold(1, "Bread");
+            printHouseholds();
             Console.Read();
         }
         private static bool addUser(String fName, string lName, string email, string phoneNumber) {
@@ -65,6 +70,50 @@ namespace TestConsoleApp {
                 mc.AppUsers.Add(newUser);
                 mc.SaveChanges();
             }
+            return true;
+        }
+
+        private static bool addThingToHousehold(int householdId, string thingName)
+        {
+            ModelContainer mc = new ModelContainer();
+            Household hh = mc.Households.Find(householdId);
+            Thing newThing = new Thing()
+            {
+                Name = thingName,
+                Needed = true
+            };
+
+            hh.Things.Add(newThing);
+            mc.SaveChanges();
+
+            return true;
+        }
+
+        private static bool createHousehold(string name, string address)
+        {
+            ModelContainer mc = new ModelContainer();
+            Household hh = new Household()
+            {
+                Address = address,
+                Name = name,
+            };
+            mc.Households.Add(hh);
+            mc.SaveChanges();
+
+            return true;
+        }
+
+        private static bool printHouseholds()
+        {
+            ModelContainer mc = new ModelContainer();
+            foreach (Household hh in mc.Households)
+            {
+                Console.WriteLine("Name:" + hh.Name);
+                Console.WriteLine("Address:" + hh.Address);
+                Console.WriteLine("ID:" + hh.HouseholdId);
+                Console.WriteLine("Things:" + hh.Things.Count);
+            }
+
             return true;
         }
     }

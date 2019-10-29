@@ -1,0 +1,43 @@
+﻿@using System.Runtime.Remoting.Messaging
+@using ThingsWeNeed.Models
+@model ThingsWeNeed.Models.Household
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ThingsListView</h2>
+<form>
+    <table class="table table-bordered table-hover table-striped ">
+        <thead>
+        <tr>
+            <th style="width: 50%">Thing</th>
+            <th style="width: 40%">Last Bought</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (Thing t in Model.Things)
+            {
+                <tr>
+                    <td>@t.Name</td>
+                    <td>
+                        @if (t.LastPurchase != null)
+                        {
+                            @t.LastPurchase.ToString();
+                        }
+                        else
+                        {
+                            <text>Not bought</text>
+                        }
+
+                    </td>
+                    <td>
+                        <button style="padding: 10px 70px" type="button" class="btn btn-success">Buy</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

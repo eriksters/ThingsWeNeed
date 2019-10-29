@@ -8,8 +8,11 @@ using ThingsWeNeed.Models;
 
 namespace ThingsWeNeed.Controllers {
     public class HomeController : Controller {
-        public ActionResult Index() {
-            return View();
+        public ActionResult Index()
+        {
+            ModelContainer mc = new ModelContainer();
+
+            return View("ThingsListView", mc.Households.Find(1));
         }
 
         public ActionResult About() {
