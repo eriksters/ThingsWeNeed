@@ -7,15 +7,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <h2>ThingsListView</h2>
 <form>
     <table class="table table-bordered table-hover table-striped ">
         <thead>
         <tr>
             <th style="width: 50%">Thing</th>
-            <th style="width: 35%">Last Bought</th>
-            <th style="width: 15%">Buy/Price/Cancel</th>
+            <th style="width: 40%">Last Bought</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -24,77 +23,21 @@
                 <tr>
                     <td>@t.Name</td>
                     <td>
-                        @if (t.Purchases.Count != 0)
+                        @if (t.LastPurchase != null)
                         {
-                            @t.Purchases.OrderByDescending(d => d.MadeOn).First().MadeOn;
-
+                            @t.LastPurchase.ToString();
                         }
                         else
                         {
-                            <text>Not bght</text>
+                            <text>Not bought</text>
                         }
 
                     </td>
                     <td>
-                        <button style="padding: 10px 70px" type="button" class="btn btn-success buy_button">Buy</button>
-
-                        @*<div class='input-group'>
-                            <input type='text' class='form-control' /> 
-                            <span class="input-group-btn">
-                                <input type="button" class='btn btn-danger' value="X" />
-                            </span>
-                        </div>*@
+                        <button style="padding: 10px 70px" type="button" class="btn btn-success">Buy</button>
                     </td>
-                    
                 </tr>
             }
-
-
         </tbody>
     </table>
 </form>
-
-<script type="text/javascript">
-    var $btnBuy = $("<button style='padding: 10px 70px' type='button' class='btn btn-success buy_button'>Buy</button>");
-    var $btnCancel = $(
-        "<div class='input-group'> " +
-        "<input type='text' class='form-control' /> " +
-        "<span class='input-group-btn'> " +
-        "<input type='button' class='btn btn-danger cancel_button' value='X' /> " +
-        "</span>" +
-        "</div>");
-
-    function cancelClicked(t) {
-        var $v = $("<button style='padding: 10px 70px' type='button' class='btn btn-success buy_button'>Buy</button>");
-        console.log("cancel clicked");
-        t.parent().parent().replaceWith($v);
-        $v.on('click', buyClicked());
-    }
-
-    function buyClicked($t) {
-        var $v = $(
-            "<div class='input-group'> " +
-            "<input type='text' class='form-control' /> " +
-            "<span class='input-group-btn'> " +
-            "<input type='button' class='btn btn-danger cancel_button' value='X' /> " +
-            "</span>" +
-            "</div>");
-        console.log("buy clicked");
-        $t.replaceWith($v);
-        console.log("replaced");
-        $v.on('click', cancelClicked());
-    }
-
-    $("button.buy_button").click(function() {
-        buyClicked($(this));
-    });
-
-    //$("button.cancel_button").click(function () {
-    //    alert();
-    //    $( this ).parent().parent().replaceWith("<button style='padding: 10px 70px' type='button' class='btn btn-success buy_button'>Buy</button>");
-    //});
-
-    //$("button").on('click', '.cancel_button', function() {
-    //    alert();
-    //});
-</script>
