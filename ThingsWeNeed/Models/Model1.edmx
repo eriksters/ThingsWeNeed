@@ -253,8 +253,6 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Needed" Type="Boolean" Nullable="false" />
           <Property Name="HouseholdId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Purchases" Relationship="Model.PurchaseThing" FromRole="Thing" ToRole="Purchase" />
-          <NavigationProperty Name="Household" Relationship="Model.ThingHousehold" FromRole="Thing" ToRole="Household" />
         </EntityType>
         <EntityType Name="Household">
           <Key>
