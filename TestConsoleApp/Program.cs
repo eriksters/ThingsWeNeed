@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -52,11 +53,32 @@ namespace TestConsoleApp {
             //createHousehold("CrazzyHouse", "Rostrupsvej 1");
             //createHousehold("Crackhouse", "Rostrupsvej 7");
 
-            addThingToHousehold(1, "Dorritos");
-            addThingToHousehold(1, "Bread");
-            printHouseholds();
+            //addThingToHousehold(1, "Dorritos");
+            //addThingToHousehold(1, "Bread");
+            //printHouseholds();
+
+            sqlQueries();
+
             Console.Read();
         }
+
+        private static bool sqlQueries()
+        {
+            using (ModelContainer mc = new ModelContainer())
+            {
+                Purchase p1 = mc.Purchases.Find(1);
+                Purchase p2 = mc.Purchases.Find(2);
+
+                List<Purchase> p = mc.Purchases.ToList();
+                Purchase p3 = mc.Purchases.Find(1);
+                Purchase p4 = mc.Purchases.Find(3);
+
+                
+            }
+
+            return true;
+        }
+
         private static bool addUser(String fName, string lName, string email, string phoneNumber) {
             AppUser newUser = new AppUser() {
                 FName = fName,

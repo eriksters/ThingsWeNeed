@@ -7,20 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace ThingsWeNeed.Models
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Thing
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Thing()
+        {
+            this.Purchases = new HashSet<Purchase>();
+        }
+    
         public int ThingId { get; set; }
         public string Name { get; set; }
         public bool Needed { get; set; }
         public int HouseholdId { get; set; }
-        [NotMapped]
-        public Purchase LastPurchase { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Purchase> Purchases { get; set; }
+        public virtual Household Household { get; set; }
     }
 }
