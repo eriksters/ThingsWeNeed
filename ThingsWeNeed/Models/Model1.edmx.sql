@@ -6,12 +6,12 @@
 -- Generated from EDMX file: C:\Repos\ThingsWeNeed\ThingsWeNeed\Models\Model1.edmx
 -- --------------------------------------------------
 
-SET QUOTED_IDENTIFIER OFF;
-GO
-USE [ThingsWeNeedTestDB];
-GO
-IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
-GO
+--SET QUOTED_IDENTIFIER OFF;
+--GO
+--USE [ThingsWeNeedTestDB];
+--GO
+--IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
+--GO
 
 -- --------------------------------------------------
 -- Dropping existing FOREIGN KEY constraints
