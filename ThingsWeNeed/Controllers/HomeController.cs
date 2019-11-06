@@ -12,7 +12,7 @@ namespace ThingsWeNeed.Controllers {
     public class HomeController : Controller {
         public ActionResult Index()
         {
-            int userId = 3;
+            int userId = 1;
 
             //  Open database connection
             using (ModelContainer mc = new ModelContainer())

@@ -4,206 +4,204 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="AppUsers">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="LName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="HouseholdAppUser">
-          <Key>
-            <PropertyRef Name="Households_HouseholdId" />
-            <PropertyRef Name="AppUsers_UserId" />
-          </Key>
-          <Property Name="Households_HouseholdId" Type="int" Nullable="false" />
-          <Property Name="AppUsers_UserId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Households">
-          <Key>
-            <PropertyRef Name="HouseholdId" />
-          </Key>
-          <Property Name="HouseholdId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Purchases">
-          <Key>
-            <PropertyRef Name="PurchaseId" />
-          </Key>
-          <Property Name="PurchaseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MadeOn" Type="datetime" Nullable="false" />
-          <Property Name="Paid" Type="float" Nullable="false" />
-          <Property Name="AppUser_UserId" Type="int" Nullable="false" />
-          <Property Name="Household_HouseholdId" Type="int" Nullable="false" />
-          <Property Name="Thing_ThingId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Things">
-          <Key>
-            <PropertyRef Name="ThingId" />
-          </Key>
-          <Property Name="ThingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Needed" Type="bit" Nullable="false" />
-          <Property Name="HouseholdId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Wishes">
-          <Key>
-            <PropertyRef Name="WIshId" />
-          </Key>
-          <Property Name="WIshId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MaxPrice" Type="float" Nullable="false" />
-          <Property Name="ExtraPay" Type="float" Nullable="false" />
-          <Property Name="MadeOn" Type="datetime" Nullable="false" />
-          <Property Name="BoughtOn" Type="datetime" Nullable="false" />
-          <Property Name="Status" Type="tinyint" Nullable="false" />
-          <Property Name="MadeByUserId" Type="int" Nullable="false" />
-          <Property Name="GrantedByUserId" Type="int" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_AppUserWish">
-          <End Role="AppUsers" Type="Self.AppUsers" Multiplicity="1" />
-          <End Role="Wishes" Type="Self.Wishes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AppUsers">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Wishes">
-              <PropertyRef Name="MadeByUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HouseholdAppUser_AppUser">
-          <End Role="AppUsers" Type="Self.AppUsers" Multiplicity="1" />
-          <End Role="HouseholdAppUser" Type="Self.HouseholdAppUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AppUsers">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="HouseholdAppUser">
-              <PropertyRef Name="AppUsers_UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HouseholdAppUser_Household">
-          <End Role="Households" Type="Self.Households" Multiplicity="1" />
-          <End Role="HouseholdAppUser" Type="Self.HouseholdAppUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Households">
-              <PropertyRef Name="HouseholdId" />
-            </Principal>
-            <Dependent Role="HouseholdAppUser">
-              <PropertyRef Name="Households_HouseholdId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseAppUser">
-          <End Role="AppUsers" Type="Self.AppUsers" Multiplicity="1" />
-          <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AppUsers">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Purchases">
-              <PropertyRef Name="AppUser_UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseHousehold">
-          <End Role="Households" Type="Self.Households" Multiplicity="1" />
-          <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Households">
-              <PropertyRef Name="HouseholdId" />
-            </Principal>
-            <Dependent Role="Purchases">
-              <PropertyRef Name="Household_HouseholdId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseThing">
-          <End Role="Things" Type="Self.Things" Multiplicity="1" />
-          <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Things">
-              <PropertyRef Name="ThingId" />
-            </Principal>
-            <Dependent Role="Purchases">
-              <PropertyRef Name="Thing_ThingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ThingHousehold">
-          <End Role="Households" Type="Self.Households" Multiplicity="1" />
-          <End Role="Things" Type="Self.Things" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Households">
-              <PropertyRef Name="HouseholdId" />
-            </Principal>
-            <Dependent Role="Things">
-              <PropertyRef Name="HouseholdId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WishAppUser">
-          <End Role="AppUsers" Type="Self.AppUsers" Multiplicity="1" />
-          <End Role="Wishes" Type="Self.Wishes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AppUsers">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Wishes">
-              <PropertyRef Name="GrantedByUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Function Name="ThingLastPurchase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="thingId" Type="int" Mode="In" />
-        </Function>
-        <EntityContainer Name="ModelStoreContainer">
-          <EntitySet Name="AppUsers" EntityType="Self.AppUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="HouseholdAppUser" EntityType="Self.HouseholdAppUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Households" EntityType="Self.Households" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Purchases" EntityType="Self.Purchases" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Things" EntityType="Self.Things" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Wishes" EntityType="Self.Wishes" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_AppUserWish" Association="Self.FK_AppUserWish">
-            <End Role="AppUsers" EntitySet="AppUsers" />
-            <End Role="Wishes" EntitySet="Wishes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HouseholdAppUser_AppUser" Association="Self.FK_HouseholdAppUser_AppUser">
-            <End Role="AppUsers" EntitySet="AppUsers" />
-            <End Role="HouseholdAppUser" EntitySet="HouseholdAppUser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HouseholdAppUser_Household" Association="Self.FK_HouseholdAppUser_Household">
-            <End Role="Households" EntitySet="Households" />
-            <End Role="HouseholdAppUser" EntitySet="HouseholdAppUser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseAppUser" Association="Self.FK_PurchaseAppUser">
-            <End Role="AppUsers" EntitySet="AppUsers" />
-            <End Role="Purchases" EntitySet="Purchases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseHousehold" Association="Self.FK_PurchaseHousehold">
-            <End Role="Households" EntitySet="Households" />
-            <End Role="Purchases" EntitySet="Purchases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseThing" Association="Self.FK_PurchaseThing">
-            <End Role="Things" EntitySet="Things" />
-            <End Role="Purchases" EntitySet="Purchases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ThingHousehold" Association="Self.FK_ThingHousehold">
-            <End Role="Households" EntitySet="Households" />
-            <End Role="Things" EntitySet="Things" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WishAppUser" Association="Self.FK_WishAppUser">
-            <End Role="AppUsers" EntitySet="AppUsers" />
-            <End Role="Wishes" EntitySet="Wishes" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Things" EntityType="Model.Store.Things" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Households" EntityType="Model.Store.Households" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AppUsers" EntityType="Model.Store.AppUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Purchases" EntityType="Model.Store.Purchases" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Wishes" EntityType="Model.Store.Wishes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HouseholdAppUser" EntityType="Model.Store.HouseholdAppUser" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ThingHousehold" Association="Model.Store.ThingHousehold">
+      <End Role="Thing" EntitySet="Things" />
+      <End Role="Household" EntitySet="Households" />
+    </AssociationSet>
+    <AssociationSet Name="PurchaseAppUser" Association="Model.Store.PurchaseAppUser">
+      <End Role="Purchase" EntitySet="Purchases" />
+      <End Role="AppUser" EntitySet="AppUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HouseholdAppUser_Household" Association="Model.Store.FK_HouseholdAppUser_Household">
+      <End Role="Household" EntitySet="Households" />
+      <End Role="HouseholdAppUser" EntitySet="HouseholdAppUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HouseholdAppUser_AppUser" Association="Model.Store.FK_HouseholdAppUser_AppUser">
+      <End Role="AppUser" EntitySet="AppUsers" />
+      <End Role="HouseholdAppUser" EntitySet="HouseholdAppUser" />
+    </AssociationSet>
+    <AssociationSet Name="PurchaseHousehold" Association="Model.Store.PurchaseHousehold">
+      <End Role="Purchase" EntitySet="Purchases" />
+      <End Role="Household" EntitySet="Households" />
+    </AssociationSet>
+    <AssociationSet Name="PurchaseThing" Association="Model.Store.PurchaseThing">
+      <End Role="Purchase" EntitySet="Purchases" />
+      <End Role="Thing" EntitySet="Things" />
+    </AssociationSet>
+    <AssociationSet Name="AppUserWish" Association="Model.Store.AppUserWish">
+      <End Role="GrantedBy" EntitySet="AppUsers" />
+      <End Role="Wish" EntitySet="Wishes" />
+    </AssociationSet>
+    <AssociationSet Name="WishAppUser" Association="Model.Store.WishAppUser">
+      <End Role="Wish" EntitySet="Wishes" />
+      <End Role="AppUser" EntitySet="AppUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Things">
+    <Key>
+      <PropertyRef Name="ThingId" />
+    </Key>
+    <Property Name="ThingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Needed" Type="bit" Nullable="false" />
+    <Property Name="HouseholdId" Type="int" Nullable="false" />
+    <Property Name="DefaultPrice" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Households">
+    <Key>
+      <PropertyRef Name="HouseholdId" />
+    </Key>
+    <Property Name="HouseholdId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AppUsers">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Purchases">
+    <Key>
+      <PropertyRef Name="PurchaseId" />
+    </Key>
+    <Property Name="PurchaseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MadeOn" Type="datetime" Nullable="false" />
+    <Property Name="Paid" Type="float" Nullable="false" />
+    <Property Name="AppUser_UserId" Type="int" Nullable="false" />
+    <Property Name="Household_HouseholdId" Type="int" Nullable="false" />
+    <Property Name="Thing_ThingId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Wishes">
+    <Key>
+      <PropertyRef Name="WIshId" />
+    </Key>
+    <Property Name="WIshId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaxPrice" Type="float" Nullable="false" />
+    <Property Name="ExtraPay" Type="float" Nullable="false" />
+    <Property Name="MadeOn" Type="datetime" Nullable="false" />
+    <Property Name="BoughtOn" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="MadeByUserId" Type="int" Nullable="false" />
+    <Property Name="GrantedByUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HouseholdAppUser">
+    <Key>
+      <PropertyRef Name="Households_HouseholdId" />
+      <PropertyRef Name="AppUsers_UserId" />
+    </Key>
+    <Property Name="Households_HouseholdId" Type="int" Nullable="false" />
+    <Property Name="AppUsers_UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ThingHousehold">
+    <End Role="Thing" Type="Model.Store.Things" Multiplicity="*" />
+    <End Role="Household" Type="Model.Store.Households" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Household">
+        <PropertyRef Name="HouseholdId" />
+      </Principal>
+      <Dependent Role="Thing">
+        <PropertyRef Name="HouseholdId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PurchaseAppUser">
+    <End Role="Purchase" Type="Model.Store.Purchases" Multiplicity="*" />
+    <End Role="AppUser" Type="Model.Store.AppUsers" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AppUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Purchase">
+        <PropertyRef Name="AppUser_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PurchaseHousehold">
+    <End Role="Purchase" Type="Model.Store.Purchases" Multiplicity="*" />
+    <End Role="Household" Type="Model.Store.Households" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Household">
+        <PropertyRef Name="HouseholdId" />
+      </Principal>
+      <Dependent Role="Purchase">
+        <PropertyRef Name="Household_HouseholdId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PurchaseThing">
+    <End Role="Purchase" Type="Model.Store.Purchases" Multiplicity="*" />
+    <End Role="Thing" Type="Model.Store.Things" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Thing">
+        <PropertyRef Name="ThingId" />
+      </Principal>
+      <Dependent Role="Purchase">
+        <PropertyRef Name="Thing_ThingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AppUserWish">
+    <End Role="GrantedBy" Type="Model.Store.AppUsers" Multiplicity="1" />
+    <End Role="Wish" Type="Model.Store.Wishes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrantedBy">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Wish">
+        <PropertyRef Name="MadeByUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="WishAppUser">
+    <End Role="Wish" Type="Model.Store.Wishes" Multiplicity="*" />
+    <End Role="AppUser" Type="Model.Store.AppUsers" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AppUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Wish">
+        <PropertyRef Name="GrantedByUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HouseholdAppUser_Household">
+    <End Role="Household" Type="Model.Store.Households" Multiplicity="1" />
+    <End Role="HouseholdAppUser" Type="Model.Store.HouseholdAppUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Household">
+        <PropertyRef Name="HouseholdId" />
+      </Principal>
+      <Dependent Role="HouseholdAppUser">
+        <PropertyRef Name="Households_HouseholdId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HouseholdAppUser_AppUser">
+    <End Role="HouseholdAppUser" Type="Model.Store.HouseholdAppUser" Multiplicity="*" />
+    <End Role="AppUser" Type="Model.Store.AppUsers" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AppUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="HouseholdAppUser">
+        <PropertyRef Name="AppUsers_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -255,6 +253,7 @@
           <Property Name="HouseholdId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Purchases" Relationship="Model.PurchaseThing" FromRole="Thing" ToRole="Purchase" />
           <NavigationProperty Name="Household" Relationship="Model.ThingHousehold" FromRole="Thing" ToRole="Household" />
+          <Property Name="DefaultPrice" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Household">
           <Key>
@@ -386,6 +385,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Needed" ColumnName="Needed" />
           <ScalarProperty Name="HouseholdId" ColumnName="HouseholdId" />
+          <ScalarProperty Name="DefaultPrice" ColumnName="DefaultPrice" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -464,7 +464,6 @@
         <ScalarProperty Name="PurchaseId" ColumnName="PurchaseId" />
       </EndProperty>
     </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="ThingLastPurchase" FunctionName="Model.Store.ThingLastPurchase" />
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

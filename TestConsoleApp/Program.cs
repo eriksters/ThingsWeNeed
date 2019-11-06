@@ -10,46 +10,11 @@ using ThingsWeNeed.Models;
 namespace TestConsoleApp {
     class Program {
         static void Main(string[] args) {
-            AppUser user = new AppUser() {
-                Email = "eriksters@gmail.com",
-                FName = "Eriks",
-                LName = "Petersons",
-                UserId = 12,
-                PhoneNumber = "81917581",
-            };
-
-            ModelContainer mc = new ModelContainer();
-            mc.AppUsers.Add(user);
-
-
-
-            Household hh = new Household() {
-                Address = "Rostrupsvej 7",
-                Name = "Crackhouse",
-            };
-
-            Thing t = new Thing() {
-                Name = "Toilet Paper",
-                Needed = false,
-            };
-
-            hh.Things.Add(t);
-
-            mc.Households.Add(hh);
-            mc.SaveChanges();
-
-            Console.WriteLine(user.Email);
-
-            addUser("Erisk", "ASdasd", "ers@gs.ss", "81917581");
-
-            createHousehold("CrazzyHouse", "Rostrupsvej 1");
-            createHousehold("Crackhouse", "Rostrupsvej 7");
-
-            addThingToHousehold(1, "Dorritos");
-            addThingToHousehold(1, "Bread");
-            printHouseholds();
-
-            sqlQueries();
+            TestDataFactory tdf = new TestDataFactory();
+            using (ModelContainer mc = new ModelContainer())
+            {
+                tdf.createTestData(mc);
+            }
 
             Console.Read();
         }

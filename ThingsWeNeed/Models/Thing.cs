@@ -24,6 +24,7 @@ namespace ThingsWeNeed.Models
         public string Name { get; set; }
         public bool Needed { get; set; }
         public int HouseholdId { get; set; }
+        public string DefaultPrice { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Purchase> Purchases { get; set; }
