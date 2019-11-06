@@ -4,15 +4,11 @@ using System.Linq;
 using System.Web;
 
 namespace ThingsWeNeed.Models.ViewModels {
-    public class ThingsListViewModel
+    public class ThingsListViewModel : ViewModel
     {
-        private ICollection<Thing> valThingsList;
-
-        public ICollection<Thing> ThingsList
-        {
-            get => valThingsList;
-            set => valThingsList = value;
-        }
+        public AppUser User { get; set; }
+    
+        public ThingsListViewModel(string title) : base(title) { }
 
     }
 }

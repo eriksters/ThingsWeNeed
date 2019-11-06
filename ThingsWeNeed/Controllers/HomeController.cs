@@ -12,27 +12,32 @@ namespace ThingsWeNeed.Controllers {
     public class HomeController : Controller {
         public ActionResult Index()
         {
+            int userId = 3;
 
-            int householdId = 1;
+            //  Open database connection
+            using (ModelContainer mc = new ModelContainer())
+            {   
+                //  If household is not found, show 404 page
+                //if (household == null)
+                //{
+                //    return HttpNotFound($"Household with the id [{userId}] not found.");
+                //}
 
-            //  Instantiate
-            ThingsListViewModel model = new ThingsListViewModel();
-            ModelContainer mc = new ModelContainer();
-            mc.Households.Include("Thing.Purchases");
-            
+                //  Create View Model
+                ThingsListViewModel model = new ThingsListViewModel ("Needs") {
+                    //  Eager load the purchases
+                    //  (Decreases times the database needs to be accessed, no DB access happens in the views layer)
+                    User = mc.AppUsers
+                        .Include("Households")
+                        .Include("Households.Things")
+                        .Include("Households.Things.Purchases")
+                        .Single(x => x.UserId == userId)
 
-            //  Find the household
-            Household household = mc.Households.Find(householdId);
+                };
 
-            //If household is not found, throw 404 page
-            if (household == null)
-            {
-                return HttpNotFound($"Household with the id [{householdId}] not found.");
+                //  Return View with complete ViewModel
+                return View("ThingsListView", model);
             }
-
-            model.ThingsList = household.Things;
-
-            return View("ThingsListView", model);
         }
 
         public ActionResult About() {
