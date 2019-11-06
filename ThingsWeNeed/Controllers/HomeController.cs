@@ -12,7 +12,7 @@ namespace ThingsWeNeed.Controllers {
         {
             ModelContainer mc = new ModelContainer();
 
-            return View("ThingsListView", mc.Households.Find(1));
+            return View("ThingsListView");
         }
 
         public ActionResult About() {
