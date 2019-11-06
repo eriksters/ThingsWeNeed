@@ -4,15 +4,35 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using ThingsWeNeed.Models;
+using ThingsWeNeed.Models.ViewModels;
 
 namespace ThingsWeNeed.Controllers {
     public class HomeController : Controller {
         public ActionResult Index()
         {
-            ModelContainer mc = new ModelContainer();
 
-            return View("ThingsListView");
+            int householdId = 1;
+
+            //  Instantiate
+            ThingsListViewModel model = new ThingsListViewModel();
+            ModelContainer mc = new ModelContainer();
+            mc.Households.Include("Thing.Purchases");
+            
+
+            //  Find the household
+            Household household = mc.Households.Find(householdId);
+
+            //If household is not found, throw 404 page
+            if (household == null)
+            {
+                return HttpNotFound($"Household with the id [{householdId}] not found.");
+            }
+
+            model.ThingsList = household.Things;
+
+            return View("ThingsListView", model);
         }
 
         public ActionResult About() {

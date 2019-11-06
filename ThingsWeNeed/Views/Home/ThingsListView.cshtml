@@ -1,6 +1,7 @@
-﻿@using System.Runtime.Remoting.Messaging
+﻿@using System.Activities.Expressions
+@using System.Runtime.Remoting.Messaging
 @using ThingsWeNeed.Models
-@model ThingsWeNeed.Models.Household
+@model ThingsWeNeed.Models.ViewModels.ThingsListViewModel
 
 @{
     ViewBag.Title = "View";
@@ -19,34 +20,64 @@
             </tr>
         </thead>
         <tbody>
+        
+        @if (Model.ThingsList.Count > 1)
+        {
+            foreach (Thing t in Model.ThingsList)
+            {
+                <tr>
+                    <td>@t.Name</td>
+                    <td>
+                        @if (t.Purchases.Count > 0)
+                        {
+                            <text>@t.Purchases.OrderBy(f => f.MadeOn).First().MadeOn.ToString()</text>
+                        }
+                        else
+                        {
+                            <text>Not bought</text>
+                        }
+
+                    </td>
+                    <td>
+                        <button style="padding: 6px 40px; min-width: 60px"
+                                type="button"
+                                class="btn btn-success buy_button" title="Buy">
+                            Buy
+                        </button>
+                        <div class='input-group btn_stopper' style="min-width: 106px; display: none; height: 10px">
+                            <input type='text' class='form-control'/>
+                            <span class='input-group-btn'>
+                                <input type='button' class='btn btn-danger cancel_button' value='X' title="Cancel"/>
+                            </span>
+                        </div>
+                    </td>
+
+                </tr>
+            }
+        }
+        else
+        {
             <tr>
-                <td>Toilet paper</td>
-                <td>Fuckin yesterday</td>
-                <td>
-                    <button style="padding: 6px 40px; min-width: 60px"
-                            type="button"
-                            class="btn btn-success buy_button" title="Buy">
-                        Buy
-                    </button>
-                    <div class='input-group btn_stopper' style="min-width: 106px; display: none; height: 10px">
-                        <input type='text' class='form-control' />
-                        <span class='input-group-btn'>
-                            <input type='button' class='btn btn-danger cancel_button' value='X' title="Cancel" />
-                        </span>
-                    </div>
+                <td colspan="3" style="text-align: center">
+                    No things to display
                 </td>
             </tr>
+        }
 
         </tbody>
     </table>
 </form>
+
+
+
+
+
 
 <script>
     $("button.buy_button").click(function () {
         $(this).hide();
         $(this).parent().children("div.btn_stopper")
             .show();
-        $("#third_column_name").html("Price/Cancel");
     });
 
     $("input.cancel_button").click(function () {
@@ -54,97 +85,5 @@
         $divElement.parent().children("button.buy_button")
             .show();
         $divElement.hide();
-        $("#third_column_name").html("Buy");
     });
 </script>
-
-@*<h2>ThingsListView</h2>
-    <form>
-        <table class="table table-bordered table-hover table-striped ">
-            <thead>
-            <tr>
-                <th style="width: 50%">Thing</th>
-                <th style="width: 35%">Last Bought</th>
-                <th style="width: 15%">Buy/Price/Cancel</th>
-            </tr>
-            </thead>
-            <tbody>*@
-@*@foreach (Thing t in Model.Things)
-    {
-        <tr>
-            <td>@t.Name</td>
-            <td>
-                @if (t.Purchases.Count != 0)
-                {
-                    @t.Purchases.OrderByDescending(d => d.MadeOn).First().MadeOn;
-
-                }
-                else
-                {
-                    <text>Not bght</text>
-                }
-
-            </td>*@
-@*<td>
-                            <button style="padding: 10px 70px" type="button" class="btn btn-success buy_button">Buy</button>
-
-                            <div class='input-group'>
-                                <input type='text' class='form-control' />
-                                <span class="input-group-btn">
-                                    <input type="button" class='btn btn-danger' value="X" />
-                                </span>
-                            </div>
-                        </td>
-
-                    </tr>
-                }
-
-
-            </tbody>
-        </table>
-    </form>*@
-
-@*<script type="text/javascript">
-        var $btnBuy = $("<button style='padding: 10px 70px' type='button' class='btn btn-success buy_button'>Buy</button>");
-        var $btnCancel = $(
-            "<div class='input-group'> " +
-            "<input type='text' class='form-control' /> " +
-            "<span class='input-group-btn'> " +
-            "<input type='button' class='btn btn-danger cancel_button' value='X' /> " +
-            "</span>" +
-            "</div>");
-
-        function cancelClicked(t) {
-            var $v = $("<button style='padding: 10px 70px' type='button' class='btn btn-success buy_button'>Buy</button>");
-            console.log("cancel clicked");
-            t.parent().parent().replaceWith($v);
-            $v.on('click', buyClicked());
-        }
-
-        function buyClicked($t) {
-            var $v = $(
-                "<div class='input-group'> " +
-                "<input type='text' class='form-control' /> " +
-                "<span class='input-group-btn'> " +
-                "<input type='button' class='btn btn-danger cancel_button' value='X' /> " +
-                "</span>" +
-                "</div>");
-            console.log("buy clicked");
-            $t.replaceWith($v);
-            console.log("replaced");
-            $v.on('click', cancelClicked());
-        }
-
-        $("button.buy_button").click(function() {
-            buyClicked($(this));
-        });
-
-        $("button.cancel_button").click(function () {
-            alert();
-            $( this ).parent().parent().replaceWith("<button style='padding: 10px 70px' type='button' class='btn btn-success buy_button'>Buy</button>");
-        });
-
-        $("button").on('click', '.cancel_button', function() {
-            alert();
-        });
-    </script>*@
