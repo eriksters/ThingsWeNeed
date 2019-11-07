@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Win32;
 using ThingsWeNeed.Models;
 
 namespace TestConsoleApp {
@@ -77,6 +72,15 @@ namespace TestConsoleApp {
             user1.Purchases.Add(purchase1);
             household1.Purchases.Add(purchase1);
             thing1.Purchases.Add(purchase1);
+
+            Purchase purchase2 = new Purchase() {
+                MadeOn = DateTime.Parse("03/10/1999"),
+                Paid = 29,
+            };
+            user2.Purchases.Add(purchase2);
+            household1.Purchases.Add(purchase2);
+            thing2.Purchases.Add(purchase2);
+
 
             mc.Households.Add(household1);
             mc.Households.Add(household2);
