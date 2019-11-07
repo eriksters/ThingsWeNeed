@@ -28,14 +28,19 @@
     $("button#save_button").click(function () {
         var purchaseArray = [];
         var count = 0;
-        var alertStr = '------';
-        buyMap.forEach(function (key, value) {
-            if (value == true) {
-                var str = $(document).find("#" + key).attr("style");
-                alertStr += str + '\n'
+        var alertStr = '';
+        buyMap.forEach(function (value, key) {
+            if (value === true) {
+                var idString = "#" + key;
+                var str = $(document).find(idString).attr("id") + ": " + value;
+                var price = $(document).find(idString).find("input.price_input")[0].value;
+                alertStr += idString + "\n";
+                alertStr += str + "\n";
+                alertStr += price + "\n \n";
+                count += 1;
             }
         }); 
-        alert(alertStr);
-        $.post('/Home/Index', buyMap);
+        console.log(alertStr);
+        $.post("/Home/Index/", buyMap);
     });
 });

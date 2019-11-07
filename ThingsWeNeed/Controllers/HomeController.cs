@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
@@ -40,10 +41,11 @@ namespace ThingsWeNeed.Controllers {
             }
         }
 
-        //[HttpPost]
-        //public ActionResult Index(IList<tempPurchase> map) {
-        //    Purchase p = new Purchase();
-        //}
+        [HttpPost]
+        public ActionResult Index(IList<Purchase> map) {
+            Purchase p = new Purchase();
+            return Content("Purchases");
+        }
 
         public ActionResult About() {
             ViewBag.Message = "Your application description page.";
