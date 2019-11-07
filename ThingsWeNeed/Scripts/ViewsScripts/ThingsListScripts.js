@@ -1,4 +1,5 @@
 ﻿$(function () {
+
     var buyMap = new Map();
     $("button.buy_button").click(function() {
         $(this).hide();
@@ -20,7 +21,21 @@
         alert(alertString);
     });
 
+    //Purchase:
+    //Paid
+    //Id
+    
     $("button#save_button").click(function () {
+        var purchaseArray = [];
+        var count = 0;
+        var alertStr = '------';
+        buyMap.forEach(function (key, value) {
+            if (value == true) {
+                var str = $(document).find("#" + key).attr("style");
+                alertStr += str + '\n'
+            }
+        }); 
+        alert(alertStr);
         $.post('/Home/Index', buyMap);
     });
 });

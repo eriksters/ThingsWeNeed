@@ -40,6 +40,11 @@ namespace ThingsWeNeed.Controllers {
             }
         }
 
+        //[HttpPost]
+        //public ActionResult Index(IList<tempPurchase> map) {
+        //    Purchase p = new Purchase();
+        //}
+
         public ActionResult About() {
             ViewBag.Message = "Your application description page.";
 
