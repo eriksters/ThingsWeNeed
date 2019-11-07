@@ -7,27 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ThingsWeNeed.Models
+namespace TestConsoleApp.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Thing
+    public partial class Household
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Thing()
+        public Household()
         {
             this.Purchases = new HashSet<Purchase>();
+            this.Things = new HashSet<Thing>();
+            this.AppUsers = new HashSet<AppUser>();
         }
     
-        public int ThingId { get; set; }
-        public string Name { get; set; }
-        public bool Needed { get; set; }
         public int HouseholdId { get; set; }
-        public string DefaultPrice { get; set; }
+        public string Address { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Purchase> Purchases { get; set; }
-        public virtual Household Household { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Thing> Things { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AppUser> AppUsers { get; set; }
     }
 }

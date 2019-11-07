@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/28/2019 15:42:14
+-- Date Created: 11/06/2019 11:34:06
 -- Generated from EDMX file: C:\Repos\ThingsWeNeed\ThingsWeNeed\Models\Model1.edmx
 -- --------------------------------------------------
 
@@ -17,17 +17,17 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_ThingHousehold]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Things] DROP CONSTRAINT [FK_ThingHousehold];
+IF OBJECT_ID(N'[dbo].[FK_AppUserWish]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Wishes] DROP CONSTRAINT [FK_AppUserWish];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PurchaseAppUser]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Purchases] DROP CONSTRAINT [FK_PurchaseAppUser];
+IF OBJECT_ID(N'[dbo].[FK_HouseholdAppUser_AppUser]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HouseholdAppUser] DROP CONSTRAINT [FK_HouseholdAppUser_AppUser];
 GO
 IF OBJECT_ID(N'[dbo].[FK_HouseholdAppUser_Household]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[HouseholdAppUser] DROP CONSTRAINT [FK_HouseholdAppUser_Household];
 GO
-IF OBJECT_ID(N'[dbo].[FK_HouseholdAppUser_AppUser]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[HouseholdAppUser] DROP CONSTRAINT [FK_HouseholdAppUser_AppUser];
+IF OBJECT_ID(N'[dbo].[FK_PurchaseAppUser]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Purchases] DROP CONSTRAINT [FK_PurchaseAppUser];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PurchaseHousehold]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Purchases] DROP CONSTRAINT [FK_PurchaseHousehold];
@@ -35,8 +35,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PurchaseThing]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Purchases] DROP CONSTRAINT [FK_PurchaseThing];
 GO
-IF OBJECT_ID(N'[dbo].[FK_AppUserWish]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Wishes] DROP CONSTRAINT [FK_AppUserWish];
+IF OBJECT_ID(N'[dbo].[FK_ThingHousehold]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Things] DROP CONSTRAINT [FK_ThingHousehold];
 GO
 IF OBJECT_ID(N'[dbo].[FK_WishAppUser]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Wishes] DROP CONSTRAINT [FK_WishAppUser];
@@ -46,23 +46,23 @@ GO
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Things]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Things];
+IF OBJECT_ID(N'[dbo].[AppUsers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AppUsers];
+GO
+IF OBJECT_ID(N'[dbo].[HouseholdAppUser]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HouseholdAppUser];
 GO
 IF OBJECT_ID(N'[dbo].[Households]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Households];
 GO
-IF OBJECT_ID(N'[dbo].[AppUsers]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AppUsers];
-GO
 IF OBJECT_ID(N'[dbo].[Purchases]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Purchases];
 GO
+IF OBJECT_ID(N'[dbo].[Things]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Things];
+GO
 IF OBJECT_ID(N'[dbo].[Wishes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Wishes];
-GO
-IF OBJECT_ID(N'[dbo].[HouseholdAppUser]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[HouseholdAppUser];
 GO
 
 -- --------------------------------------------------
@@ -74,7 +74,8 @@ CREATE TABLE [dbo].[Things] (
     [ThingId] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Needed] bit  NOT NULL,
-    [HouseholdId] int  NOT NULL
+    [HouseholdId] int  NOT NULL,
+    [DefaultPrice] nvarchar(max)  NOT NULL
 );
 GO
 

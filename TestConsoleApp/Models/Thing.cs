@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ThingsWeNeed.Models
+namespace TestConsoleApp.Models
 {
     using System;
     using System.Collections.Generic;
@@ -24,10 +24,9 @@ namespace ThingsWeNeed.Models
         public string Name { get; set; }
         public bool Needed { get; set; }
         public int HouseholdId { get; set; }
-        public string DefaultPrice { get; set; }
     
+        public virtual Household Household { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Purchase> Purchases { get; set; }
-        public virtual Household Household { get; set; }
     }
 }

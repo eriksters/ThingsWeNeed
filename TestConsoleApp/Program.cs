@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -9,54 +10,32 @@ using ThingsWeNeed.Models;
 namespace TestConsoleApp {
     class Program {
         static void Main(string[] args) {
-            //AppUser user = new AppUser() {
-            //    Email = "eriksters@gmail.com",
-            //    FName = "Eriks",
-            //    LName = "Petersons",
-            //    UserId = 12,
-            //    PhoneNumber = "81917581",
-            //};
+            TestDataFactory tdf = new TestDataFactory();
+            using (ModelContainer mc = new ModelContainer())
+            {
+                tdf.createTestData(mc);
+            }
 
-            //ModelContainer mc = new ModelContainer();
-            //mc.AppUsers.Add(user);
-
-
-
-            //Household hh = new Household() {
-            //    Address = "Rostrupsvej 7",
-            //    Name = "Crackhouse",
-            //};
-
-            //Thing t = new Thing() {
-            //    Name = "Toilet Paper",
-            //    Needed = false,
-            //};
-
-            //hh.Things.Add(t);
-
-            //mc.Households.Add(hh);
-            //mc.SaveChanges();
-            //Console.WriteLine("Hellow World");
-            //Console.Read();
-
-            //ModelContainer mc = new ModelContainer();
-            //AppUser user = mc.AppUsers.Find(1);
-            //Household hh = mc.Households.Find(1);
-            //hh.AppUsers.Remove(user);
-            //mc.SaveChanges();
-
-            //Console.WriteLine(user.Email);
-
-            //addUser("Erisk", "ASdasd", "ers@gs.ss", "81917581");
-
-            //createHousehold("CrazzyHouse", "Rostrupsvej 1");
-            //createHousehold("Crackhouse", "Rostrupsvej 7");
-
-            addThingToHousehold(1, "Dorritos");
-            addThingToHousehold(1, "Bread");
-            printHouseholds();
             Console.Read();
         }
+
+        private static bool sqlQueries()
+        {
+            using (ModelContainer mc = new ModelContainer())
+            {
+                Purchase p1 = mc.Purchases.Find(1);
+                Purchase p2 = mc.Purchases.Find(2);
+
+                List<Purchase> p = mc.Purchases.ToList();
+                Purchase p3 = mc.Purchases.Find(1);
+                Purchase p4 = mc.Purchases.Find(3);
+
+                
+            }
+
+            return true;
+        }
+
         private static bool addUser(String fName, string lName, string email, string phoneNumber) {
             AppUser newUser = new AppUser() {
                 FName = fName,
