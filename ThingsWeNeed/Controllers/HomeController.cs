@@ -11,40 +11,11 @@ using ThingsWeNeed.Models.ViewModels;
 
 namespace ThingsWeNeed.Controllers {
     public class HomeController : Controller {
-        public ActionResult Index()
-        {
-            int userId = 1;
 
-            //  Open database connection
-            using (ModelContainer mc = new ModelContainer())
-            {   
-                //  If household is not found, show 404 page
-                //if (household == null)
-                //{
-                //    return HttpNotFound($"Household with the id [{userId}] not found.");
-                //}
+        public ActionResult Index() {
+            ViewBag.Message = "";
 
-                //  Create View Model
-                ThingsListViewModel model = new ThingsListViewModel ("Needs") {
-                    //  Eager load the purchases
-                    //  (Decreases times the database needs to be accessed, no DB access happens in the views layer)
-                    User = mc.AppUsers
-                        .Include("Households")
-                        .Include("Households.Things")
-                        .Include("Households.Things.Purchases")
-                        .Single(x => x.UserId == userId)
-
-                };
-
-                //  Return View with complete ViewModel
-                return View("ThingsListView", model);
-            }
-        }
-
-        [HttpPost]
-        public ActionResult Index(IList<Purchase> map) {
-            Purchase p = new Purchase();
-            return Content("Purchases");
+            return View();
         }
 
         public ActionResult About() {

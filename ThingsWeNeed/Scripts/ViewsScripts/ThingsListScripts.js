@@ -1,6 +1,6 @@
 ﻿$(function () {
-
     var buyMap = new Map();
+
     $("button.buy_button").click(function() {
         $(this).hide();
         $(this).parent().children("div.btn_stopper")
@@ -20,27 +20,29 @@
         });
         alert(alertString);
     });
-
-    //Purchase:
-    //Paid
-    //Id
     
     $("button#save_button").click(function () {
-        var purchaseArray = [];
-        var count = 0;
         var alertStr = '';
+        var needsList = new Array();
         buyMap.forEach(function (value, key) {
             if (value === true) {
                 var idString = "#" + key;
                 var str = $(document).find(idString).attr("id") + ": " + value;
-                var price = $(document).find(idString).find("input.price_input")[0].value;
+                var thingPrice = $(document).find(idString).find("input.price_input")[0].value;
                 alertStr += idString + "\n";
                 alertStr += str + "\n";
-                alertStr += price + "\n \n";
-                count += 1;
+                alertStr += thingPrice + "\n \n";
+
+                needsList.push({ itemId: idString.slice(1, idString.length), price: new Number(thingPrice)});
             }
         }); 
-        console.log(alertStr);
-        $.post("/Home/Index/", buyMap);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/Needs/CreateNeeds", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify({
+            CreateNeeds: needsList
+        }));
+
     });
 });

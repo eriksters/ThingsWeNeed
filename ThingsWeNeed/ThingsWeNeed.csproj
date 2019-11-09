@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NeedsController.cs" />
     <Compile Include="Controllers\ThingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -231,14 +232,17 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\ThingsListView.cshtml" />
+    <Content Include="Views\Needs\NeedsList.cshtml" />
     <Content Include="Views\Things\Create.cshtml" />
     <Content Include="Views\Things\Delete.cshtml" />
     <Content Include="Views\Things\Details.cshtml" />
     <Content Include="Views\Things\Edit.cshtml" />
     <Content Include="Views\Things\Index.cshtml" />
+    <Content Include="Views\Needs\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Views\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
