@@ -24,6 +24,8 @@
     $("button#save_button").click(function () {
         var alertStr = '';
         var needsList = new Array();
+        var $theButton = $(this);
+
         buyMap.forEach(function (value, key) {
             if (value === true) {
                 var idString = "#" + key;
@@ -33,16 +35,35 @@
                 alertStr += str + "\n";
                 alertStr += thingPrice + "\n \n";
 
-                needsList.push({ itemId: idString.slice(1, idString.length), price: new Number(thingPrice)});
+                needsList.push({ ThingId: idString.slice(1, idString.length), ThingPrice: new Number(thingPrice)});
+
+                var urlStr = $theButton.data('request-url');
+                console.debug(urlStr);
+
+                $.ajax({
+                    url: urlStr,
+                    dataType: 'json',
+                    type: 'POST',
+                    data: JSON.stringify({CreateNeeds: needsList}),
+                    contentType: 'application/json',
+                    success: function() {
+                        return data;
+                    }
+                });
+
+                console.debug("hello");
+
+
             }
         }); 
 
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/Needs/CreateNeeds", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(JSON.stringify({
-            CreateNeeds: needsList
-        }));
+
+        //var xhr = new XMLHttpRequest();
+        //xhr.open("POST", "/Needs/Create", true);
+        //xhr.setRequestHeader("Content-Type", "application/json");
+        //xhr.send(JSON.stringify({
+        //    CreateNeeds: needsList
+        //}));
 
     });
 });

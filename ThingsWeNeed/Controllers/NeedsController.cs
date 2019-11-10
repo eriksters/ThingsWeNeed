@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ThingsWeNeed.Models;
 using ThingsWeNeed.Models.ViewModels;
+using ThingsWeNeed.Models.Binders;
 
 namespace ThingsWeNeed.Controllers
 {
     public class NeedsController : Controller
     {
-        public ActionResult Index() {
+        public ActionResult List() {
             int userId = 1;
 
             //  Open database connection
@@ -38,10 +40,33 @@ namespace ThingsWeNeed.Controllers
             }
         }
 
+        [ValidateInput(false)]
         [HttpPost]
-        public ActionResult Index(IList<Purchase> map) {
+        //[Route("/Needs/Create")]
+        public ActionResult Create([Bind(Prefix = "CreateNeeds",Include = "ThingId")] CreateNeedsReturn t) {
             Purchase p = new Purchase();
+            Debug.WriteLine(String.Format("---Start---\n{0}\n---End---", t.CreateThings.Count));
+            //if (result != null)
+            //{
+            //    if (result.CreateThings.Count > 0)
+            //    {
+            //        Debug.WriteLine(String.Format(
+            //            "Thing id: {0}\nThing price: {1}",
+            //            result.CreateThings[0].ThingId,
+            //            result.CreateThings[0].ThingPrice));
+            //    }
+            //    else
+            //    {
+            //        Debug.WriteLine("List of things has {0} elements.", result.CreateThings.Count);
+            //    }
+            //}
+            //else
+            //{
+            //    Debug.WriteLine("The result is null");
+            //}
+
             return Content("Purchases");
+
         }
     }
 }
