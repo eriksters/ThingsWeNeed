@@ -39,7 +39,7 @@
 
                 
 
-                console.debug("This is a test and should change back eventually");
+                console.debug("hello");
 
 
             }
