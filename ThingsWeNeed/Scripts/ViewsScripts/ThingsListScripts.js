@@ -37,19 +37,7 @@
 
                 needsList.push({ ThingId: idString.slice(1, idString.length), ThingPrice: new Number(thingPrice)});
 
-                var urlStr = $theButton.data('request-url');
-                console.debug(urlStr);
-
-                $.ajax({
-                    url: urlStr,
-                    dataType: 'json',
-                    type: 'POST',
-                    data: JSON.stringify({CreateNeeds: needsList}),
-                    contentType: 'application/json',
-                    success: function() {
-                        return data;
-                    }
-                });
+                
 
                 console.debug("hello");
 
@@ -57,6 +45,19 @@
             }
         }); 
 
+        var urlStr = $theButton.data('request-url');
+        console.debug(urlStr);
+
+        $.ajax({
+            url: urlStr,
+            dataType: 'json',
+            type: 'POST',
+            data: JSON.stringify({ CreateNeeds: needsList }),
+            contentType: 'application/json',
+            success: function () {
+                return data;
+            }
+        });
 
         //var xhr = new XMLHttpRequest();
         //xhr.open("POST", "/Needs/Create", true);
