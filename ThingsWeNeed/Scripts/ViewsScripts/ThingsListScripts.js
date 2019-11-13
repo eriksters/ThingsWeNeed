@@ -24,7 +24,7 @@
     $("button#save_button").click(function () {
 
         //  List that stores the items that a User is buying
-        var needsList = new Array();
+        var buyList = new Array();
         var $theButton = $(this);
 
         //  Loop through the buyMap and if a thing is to be bought, add it to the needsList as an Object { ThingId: -id-, ThingPrice: -price- }
@@ -32,7 +32,7 @@
             if (value === true) {
                 var idString = "#" + key;
                 var thingPrice = $(document).find(idString).find("input.price_input")[0].value;
-                needsList.push({
+                buyList.push({
                     ThingId: idString.slice(1, idString.length),
                     ThingPrice: new Number(thingPrice)
                 });
@@ -43,13 +43,13 @@
         var urlStr = $theButton.data('request-url');
 
         //  Send the POST request to the server as a JSON
-        //  JSON Structure: { createNeeds: [{ThingId: -id1-, ThingPrice: -price1-}..]}
-        if (needsList.length > 0) {
+        //  JSON Structure: { purchases: [{ThingId: -id1-, ThingPrice: -price1-}..]}
+        if (buyList.length > 0) {
             $.ajax({
                 url: urlStr,
                 dataType: 'json',
                 type: 'POST',
-                data: JSON.stringify({ createNeeds: needsList }),
+                data: JSON.stringify({ purchases: buyList }),
                 contentType: 'application/json',
                 success: function () {
                     return data;

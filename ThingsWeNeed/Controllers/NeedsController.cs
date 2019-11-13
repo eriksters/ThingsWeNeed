@@ -48,19 +48,19 @@ namespace ThingsWeNeed.Controllers
         }
 
 
-        //  Action for handling new needs
+        //  Action for handling purchases
         [HttpPost]
-        public ActionResult Create([Bind(Prefix = "createNeeds", Include = "ThingId, ThingPrice")] CreateNeedData[] createNeeds) {
+        public ActionResult Purchase([Bind(Prefix = "purchases", Include = "ThingId, ThingPrice")] CreateNeedData[] purchases) {
             string str = "";
             
             //  TODO
             //  if request contains needed things, handle 'em
 
-            if (createNeeds != null)
+            if (purchases != null)
             {
-                for (int i = 0; i < createNeeds.Length; i++)
+                for (int i = 0; i < purchases.Length; i++)
                 {
-                    str = $"{str}{i}: {createNeeds[i].ThingId}, {createNeeds[i].ThingPrice}\n";
+                    str = $"{str}{i}: {purchases[i].ThingId}, {purchases[i].ThingPrice}\n";
                 }
                 Debug.WriteLine(String.Format("---Start---\n{0}\n---End---", str));
             }
