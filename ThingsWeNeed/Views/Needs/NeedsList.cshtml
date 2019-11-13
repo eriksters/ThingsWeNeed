@@ -14,11 +14,15 @@
 
 
 <div class="jumbotron">
+    <a href="AddThing.cshtml">Add thing</a>
     <div class="row">
-        @if (Model.User != null) {
-            if (Model.User.Households.Count > 0) {
+        @if (Model.User != null)
+        {
+            if (Model.User.Households.Count > 0)
+            {
 
-                foreach (Household household in Model.User.Households) {
+                foreach (Household household in Model.User.Households)
+                {
                     <h2>@household.Name needs</h2>
                     <form>
                         <table class="table table-bordered table-hover table-striped ">
@@ -30,16 +34,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (household.Things.Count > 0) {
-                                    foreach (Thing t in household.Things) {
+                                @if (household.Things.Count > 0)
+                                {
+                                    foreach (Thing t in household.Things)
+                                    {
                                         <tr id="@t.ThingId">
                                             <td>@t.Name</td>
                                             <td>
-                                                @if (t.Purchases.Count > 0) {
+                                                @if (t.Purchases.Count > 0)
+                                                {
                                                     DateTime lastBought = t.Purchases.OrderBy(f => f.MadeOn).First().MadeOn;
                                                     int numberOfDays = (DateTime.Now - lastBought).Days;
                                                     <text>@numberOfDays days ago</text>
-                                                } else {
+                                                }
+                                                else
+                                                {
                                                     <text>Not bought</text>
                                                 }
 
@@ -58,16 +67,18 @@
                                                             displayPrice = t.DefaultPrice;
                                                         }
                                                     }
-                                                    <input type='text' class='form-control price_input' value="@displayPrice"/>
+                                                    <input type='text' class='form-control price_input' value="@displayPrice" />
                                                     <span class='input-group-btn'>
-                                                        <input type='button' class='btn btn-danger cancel_button' value='X' title="Cancel"/>
+                                                        <input type='button' class='btn btn-danger cancel_button' value='X' title="Cancel" />
                                                     </span>
                                                 </div>
                                             </td>
 
                                         </tr>
                                     }
-                                } else {
+                                }
+                                else
+                                {
                                     <tr>
                                         <td colspan="3" style="text-align: center">
                                             No things to display
@@ -78,10 +89,14 @@
                         </table>
                     </form>
                 }
-            } else {
+            }
+            else
+            {
                 <h4>You are not in any households yet.</h4>
             }
-        } else {
+        }
+        else
+        {
             <text>Somthing went wrong very much. No user passed to view!</text>
         }
     </div>
