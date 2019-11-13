@@ -44,15 +44,17 @@
 
         //  Send the POST request to the server as a JSON
         //  JSON Structure: { createNeeds: [{ThingId: -id1-, ThingPrice: -price1-}..]}
-        $.ajax({
-            url: urlStr,
-            dataType: 'json',
-            type: 'POST',
-            data: JSON.stringify({ createNeeds: needsList }),
-            contentType: 'application/json',
-            success: function () {
-                return data;
-            }
-        });
+        if (needsList.length > 0) {
+            $.ajax({
+                url: urlStr,
+                dataType: 'json',
+                type: 'POST',
+                data: JSON.stringify({ createNeeds: needsList }),
+                contentType: 'application/json',
+                success: function () {
+                    return data;
+                }
+            });
+        }
     });
 });
