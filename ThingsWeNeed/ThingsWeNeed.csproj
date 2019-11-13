@@ -227,6 +227,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Needs\NeedsList.cshtml" />
     <Content Include="Views\Needs\Index.cshtml" />
+    <Content Include="Views\Needs\AddThing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Views\" />
