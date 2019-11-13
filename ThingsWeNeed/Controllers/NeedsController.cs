@@ -55,7 +55,8 @@ namespace ThingsWeNeed.Controllers
             
             //  TODO
             //  if request contains needed things, handle 'em
-            if (createNeeds = !null)
+
+            if (createNeeds != null)
             {
                 for (int i = 0; i < createNeeds.Length; i++)
                 {
