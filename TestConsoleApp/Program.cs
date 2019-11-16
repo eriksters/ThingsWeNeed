@@ -10,11 +10,14 @@ using ThingsWeNeed.Models;
 namespace TestConsoleApp {
     class Program {
         static void Main(string[] args) {
-            TestDataFactory tdf = new TestDataFactory();
-            using (ModelContainer mc = new ModelContainer())
-            {
-                tdf.createTestData(mc);
-            }
+            //TestDataFactory tdf = new TestDataFactory();
+            //using (ModelContainer mc = new ModelContainer())
+            //{
+            //    tdf.createTestData(mc);
+            //}
+
+            RepositoryTest rt = new RepositoryTest();
+            rt.Test();
 
             Console.Read();
         }
