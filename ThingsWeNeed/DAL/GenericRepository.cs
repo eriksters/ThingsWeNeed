@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using ThingsWeNeed.Models;
 
@@ -26,7 +27,15 @@ namespace ThingsWeNeed.DAL
 
         public void Insert(T toInsert) => entities.Add(toInsert);
 
-        public void Update(T changes) => mc.Entry<T>(changes).State = EntityState.Modified;
+        public IEnumerable<T> Query(Expression<Func<T, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<T> QueryObjectGraph(Expression<Func<T, bool>> filter, string children)
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }

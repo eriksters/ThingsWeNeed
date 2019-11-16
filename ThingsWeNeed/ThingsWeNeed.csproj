@@ -129,6 +129,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\NeedsController.cs" />
+    <Compile Include="DAL\GenericRepository.cs" />
+    <Compile Include="DAL\HouseholdRepository.cs" />
+    <Compile Include="DAL\IGenericRepository.cs" />
+    <Compile Include="DAL\DedicatedRepositoryInterfaces.cs" />
+    <Compile Include="DAL\IUnitOfWork.cs" />
+    <Compile Include="DAL\PurchaseRepository.cs" />
+    <Compile Include="DAL\ThingRepository.cs" />
+    <Compile Include="DAL\UnitOfWork.cs" />
+    <Compile Include="DAL\UserRepository.cs" />
+    <Compile Include="DAL\WishRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

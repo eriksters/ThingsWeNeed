@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using ThingsWeNeed.Models;
@@ -8,12 +9,14 @@ using ThingsWeNeed.Models;
 namespace ThingsWeNeed.DAL
 {
     //  A generic implementation of the repository pattern
-    interface IGenericRepository<T>
+    public interface IGenericRepository<T>
     {
-        IEnumerable<T> GetAll();
         T GetById(int id);
+        IEnumerable<T> GetAll();
         void Insert(T toInsert);
         void Delete(int id);
-        void Update(T changes);
+        IEnumerable<T> Query(Expression<Func<T, bool>> filter);
+        IEnumerable<T> QueryObjectGraph(Expression<Func<T, bool>> filter, string children);
+
     }
 }

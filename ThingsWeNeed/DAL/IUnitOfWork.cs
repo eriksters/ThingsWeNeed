@@ -8,12 +8,12 @@ namespace ThingsWeNeed.DAL
 {
     public interface IUnitOfWork : IDisposable
     {
-        UserRepository UserRepository { get; }
-        HouseholdRepository HouseholdRepository {get;}
-        PurchaseRepository PurchaseRepository { get; }
-        ThingRepository ThingRepository { get; }
-        WishRepository WishRepository { get; }
-        void Save();
+        IUserRepository UserRepository { get; }
+        IHouseholdRepository HouseholdRepository {get;}
+        IPurchaseRepository PurchaseRepository { get; }
+        IThingRepository ThingRepository { get; }
+        IWishRepository WishRepository { get; }
+        void Commit();
 
     }
 }
