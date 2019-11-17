@@ -1,31 +1,44 @@
 ﻿$(function () {
 
-        var modal = document.getElementById("myModal");
+    var modals = document.getElementsByClassName("modal");
+    console.log(modals);
 
-        //Get the button that opens the modal
-        var btn = document.getElementsByClassName("options-button");
+    //Get the button that opens the modal
+    var btns = document.getElementsByClassName("options-button");
 
-        var modalCloseButton = document.getElementById("modal-close-button")
+    var modalCloseButton = document.getElementById("modal-close-button");
 
-        //When the user clicks on the button, open the modal
-        $(btn).click(function () {
-            modal.style.display = "block";
-        });
+    //When the user clicks on the button, open the modal
+    function openModal(modal) {
+        $(modal).style.display = "block";
+    }
 
-        $(modalCloseButton).click(function () {
-            modal.style.display = "none"
-        });
+    
 
+    
+
+    $(modalCloseButton).click(function () {
+        Object.keys(modals).forEach(modal => {
+            modal.style.display = "none";
+        })
+    });
 
         //When the user clicks anywhere outside of the modal, close it
         $(window).click(function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+            Object.keys(modals).forEach(modal => {
+                $(modal).style.display = "none";
+            })
         });
 
         $(document).ready(function () {
-            modal.style.display = "none";
+            /*Object.keys(modals).forEach(modal => {
+                modal.style.display = "none";
+            })*/
+            for (var i = 0; i < btns.length; i++) {
+                (function () {
+                    btns[i].addEventListener("click", function () { openModal($(modals)[i]); }, false);
+                }());
+            }
         });
 
         //  Map that stores the 'buy state' of things
