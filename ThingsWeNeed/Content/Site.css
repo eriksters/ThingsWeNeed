@@ -1,24 +1,94 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿.table {
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+thead th:nth-child(1) {
+    width: 3%;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+thead th:nth-child(2) {
+    width: 47%;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+thead th:nth-child(3) {
+    width: 40%;
 }
+
+thead th:nth-child(4) {
+    width: 10%;
+}
+
+.option-button {
+    width: 15px;
+}
+
+.col-xs-12 {
+    padding-left: 0px;
+    padding-right: 0px
+}
+
+#save_button {
+    height: 40px;
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0
+}
+
+.buy_button {
+    padding: 6px 40px;
+}
+
+.options-button {
+    background-color: #fff;
+    border: black solid 1px;
+}
+
+/* The Modal (background) */
+.myModal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+.modal-list {
+    margin-left: -40px;
+    list-style: none;
+}
+
+.dunno-button,
+.remove-button,
+.status-button {
+    width: 100%;
+    margin: 0.5em;
+}
+
