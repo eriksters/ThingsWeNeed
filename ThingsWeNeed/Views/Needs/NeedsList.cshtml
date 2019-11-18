@@ -21,7 +21,6 @@
         {
             if (Model.User.Households.Count > 0)
             {
-
                 foreach (Household household in Model.User.Households)
                 {
                     <h2>@household.Name needs</h2>
@@ -43,7 +42,7 @@
                                         <tr id="@t.ThingId">
                                             <td>
                                                 <div>
-                                                    <button class="options-button" type="button"><img src="images/optionbutton.png"</button>
+                                                    <button class="options-button" type="button" id="@t.ThingId" name="@t.Name"><img src="images/optionbutton.png"</button>
                                                 </div>
                                                 
                                                 <!-- The Modal -->
@@ -52,8 +51,8 @@
 
                                                         <!-- Modal content -->
                                                         <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h4>Options</h4>
+                                                            <div>
+                                                                <h4 id="modal-header">Options</h4>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <ul class="modal-list">
