@@ -10,12 +10,12 @@ namespace ThingsWeNeed.DAL
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly ModelContainer mc;
+        private readonly ModelContainer context;
         private readonly DbSet<T> entities;
 
         public GenericRepository(ModelContainer mc)
         {
-            this.mc = mc;
+            this.context = mc;
             entities = mc.Set<T>();
         }
 
