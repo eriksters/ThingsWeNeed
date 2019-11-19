@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using ThingsWeNeed.Models;
 
-namespace ThingsWeNeed.DAL
+namespace TwnData
 {
     public class WishRepository : GenericRepository<Wish>, IWishRepository
     {

@@ -7,28 +7,39 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ThingsWeNeed.Models
+namespace TwnData
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Thing
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Thing()
         {
-            this.DefaultPrice = "0";
+            this.DefaultPrice = 0;
+            this.Needed = false;
             this.Purchases = new HashSet<Purchase>();
         }
     
+        [Key]
         public int ThingId { get; set; }
+
+        [Required(ErrorMessage = "Name required")]
         public string Name { get; set; }
-        public bool Needed { get; set; }
+
+        [Required]
         public int HouseholdId { get; set; }
-        public string DefaultPrice { get; set; }
+
+        public bool Needed { get; set; }
+
+        public double DefaultPrice { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [InverseProperty("Thing")]
         public virtual ICollection<Purchase> Purchases { get; set; }
+
+        [ForeignKey("HouseholdId")]
         public virtual Household Household { get; set; }
     }
 }

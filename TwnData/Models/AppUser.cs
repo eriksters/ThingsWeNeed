@@ -7,10 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ThingsWeNeed.Models
+namespace TwnData
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class AppUser
     {
@@ -23,20 +25,32 @@ namespace ThingsWeNeed.Models
             this.GrantedWishes = new HashSet<Wish>();
         }
     
+        [Key]
         public int UserId { get; set; }
+
+        [Required(ErrorMessage = "Email required")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Username required")]
+        public string Username { get; set; }
+
         public string FName { get; set; }
         public string LName { get; set; }
         public string PhoneNumber { get; set; }
-        public string Email { get; set; }
-        public string Username { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+
+        [InverseProperty("MadeBy")]
         public virtual ICollection<Purchase> Purchases { get; private set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+        [InverseProperty("AppUsers")]
         public virtual ICollection<Household> Households { get; private set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+        [InverseProperty("MadeBy")]
         public virtual ICollection<Wish> MadeWishes { get; private set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+        [InverseProperty("GrantedBy")]
         public virtual ICollection<Wish> GrantedWishes { get; private set; }
+
+        
     }
 }

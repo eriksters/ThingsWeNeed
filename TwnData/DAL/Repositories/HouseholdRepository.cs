@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using ThingsWeNeed.Models;
 
-namespace ThingsWeNeed.DAL
+namespace TwnData
 {
     public class HouseholdRepository : GenericRepository<Household>, IHouseholdRepository
     {
 
 
-        public HouseholdRepository(TwnContext mc) : base(mc)
+        public HouseholdRepository(TwnContext mc) : base(mc, "dbo.Households")
         {
             
         }

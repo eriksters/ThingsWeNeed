@@ -7,24 +7,28 @@ using System.Web.Mvc;
 using ThingsWeNeed.Models;
 using ThingsWeNeed.Models.ViewModels;
 using ThingsWeNeed.Models.Binders;
-using ThingsWeNeed.DAL;
+using TwnData;
 
 namespace ThingsWeNeed.Controllers
 {
     public class NeedsController : Controller
     {
-        private IUnitOfWork unitOfWork;
+        public TwnContext context { get; set; }
 
-        public NeedsController(IUnitOfWork unitOfWork)
+        public NeedsController()
         {
-            this.unitOfWork = unitOfWork;
+            context = new TwnContext();
+        }
+
+        public NeedsController(TwnContext context) {
+            this.context = context;
         }
 
         public ActionResult List() {
             int userId = 1;
 
             //  Open database connection
-            using (unitOfWork) {
+            using (context) {
                 try
                 {
                     ThingsListViewModel model = new ThingsListViewModel("Needs")
@@ -32,11 +36,6 @@ namespace ThingsWeNeed.Controllers
                         //  Eager load the purchases
                         //  (Decreases times the database needs to be accessed, no DB access happens in the views layer)
 
-                        User = unitOfWork.UserRepository.GetById(userId)
-                            //.Include("Households")
-                            //.Include("Households.Things")
-                            //.Include("Households.Things.Purchases")
-                            //.Single(x => x.UserId == userId)
                     };
                     //  Return View with complete ViewModel
                     return View("NeedsList", model);
@@ -46,10 +45,6 @@ namespace ThingsWeNeed.Controllers
 
                     return View("Error");
                 }
-
-
-                
-                
             }
         }
 

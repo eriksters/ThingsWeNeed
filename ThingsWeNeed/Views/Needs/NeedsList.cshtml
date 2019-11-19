@@ -1,6 +1,6 @@
 ﻿@using System.Activities.Expressions
 @using System.Runtime.Remoting.Messaging
-@using ThingsWeNeed.Models
+@using TwnData
 @model ThingsWeNeed.Models.ViewModels.ThingsListViewModel
 
 @{
@@ -51,16 +51,14 @@
                                                     Buy
                                                 </button>
                                                 <div class='input-group btn_stopper' style="min-width: 106px; display: none; height: 10px">
+
                                                     @{
-                                                        string displayPrice = "0";
-                                                        if (t.DefaultPrice != null)
-                                                        {
-                                                            displayPrice = t.DefaultPrice;
-                                                        }
+                                                        double displayPrice;
+                                                        displayPrice = t.DefaultPrice;
                                                     }
-                                                    <input type='text' class='form-control price_input' value="@displayPrice"/>
+                                                    <input type='text' class='form-control price_input' value="@displayPrice" />
                                                     <span class='input-group-btn'>
-                                                        <input type='button' class='btn btn-danger cancel_button' value='X' title="Cancel"/>
+                                                        <input type='button' class='btn btn-danger cancel_button' value='X' title="Cancel" />
                                                     </span>
                                                 </div>
                                             </td>

@@ -1,10 +1,11 @@
 ﻿using System;
 using ThingsWeNeed.Models;
+using ThingsWeNeed.DAL;
 
 namespace TestConsoleApp {
     class TestDataFactory {
 
-        public void createTestData(ModelContainer mc)
+        public void createTestData(TwnContext mc)
         {
 
             //  Create things for first household

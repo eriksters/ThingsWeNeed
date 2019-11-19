@@ -7,24 +7,49 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ThingsWeNeed.Models
+namespace TwnData
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Wish
     {
+        public Wish() {
+            this.ExtraPay = 0;
+            this.Status = Status.Pending;
+        }
+
+        [Key]
         public int WIshId { get; set; }
+
+        [Required(ErrorMessage = "Maximum price required")]
         public double MaxPrice { get; set; }
+
         public double ExtraPay { get; set; }
+
+        [Required]
         public System.DateTime MadeOn { get; set; }
+
         public Nullable<System.DateTime> BoughtOn { get; set; }
+
         public Status Status { get; set; }
+
+        [Required]
         public int MadeByUserId { get; set; }
+
         public Nullable<int> GrantedByUserId { get; set; }
+
+        [Required(ErrorMessage = "Name required")]
         public string Name { get; set; }
+
+
     
+        [ForeignKey("MadeByUserId")]
         public virtual AppUser MadeBy { get; private set; }
+
+        [ForeignKey("GrantedByUserId")]
         public virtual AppUser GrantedBy { get; private set; }
     }
 }

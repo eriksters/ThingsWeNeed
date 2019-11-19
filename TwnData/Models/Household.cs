@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ThingsWeNeed.Models
+namespace TwnData
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Household
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,15 +24,22 @@ namespace ThingsWeNeed.Models
             this.Purchases = new HashSet<Purchase>();
         }
     
+        [Key]
         public int HouseholdId { get; set; }
-        public string Address { get; set; }
+
+        [Required(ErrorMessage = "A name is required. This can be anything.")]
         public string Name { get; set; }
+
+        public string Address { get; set; }
+
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [InverseProperty("Household")]
         public virtual ICollection<Thing> Things { get; private set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+        [InverseProperty("Households")]
         public virtual ICollection<AppUser> AppUsers { get; private set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
+        [InverseProperty("Household")]
         public virtual ICollection<Purchase> Purchases { get; private set; }
     }
 }

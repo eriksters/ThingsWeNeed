@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ThingsWeNeed.Models;
 
 //  File for storing dedicated interfaces for each repository
 //  Add any entity-specific methods here
-namespace ThingsWeNeed.DAL
+namespace TwnData
 {
     public interface IHouseholdRepository : IGenericRepository<Household>
     {

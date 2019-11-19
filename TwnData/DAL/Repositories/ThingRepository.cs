@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ThingsWeNeed.Models;
 
-namespace ThingsWeNeed.DAL
+namespace TwnData
 {
     public class ThingRepository : GenericRepository<Thing>, IThingRepository
     {

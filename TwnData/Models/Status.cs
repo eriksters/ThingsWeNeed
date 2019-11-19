@@ -7,19 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ThingsWeNeed.Models
+namespace TwnData
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Purchase
+    public enum Status : byte
     {
-        public int PurchaseId { get; set; }
-        public System.DateTime MadeOn { get; set; }
-        public double Paid { get; set; }
-    
-        public virtual AppUser AppUser { get; private set; }
-        public virtual Household Household { get; private set; }
-        public virtual Thing Thing { get; private set; }
+        Cancelled = 0,
+        BoughtNotPaid = 1,
+        BoughtPaid = 2,
+        Pending = 3
     }
 }
