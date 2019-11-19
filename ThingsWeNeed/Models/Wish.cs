@@ -18,10 +18,11 @@ namespace ThingsWeNeed.Models
         public double MaxPrice { get; set; }
         public double ExtraPay { get; set; }
         public System.DateTime MadeOn { get; set; }
-        public System.DateTime BoughtOn { get; set; }
+        public Nullable<System.DateTime> BoughtOn { get; set; }
         public Status Status { get; set; }
         public int MadeByUserId { get; set; }
-        public int GrantedByUserId { get; set; }
+        public Nullable<int> GrantedByUserId { get; set; }
+        public string Name { get; set; }
     
         public virtual AppUser MadeBy { get; private set; }
         public virtual AppUser GrantedBy { get; private set; }

@@ -17,6 +17,7 @@ namespace ThingsWeNeed.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Thing()
         {
+            this.DefaultPrice = "0";
             this.Purchases = new HashSet<Purchase>();
         }
     
