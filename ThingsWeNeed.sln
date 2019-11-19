@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThingsWeNeed", "ThingsWeNeed\ThingsWeNeed.csproj", "{2A5ABB09-80AE-407A-880B-0850D2290FF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApp", "TestConsoleApp\TestConsoleApp.csproj", "{8FC00792-96AB-47D7-8E7C-14ECE0F62F1F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{E884062B-6730-4EE3-B566-2DE19D6B6DCF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwnData", "TwnData\TwnData.csproj", "{162F3CEA-A2D3-4559-88DF-D398FEC76C42}"
@@ -23,12 +21,6 @@ Global
 		{2A5ABB09-80AE-407A-880B-0850D2290FF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A5ABB09-80AE-407A-880B-0850D2290FF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A5ABB09-80AE-407A-880B-0850D2290FF8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8FC00792-96AB-47D7-8E7C-14ECE0F62F1F}.ConsoleTest|Any CPU.ActiveCfg = ConsoleTest|Any CPU
-		{8FC00792-96AB-47D7-8E7C-14ECE0F62F1F}.ConsoleTest|Any CPU.Build.0 = ConsoleTest|Any CPU
-		{8FC00792-96AB-47D7-8E7C-14ECE0F62F1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8FC00792-96AB-47D7-8E7C-14ECE0F62F1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8FC00792-96AB-47D7-8E7C-14ECE0F62F1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8FC00792-96AB-47D7-8E7C-14ECE0F62F1F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E884062B-6730-4EE3-B566-2DE19D6B6DCF}.ConsoleTest|Any CPU.ActiveCfg = Release|Any CPU
 		{E884062B-6730-4EE3-B566-2DE19D6B6DCF}.ConsoleTest|Any CPU.Build.0 = Release|Any CPU
 		{E884062B-6730-4EE3-B566-2DE19D6B6DCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

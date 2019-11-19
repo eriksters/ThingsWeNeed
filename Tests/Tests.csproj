@@ -61,7 +61,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicDatabaseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NeedsTests.cs" />
   </ItemGroup>
@@ -70,7 +69,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataModel\TwnData.csproj">
+    <ProjectReference Include="..\TwnData\TwnData.csproj">
       <Project>{162f3cea-a2d3-4559-88df-d398fec76c42}</Project>
       <Name>TwnData</Name>
     </ProjectReference>
