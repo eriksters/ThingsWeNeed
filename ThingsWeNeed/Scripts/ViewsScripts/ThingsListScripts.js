@@ -9,7 +9,7 @@
     //Get the modal 
     var modal = document.getElementById("myModal");
 
-    //Override click function for buttons opening the modal
+    //Event listener "click" for buttons opening the modal
     $(btn).click(function () {
         openModal();
     });

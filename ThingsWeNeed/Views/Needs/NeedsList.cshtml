@@ -41,7 +41,7 @@
                                     {
                                         <tr id="@t.ThingId">
                                             <td>
-                                                <div>
+                                                <div class="options-button-frame">
                                                     <button class="options-button" type="button" id="@t.ThingId" name="@t.Name"><img src="images/optionbutton.png"</button>
                                                 </div>
                                                 
@@ -55,11 +55,12 @@
                                                                 <h4 id="modal-header">Options</h4>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <ul class="modal-list">
-                                                                    <li><button type="button" class="dunno-button">Dunno</button></li>
-                                                                    <li><button type="button" class="status-button">Change Status</button></li>
-                                                                    <li><button type="button" class="remove-button">Remove</button></li>
-                                                                </ul>
+                                                                <h5>Change status</h5>
+                                                                <select id="status-select">
+                                                                    <option value="needed">Needed</option>
+                                                                    <option value="enough">Enough</option>
+                                                                </select>
+                                                                <button type="button" id="remove-button">Remove</button>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" id="modal-close-button" class="btn btn-default" data-dismiss="modal">Close></button>

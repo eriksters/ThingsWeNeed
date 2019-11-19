@@ -1,4 +1,4 @@
-﻿.table {
+﻿.jumbotron {
 }
 
 thead th:nth-child(1) {
@@ -15,10 +15,6 @@ thead th:nth-child(3) {
 
 thead th:nth-child(4) {
     width: 10%;
-}
-
-.option-button {
-    width: 15px;
 }
 
 .col-xs-12 {
@@ -62,7 +58,7 @@ thead th:nth-child(4) {
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 70%; /* Could be more or less, depending on screen size */
+    width: 60%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button */
@@ -85,14 +81,13 @@ thead th:nth-child(4) {
     list-style: none;
 }
 
-.dunno-button,
-.remove-button,
-.status-button {
+#remove-button {
     width: 100%;
-    margin: 1em;
-}
-
-.remove-button {
+    margin: auto;
+    margin-top: 50px;
     background-color: #ff4d4d;
 }
 
+#status-select {
+    width: 100%;
+}
