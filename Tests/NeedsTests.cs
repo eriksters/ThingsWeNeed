@@ -67,7 +67,28 @@ namespace Tests
         [TestMethod]
         public void Test_CreatePurchase_InvalidData()
         {
+            int thingId1 = 3;
+            int thingId2 = 4;
 
+            //  Assign
+            CreateNeedData thing1 = new CreateNeedData
+            {
+                ThingId = thingId1
+            };
+            CreateNeedData thing2 = new CreateNeedData
+            {
+                ThingId = thingId2
+            };
+            CreateNeedData[] data = { thing1, thing2 };
+
+            //  Act
+            nCtr.Purchase(data);
+
+            //  Assert
+            Assert.IsTrue(!context.Things.Find(thingId1).Needed);
+            Assert.IsTrue(!context.Things.Find(thingId2).Needed);
+
+            //Assert.IsTrue(context.Users.Find(1).Purchases.Count == 2);
         }
     }
 }
