@@ -198,7 +198,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataModel\TwnData.csproj">
+    <ProjectReference Include="..\TwnData\TwnData.csproj">
       <Project>{162f3cea-a2d3-4559-88df-d398fec76c42}</Project>
       <Name>TwnData</Name>
     </ProjectReference>

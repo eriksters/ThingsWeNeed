@@ -35,7 +35,12 @@ namespace ThingsWeNeed.Controllers
                     {
                         //  Eager load the purchases
                         //  (Decreases times the database needs to be accessed, no DB access happens in the views layer)
-
+                        Title = "Household list",
+                        User = context.Users
+                            .Include("Households")
+                            .Include("Households.Things")
+                            .Include("Households.Things.Purchases")
+                            .Single(x => x.UserId == userId)
                     };
                     //  Return View with complete ViewModel
                     return View("NeedsList", model);
