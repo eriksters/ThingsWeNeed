@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TwnData;
 using ThingsWeNeed.Controllers;
@@ -10,30 +11,31 @@ namespace Tests
     public class NeedsTests
     {
 
-        [TestInitialize]
-        public void TestInit() 
+        public NeedsTests()
         {
+            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string path = (System.IO.Path.GetDirectoryName(executable));
+            AppDomain.CurrentDomain.SetData("DataDirectory", path);
+
             TwnContext context = new TwnContext();
-            context.Database.Delete();
+            //AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data"));
+
+            if (context.Database.Exists())
+                context.Database.Delete();
+
             context.Database.Create();
             context.Database.Initialize(true);
             context.Dispose();
         }
 
         [TestMethod]
-        public void Test_CreateNeed_ValidData()
+        public void Test_CreateNeed()
         {
 
         }
 
         [TestMethod]
-        public void Test_CreateNeed_InvalidData()
-        {
-
-        }
-
-        [TestMethod]
-        public void Test_CreatePurchase_ValidData() 
+        public void Test_CreatePurchase() 
         {
             int thingId1 = 1;
             int thingId2 = 2;
@@ -63,40 +65,6 @@ namespace Tests
 
             Assert.IsTrue(context.Users.Find(1).Purchases.Count == 4);
 
-        }
-
-        [TestMethod]
-        public void Test_CreatePurchase_InvalidData()
-        {
-            //  Assign
-            int thingId1 = 3;
-            int thingId2 = 0;
-
-            TwnContext context = new TwnContext();
-            NeedsController nCtr = new NeedsController(context);
-
-            CreateNeedData thing1 = new CreateNeedData
-            {
-                ThingId = thingId1,
-                ThingPrice = -10
-            };
-            CreateNeedData thing2 = new CreateNeedData
-            {
-                ThingId = thingId2,
-            };
-            CreateNeedData[] data = { thing1, thing2 };
-            int countStart = context.Users.Find(1).Purchases.Count;
-
-
-            //  Act
-            nCtr.Purchase(data);
-
-            //  Assert
-            context = new TwnContext();
-            Assert.IsTrue(context.Things.Find(thingId1).Needed);
-            Assert.IsTrue(context.Things.Find(thingId2).Needed);
-
-            Assert.IsTrue(context.Users.Find(1).Purchases.Count == countStart);
         }
     }
 }

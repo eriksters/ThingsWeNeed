@@ -63,6 +63,7 @@ namespace ThingsWeNeed.Controllers
             JsonResponseBuilder builder = new JsonResponseBuilder();
             if (ModelState.IsValid)
             {
+                Debug.WriteLine("Model state is valid");
                 try
                 {
                     int changes = 0;
