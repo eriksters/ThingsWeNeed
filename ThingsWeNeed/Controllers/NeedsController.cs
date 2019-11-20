@@ -57,22 +57,48 @@ namespace ThingsWeNeed.Controllers
         //  Action for handling purchases
         [HttpPost]
         public ActionResult Purchase([Bind(Prefix = "purchases", Include = "ThingId, ThingPrice")] CreateNeedData[] purchases) {
-            string str = "";
             
-            //  TODO
-            //  if request contains needed things, handle 'em
+            JsonResult result;
 
-            if (purchases != null)
+            try
             {
-                for (int i = 0; i < purchases.Length; i++)
+                int changes = 0;
+
+                foreach (CreateNeedData data in purchases)
                 {
-                    str = $"{str}{i}: {purchases[i].ThingId}, {purchases[i].ThingPrice}\n";
+
+                    Thing thing = context.Things.Find(data.ThingId);
+
+                    if (thing != null)
+                    {
+                        Purchase purchase = new Purchase
+                        {
+                            HouseholdId = thing.HouseholdId,
+                            MadeById = 1,
+                            Paid = data.ThingPrice,
+                            ThingId = data.ThingId,
+                            MadeOn = DateTime.Now,
+                        };
+
+                        context.Purchases.Add(purchase);
+                        thing.Needed = false;
+                        changes++;
+                    }
                 }
-                Debug.WriteLine(String.Format("---Start---\n{0}\n---End---", str));
+
+                context.SaveChanges();
+                result = Json(new { Status = "OK", PurchasedAmount = changes }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception e)
+            {
+                result = Json(new { Status = "ERROR", ErrorMessage = e.Message, StackTrace = e.StackTrace }, JsonRequestBehavior.AllowGet);
+            }
+            finally {
+                context.Dispose();
             }
 
-            //  Dummy return
-            return Content("Purchases");
+            return result;
         }
     }
 }
