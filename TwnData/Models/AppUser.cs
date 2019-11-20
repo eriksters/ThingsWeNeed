@@ -29,6 +29,7 @@ namespace TwnData
         public int UserId { get; set; }
 
         [Required(ErrorMessage = "Email required")]
+        [EmailAddress(ErrorMessage = "Email must be in correct format")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Username required")]

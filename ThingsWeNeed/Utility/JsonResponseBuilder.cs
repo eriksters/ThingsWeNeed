@@ -9,8 +9,6 @@ namespace ThingsWeNeed.Utility
 
     public class JsonResponseBuilder
     {
-        private bool sendErrors;
-        private bool sendData;
 
         public bool Success { get; set; }
         public bool SendErrors { get; set; }
@@ -34,7 +32,7 @@ namespace ThingsWeNeed.Utility
 
         public object Build() {
             var result = new Dictionary<string, object>();
-            result.Add("success", true);
+            result.Add("success", Success);
 
             if (SendErrors) {
                 result.Add("errors", Errors);

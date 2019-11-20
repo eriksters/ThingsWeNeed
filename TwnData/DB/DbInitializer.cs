@@ -43,9 +43,9 @@ namespace TwnData.DB
             context.SaveChanges();
 
             ICollection<Thing> Things = new List<Thing> {
-                new Thing { Name = "Toilet paper", DefaultPrice = 10, Needed = false, HouseholdId = 1 },
+                new Thing { Name = "Toilet paper", DefaultPrice = 10, HouseholdId = 1 },
                 new Thing { Name = "Skittles", DefaultPrice = 30, HouseholdId = 1},
-                new Thing { Name = "Bread", DefaultPrice = 20, HouseholdId = 1},
+                new Thing { Name = "Bread", DefaultPrice = 20, Needed = true, HouseholdId = 1},
                 new Thing { Name = "Toilet paper", Needed = true, HouseholdId = 2},
                 new Thing { Name = "Twix", Needed = true, HouseholdId = 2}
             };

@@ -9,18 +9,15 @@ namespace Tests
     [TestClass]
     public class NeedsTests
     {
-        private TwnContext context;
-        private NeedsController nCtr;
 
         [TestInitialize]
         public void TestInit() 
         {
-            context = new TwnContext();
+            TwnContext context = new TwnContext();
             context.Database.Delete();
             context.Database.Create();
             context.Database.Initialize(true);
-
-            nCtr = new NeedsController(context);
+            context.Dispose();
         }
 
         [TestMethod]
@@ -53,12 +50,16 @@ namespace Tests
             };
             CreateNeedData[] data = { thing1, thing2 };
 
+            TwnContext context = new TwnContext();
+            NeedsController nCtr = new NeedsController(context);
+
             //  Act
             nCtr.Purchase(data);
 
             //  Assert
-            Assert.IsTrue(context.Things.Find(thingId1).Needed);
-            Assert.IsTrue(context.Things.Find(thingId2).Needed);
+            context = new TwnContext();
+            Assert.IsTrue(!context.Things.Find(thingId1).Needed);
+            Assert.IsTrue(!context.Things.Find(thingId2).Needed);
 
             Assert.IsTrue(context.Users.Find(1).Purchases.Count == 4);
 
@@ -67,28 +68,35 @@ namespace Tests
         [TestMethod]
         public void Test_CreatePurchase_InvalidData()
         {
-            int thingId1 = 3;
-            int thingId2 = 4;
-
             //  Assign
+            int thingId1 = 3;
+            int thingId2 = 0;
+
+            TwnContext context = new TwnContext();
+            NeedsController nCtr = new NeedsController(context);
+
             CreateNeedData thing1 = new CreateNeedData
             {
-                ThingId = thingId1
+                ThingId = thingId1,
+                ThingPrice = -10
             };
             CreateNeedData thing2 = new CreateNeedData
             {
-                ThingId = thingId2
+                ThingId = thingId2,
             };
             CreateNeedData[] data = { thing1, thing2 };
+            int countStart = context.Users.Find(1).Purchases.Count;
+
 
             //  Act
             nCtr.Purchase(data);
 
             //  Assert
-            Assert.IsTrue(!context.Things.Find(thingId1).Needed);
-            Assert.IsTrue(!context.Things.Find(thingId2).Needed);
+            context = new TwnContext();
+            Assert.IsTrue(context.Things.Find(thingId1).Needed);
+            Assert.IsTrue(context.Things.Find(thingId2).Needed);
 
-            //Assert.IsTrue(context.Users.Find(1).Purchases.Count == 2);
+            Assert.IsTrue(context.Users.Find(1).Purchases.Count == countStart);
         }
     }
 }
