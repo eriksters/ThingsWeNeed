@@ -8,6 +8,7 @@ using ThingsWeNeed.Models;
 using ThingsWeNeed.Models.ViewModels;
 using ThingsWeNeed.Models.Binders;
 using TwnData;
+using ThingsWeNeed.Utility;
 
 namespace ThingsWeNeed.Controllers
 {
@@ -56,9 +57,9 @@ namespace ThingsWeNeed.Controllers
 
         //  Action for handling purchases
         [HttpPost]
-        public ActionResult Purchase([Bind(Prefix = "purchases", Include = "ThingId, ThingPrice")] CreateNeedData[] purchases) {
+        public JsonResult Purchase([Bind(Prefix = "purchases", Include = "ThingId, ThingPrice")] CreateNeedData[] purchases) {
             
-            JsonResult result;
+            JsonResponseBuilder builder = new JsonResponseBuilder();
 
             try
             {
@@ -86,19 +87,26 @@ namespace ThingsWeNeed.Controllers
                     }
                 }
 
-                context.SaveChanges();
-                result = Json(new { Status = "OK", PurchasedAmount = changes }, JsonRequestBehavior.AllowGet);
+                builder.Success = true;
+                builder.SendData = true;
+                builder.Data = new { PurchasedAmount = changes };
 
+                context.SaveChanges();
             }
             catch (Exception e)
             {
-                result = Json(new { Status = "ERROR", ErrorMessage = e.Message, StackTrace = e.StackTrace }, JsonRequestBehavior.AllowGet);
+                builder.Success = false;
+                builder.Errors.Add(new JsonResponseBuilder.Error { 
+                    ErrorMessage = e.Message,
+                    StackTrace = e.StackTrace,
+                    Source = e.Source,
+                });
             }
             finally {
                 context.Dispose();
             }
 
-            return result;
+            return Json(builder.Build(), JsonRequestBehavior.AllowGet);
         }
     }
 }
