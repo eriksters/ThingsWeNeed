@@ -47,6 +47,10 @@ namespace ThingsWeNeed.Controllers
             }
         }
 
+        public ActionResult AddThing() {
+            return View(new ThingsListViewModel("Add thing"));
+        }
+
 
         //  Action for handling purchases
         [HttpPost]

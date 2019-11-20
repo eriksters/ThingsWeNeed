@@ -3,10 +3,60 @@
 @using ThingsWeNeed.Models
 @model ThingsWeNeed.Models.ViewModels.ThingsListViewModel
 
-<script src="~/Scripts/ViewsScripts/ThingsListScripts.js"></script>
-
 <!DOCTYPE html>
+<style>
+        input[type=checkbox] ~ label {
+            background: purple;
+            height: 50px;
+            color: #fff;
+            padding: 16px;
+            display: block;
+            align-items:center;
+        }
+
+
+        input[type=checkbox]:checked ~ label ~ .content {
+            opacity: 0;
+            height: 0;
+            display: none;
+        }
+
+         input[type=checkbox]:checked ~ label ~ .content2 {
+            height: 200px;
+            padding: 16px;
+            display: block;
+            clear: both;
+            opacity: initial;
+        }
+
+
+    .content {
+        height: 200px;
+        padding: 16px;
+        display: block;
+        clear: both;
+    }
+
+    .content2 {
+        opacity: 0;
+        height: 0;
+        display: none;
+    }
+
+    .div1 {
+        height: 200px;
+        padding: 16px;
+        display: block;
+        clear: both;
+    }
+    .labelno{
+        opacity: 0;
+        height: 0;
+        display: none;
+    }
+</style>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title>New Thing</title>
@@ -15,34 +65,38 @@
     <h3 style="text-align: center;">Insert new thing</h3>
     <div class="container">
         <form method='post'>
-            <div class="form-group col-lg-4">
-                <label for="name" class="control-label">Thing name:</label>
-                <input name='name' type='text' class="form-control input-sm">
+            <label>Is it a personal wish?</label>
+            <input type="checkbox" id="toggle">
+            <label class="labelno" style="text-align: center;" for="toggle">Personal wish</label>
+            <div class="content col-lg-4">
+                <label for="thingname" class="control-label">Thing name:</label>
+                <input name='thingname' type='text' class="form-control input-sm">
             </div>
-            <div class="form-group col-lg-4">
-                <label for="lastbought" class="control-label">Last bought:</label>
-                <input name='lastbought' id="lastbought" class="form-control input-sm">
+            <div class="content2 col-lg-4">
+                <label for="wishname" class="control-label">Wish name:</label>
+                <input name='wishname' type='text' class="form-control input-sm">
             </div>
-            <div class="form-group col-lg-4">
+            <div class="content col-lg-4">
                 <label for="average" class="control-label">Average price:</label>
                 <input name='average' type='text' class="form-control input-sm">
             </div>
-            <div class="form-group col-lg-4">
-                <label for="household" class="control-label">Average price:</label>
+            <div class="content2 col-lg-4">
+                <label for="max" class="control-label">Max price:</label>
+                <input name='max' type='text' class="form-control input-sm">
+            </div>
+            <div class="content2 col-lg-4">
+                <label for="extra" class="control-label">Extra pay:</label>
+                <input name='extra' type='text' class="form-control input-sm">
+            </div>
+            <div class="div1 col-lg-4">
+                <p><label for="household" class="control-label">Household:</label></p>
                 <Select name="household">
-                    @if (Model.User != null)
-                    {
-                        if (Model.User.Households.Count > 0)
-                        {
-                            foreach (Household household in Model.User.Households)
-                            {
-                                <option>@household</option>
-                            }
-                        }
-                    }
+                    <option>household1</option>
+                    <option>household2</option>
+                    <option>household3</option>
                 </Select>
             </div>
-            <div class="form-group col-lg-2">
+            <div class="div1 col-lg-4">
                 <input type='submit' name='ok' value='Add' class="btnbtn-default">
             </div>
         </form>
