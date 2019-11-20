@@ -22,7 +22,7 @@
         }
 
          input[type=checkbox]:checked ~ label ~ .content2 {
-            height: 200px;
+            height: auto;
             padding: 16px;
             display: block;
             clear: both;
@@ -31,23 +31,26 @@
 
 
     .content {
-        height: 200px;
+        height: auto;
         padding: 16px;
         display: block;
         clear: both;
+      
     }
 
     .content2 {
         opacity: 0;
         height: 0;
         display: none;
+   
     }
 
     .div1 {
-        height: 200px;
+        height: auto;
         padding: 16px;
         display: block;
         clear: both;
+      
     }
     .labelno{
         opacity: 0;
@@ -62,44 +65,48 @@
     <title>New Thing</title>
 </head>
 <body>
-    <h3 style="text-align: center;">Insert new thing</h3>
-    <div class="container">
-        <form method='post'>
+    <div class="container jumbotron">
+            <h3>Add to list</h3>
             <label>Is it a personal wish?</label>
-            <input type="checkbox" id="toggle">
+            <input  type="checkbox" id="toggle">
             <label class="labelno" style="text-align: center;" for="toggle">Personal wish</label>
-            <div class="content col-lg-4">
-                <label for="thingname" class="control-label">Thing name:</label>
-                <input name='thingname' type='text' class="form-control input-sm">
-            </div>
+            <p class="one">
+                <div class="content col-lg-4">
+                    <label for="thingname" class="control-label">Thing name:</label>
+                    <input name='thingname' type='text' class="form-control input-sm" placeholder="Milk">
+                </div>
+            </p>
             <div class="content2 col-lg-4">
                 <label for="wishname" class="control-label">Wish name:</label>
-                <input name='wishname' type='text' class="form-control input-sm">
+                <input name='wishname' type='text' class="form-control input-sm" placeholder="Skittles ">
             </div>
             <div class="content col-lg-4">
                 <label for="average" class="control-label">Average price:</label>
-                <input name='average' type='text' class="form-control input-sm">
+                <input name='average' type='text' class="form-control input-sm" placeholder="10">
             </div>
             <div class="content2 col-lg-4">
                 <label for="max" class="control-label">Max price:</label>
-                <input name='max' type='text' class="form-control input-sm">
+                <input name='max' type='text' class="form-control input-sm" placeholder="30">
             </div>
             <div class="content2 col-lg-4">
                 <label for="extra" class="control-label">Extra pay:</label>
-                <input name='extra' type='text' class="form-control input-sm">
+                <input name='extra' type='text' class="form-control input-sm" placeholder="5">
             </div>
             <div class="div1 col-lg-4">
-                <p><label for="household" class="control-label">Household:</label></p>
-                <Select name="household">
+                <label for="household" class="control-label">Household:</label>
+                <Select class="form-control input-sm" name="household">
                     <option>household1</option>
                     <option>household2</option>
                     <option>household3</option>
                 </Select>
             </div>
             <div class="div1 col-lg-4">
-                <input type='submit' name='ok' value='Add' class="btnbtn-default">
+                <button style="padding: 6px 40px; min-width: 60px"
+                        type="button"
+                        class="btn btn-success buy_button" title="Add">
+                    Add
+                </button>
             </div>
-        </form>
     </div>
 </body>
 </html>
