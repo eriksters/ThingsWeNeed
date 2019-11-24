@@ -70,8 +70,8 @@ namespace TwnData.Migrations
             crazyHouse.Users.Add(bianca);
             crazyHouse.Users.Add(sivin);
 
-            context.Households.Add(home);
-            context.Households.Add(crazyHouse);
+            context.Households.AddOrUpdate(home);
+            context.Households.AddOrUpdate(crazyHouse);
             context.SaveChanges();
 
             ICollection<ThingEntity> Things = new List<ThingEntity> {
