@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{162F3CEA-A2D3-4559-88DF-D398FEC76C42}</ProjectGuid>
+    <ProjectGuid>{2EFE4396-90C7-4FC9-93C5-E1B46A4A6BD0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TwnData</RootNamespace>
@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Entity.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,19 +52,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DB\DbInitializer.cs" />
-    <Compile Include="Models\AppUser.cs" />
-    <Compile Include="Models\Household.cs" />
+    <Compile Include="Address.cs" />
+    <Compile Include="Migrations\201911232239470_Mig1.cs" />
+    <Compile Include="Migrations\201911232239470_Mig1.Designer.cs">
+      <DependentUpon>201911232239470_Mig1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="UserEntity.cs" />
+    <Compile Include="HouseholdEntity.cs" />
+    <Compile Include="PurchaseEntity.cs" />
+    <Compile Include="WishStatus.cs" />
+    <Compile Include="ThingEntity.cs" />
+    <Compile Include="TwnContext.cs" />
+    <Compile Include="WishEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Purchase.cs" />
-    <Compile Include="Models\Status.cs" />
-    <Compile Include="Models\Thing.cs" />
-    <Compile Include="DAL\TwnContext.cs" />
-    <Compile Include="Models\Wish.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201911232239470_Mig1.resx">
+      <DependentUpon>201911232239470_Mig1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

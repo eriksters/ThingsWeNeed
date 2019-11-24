@@ -4,11 +4,12 @@ using System.Linq;
 using System.Web;
 using TwnData;
 
-namespace ThingsWeNeed.Models.ViewModels {
+namespace ThingsWeNeed.Models.ViewModels
+{
     public class ThingsListViewModel : ViewModel
     {
-        public AppUser User { get; set; }
-    
+        public UserEntity User { get; set; }
+
         public ThingsListViewModel(string title) : base(title) { }
 
     }

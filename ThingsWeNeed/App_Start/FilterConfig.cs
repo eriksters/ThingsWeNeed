@@ -1,9 +1,12 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace ThingsWeNeed {
-    public class FilterConfig {
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters) {
+namespace ThingsWeNeed
+{
+    public class FilterConfig
+    {
+        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        {
             filters.Add(new HandleErrorAttribute());
         }
     }
