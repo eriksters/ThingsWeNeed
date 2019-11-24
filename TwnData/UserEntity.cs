@@ -26,6 +26,8 @@ namespace TwnData
         [Required(ErrorMessage = "Username required")]
         public string Username { get; set; }
 
+        public float PenisSize { get; set; }
+
         public string FName { get; set; }
         public string LName { get; set; }
         public string PhoneNumber { get; set; }
