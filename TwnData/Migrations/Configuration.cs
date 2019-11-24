@@ -21,13 +21,13 @@ namespace TwnData.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data
 
-            UserEntity eriks = new UserEntity { Email = "eriksters@gmail.com", Username = "eriksters", FName = "Eriks", LName = "Petersons", PhoneNumber = "81917581" };
-            UserEntity kristjonas = new UserEntity { Email = "kristjonas@inbox.lt", Username = "bigK", FName = "Kristjonas" };
-            UserEntity tomi = new UserEntity { Email = "tfaludi@gmail.com", Username = "Taamaaaas", FName = "Tamas", LName = "Faludi" };
-            UserEntity kris = new UserEntity { Email = "krissyboi@hotmail.com", Username = "smallK", FName = "Krzisciek" };
-            UserEntity adam = new UserEntity { Email = "baduraAdam@gmail.com", Username = "TheOneWithTheCabbage", FName = "Adam", LName = "Badura" };
-            UserEntity bianca = new UserEntity { Email = "bi.amza@gmail.com", Username = "bAmza", FName = "Bianca", LName = "Amza" };
-            UserEntity sivin = new UserEntity { Email = "BlackKnight@gmail.com", Username = "TheBlackKnight", FName = "Sivin" };
+            UserEntity eriks = new UserEntity { PenisSize = 10, Email = "eriksters@gmail.com", Username = "eriksters", FName = "Eriks", LName = "Petersons", PhoneNumber = "81917581" };
+            UserEntity kristjonas = new UserEntity { Email = "kristjonas@inbox.lt", Username = "bigK", FName = "Kristjonas", PenisSize = 6 };
+            UserEntity tomi = new UserEntity { Email = "tfaludi@gmail.com", Username = "Taamaaaas", FName = "Tamas", LName = "Faludi" , PenisSize = 3};
+            UserEntity kris = new UserEntity { Email = "krissyboi@hotmail.com", Username = "smallK", FName = "Krzisciek", PenisSize = 2 };
+            UserEntity adam = new UserEntity { Email = "baduraAdam@gmail.com", Username = "TheOneWithTheCabbage", FName = "Adam", LName = "Badura", PenisSize = 6 };
+            UserEntity bianca = new UserEntity { Email = "bi.amza@gmail.com", Username = "bAmza", FName = "Bianca", LName = "Amza", PenisSize = 0 };
+            UserEntity sivin = new UserEntity { Email = "BlackKnight@gmail.com", Username = "TheBlackKnight", FName = "Sivin", PenisSize = 5 };
 
             context.Users.AddOrUpdate(eriks);
             context.Users.AddOrUpdate(kristjonas);
