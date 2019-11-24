@@ -75,11 +75,11 @@ namespace TwnData.Migrations
             context.SaveChanges();
 
             ICollection<ThingEntity> Things = new List<ThingEntity> {
-                new ThingEntity { Name = "Toilet paper", DefaultPrice = 10, HouseholdId = 1 },
-                new ThingEntity { Name = "Skittles", DefaultPrice = 30, HouseholdId = 1},
-                new ThingEntity { Name = "Bread", DefaultPrice = 20, Needed = true, HouseholdId = 1},
-                new ThingEntity { Name = "Toilet paper", Needed = true, HouseholdId = 2},
-                new ThingEntity { Name = "Twix", Needed = true, HouseholdId = 2}
+                new ThingEntity { Name = "Toilet paper", DefaultPrice = 10, HouseholdId = 1, Show = true },
+                new ThingEntity { Name = "Skittles", DefaultPrice = 30, HouseholdId = 1, Show = false},
+                new ThingEntity { Name = "Bread", DefaultPrice = 20, Needed = true, HouseholdId = 1, Show = true},
+                new ThingEntity { Name = "Toilet paper", Needed = true, HouseholdId = 2, Show = true},
+                new ThingEntity { Name = "Twix", Needed = true, HouseholdId = 2, Show = true}
             };
             foreach (ThingEntity thing in Things)
                 context.Things.AddOrUpdate(thing);

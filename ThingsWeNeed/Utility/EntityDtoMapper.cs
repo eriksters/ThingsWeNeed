@@ -5,6 +5,8 @@ using System.Web;
 using TwnData;
 using ThingsWeNeed.DTOs;
 
+//REFACTOR: Check if there is a way to implement SINGLE query into the MULTIPLE query
+
 namespace ThingsWeNeed.Utility
 {
     public static class EntityDtoMapper
@@ -44,23 +46,30 @@ namespace ThingsWeNeed.Utility
         //}
 
         //  Multiple thing Entities to DTOs
-        public static IEnumerable<Thing> Map(IEnumerable<ThingEntity> entities)
+        public static IEnumerable<Thing> Map(   IEnumerable<ThingEntity> entities, 
+                                                bool includeHousehold = false,
+                                                bool includeHidden = false)
         {
             var thingDTOs = from entity in entities
-                                select new Thing()
-                                {
-                                    ThingId = entity.ThingId,
-                                    DefaultPrice = entity.DefaultPrice,
-                                    HouseholdId = entity.HouseholdId,
-                                    Name = entity.Name,
-                                    Needed = entity.Needed
-                                };
+                            //  if includehidden==true, then include all, 
+                            //  if includeHidden==false, check if show == true
+                            where includeHidden ? true : entity.Show == true
+                            select new Thing()
+                            {
+                                ThingId = entity.ThingId,
+                                DefaultPrice = entity.DefaultPrice,
+                                HouseholdId = entity.HouseholdId,
+                                Name = entity.Name,
+                                Needed = entity.Needed,
+                                Show = entity.Show,
+                                Household = includeHousehold ? Map(entity.Household) : null,
+                            };
 
             return thingDTOs;
         }
 
         //  Single thing Entity to DTO
-        public static Thing Map(ThingEntity entity)
+        public static Thing Map(ThingEntity entity, bool includeHousehold = false)
         {
             var dto = new Thing()
             {
@@ -68,7 +77,9 @@ namespace ThingsWeNeed.Utility
                 DefaultPrice = entity.DefaultPrice,
                 HouseholdId = entity.HouseholdId,
                 Name = entity.Name,
-                Needed = entity.Needed
+                Needed = entity.Needed,
+                Show = entity.Show,
+                Household = includeHousehold ? Map(entity.Household) : null,
             };
             return dto;
         }

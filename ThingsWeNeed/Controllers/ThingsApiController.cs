@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TwnData;
+using System.Data.Entity;
 using ThingsWeNeed.Utility;
 using ThingsWeNeed.DTOs;
 
@@ -32,7 +33,9 @@ namespace ThingsWeNeed.Controllers
         public IHttpActionResult GetDetails(int id)
         {
             //  Find the thing in the database using EF
-            ThingEntity thing = context.Things.Find(id);
+            ThingEntity thing = context.Things
+                .Include(x => x.Household)
+                .SingleOrDefault(x => x.ThingId == id);
 
             //  If the Thing was not found, return Not found
             if (thing == null)
@@ -41,7 +44,7 @@ namespace ThingsWeNeed.Controllers
             }
             else 
             {
-                return Ok(EntityDtoMapper.Map(thing));
+                return Ok(EntityDtoMapper.Map(thing, includeHousehold: true));
             }
         }
 
@@ -55,8 +58,6 @@ namespace ThingsWeNeed.Controllers
             //  Currently no errors are being handled (at this layer)
             //  so just return all things derectly from the EF context
             //  return Ok(context.Things.Except);
-
-            List<Thing> e = EntityDtoMapper.Map(context.Things).ToList();
 
             return Ok(EntityDtoMapper.Map(context.Things));
         }
@@ -84,10 +85,13 @@ namespace ThingsWeNeed.Controllers
                 //  return the created thing with Ok status code and the created thing's data including generated Id
                 ThingEntity thingEntity = new ThingEntity()
                 {
-                    DefaultPrice = thing.DefaultPrice,
                     Name = thing.Name,
-                    Needed = thing.Needed,
-                    HouseholdId = thing.HouseholdId
+                    HouseholdId = thing.HouseholdId,
+
+                    Needed = thing.Needed == null ? true : (bool) thing.Needed,
+                    DefaultPrice = thing.DefaultPrice == null ? 0 : (double) thing.DefaultPrice,
+                    Show = thing.Show == null ? true : (bool) thing.Show
+                    
                 };
                 context.Things.Add(thingEntity);
                 context.SaveChanges();
@@ -108,8 +112,8 @@ namespace ThingsWeNeed.Controllers
             ThingEntity thing = context.Things.Find(id);
 
             //  If the thing was not found, return Bad Request
-            if (this == null) {
-                return Content(HttpStatusCode.BadRequest, ErrorResponseFactory.BadRequest(ModelState));
+            if (thing == null) {
+                return NotFound();
             } 
             else 
             {
@@ -117,8 +121,8 @@ namespace ThingsWeNeed.Controllers
                 //  remove the thing from the ED context,
                 //  save to database, 
                 //  return Ok with the removed thing's data
-                
-                context.Things.Remove(thing);
+
+                thing.Show = false;
                 context.SaveChanges();
                 return Ok(EntityDtoMapper.Map(thing));
             }
@@ -142,10 +146,10 @@ namespace ThingsWeNeed.Controllers
             else 
             {
                 //  Find the thing in the database using EF
-                ThingEntity thing = context.Things.Find(id);
+                ThingEntity thingEntity = context.Things.Find(id);
 
                 //  If the Thing was not found, return Bad Request 
-                if (thing == null)
+                if (thingEntity == null)
                 {
                     throw new HttpResponseException(HttpStatusCode.NotFound);
                 }
@@ -154,11 +158,14 @@ namespace ThingsWeNeed.Controllers
                     //  If all is Good, 
                     //  update the entity, 
                     //  save the changes to the Database,
-                    //  return with the updated thing's data
+                    //  return with the updated thingEntity's data
+
+                    thingEntity.Name = updatedThing.Name;
+
+                    if (updatedThing.DefaultPrice != null)
+                        thingEntity.DefaultPrice = (double) updatedThing.DefaultPrice;
+
                     
-                    thing.DefaultPrice = updatedThing.DefaultPrice;
-                    thing.Name = updatedThing.Name;
-                    thing.Needed = updatedThing.Needed;
 
                     context.SaveChanges();
                     

@@ -26,6 +26,10 @@ namespace TwnData
         [Required]
         public int HouseholdId { get; set; }
 
+        [Required]
+        public bool Show { get; set; }      // For referential integrity
+                                            // When deleting, dont actually delete the thing, but make it not show in the List
+
         public bool Needed { get; set; }
 
         public double DefaultPrice { get; set; }

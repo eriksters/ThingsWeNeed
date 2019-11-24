@@ -60,6 +60,10 @@
     <Compile Include="Migrations\201911241339488_WillySize.Designer.cs">
       <DependentUpon>201911241339488_WillySize.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911241545458_Mig3.cs" />
+    <Compile Include="Migrations\201911241545458_Mig3.Designer.cs">
+      <DependentUpon>201911241545458_Mig3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="UserEntity.cs" />
     <Compile Include="HouseholdEntity.cs" />
@@ -83,6 +87,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911241339488_WillySize.resx">
       <DependentUpon>201911241339488_WillySize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911241545458_Mig3.resx">
+      <DependentUpon>201911241545458_Mig3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -19,15 +19,12 @@ namespace ThingsWeNeed.DTOs
         [Required (ErrorMessage = "Name required")]
         public string Name { get; set; }
 
-        [Required (ErrorMessage = "Penis size is a must")]
-        public string PenisSize { get; set; }
-
         [Required (ErrorMessage = "Household Id required")]
         public int HouseholdId { get; set; }
-
-        public bool Needed { get; set; }
-
-        public double DefaultPrice { get; set; }
+        public bool? Needed { get; set; }
+        public double? DefaultPrice { get; set; }
+        public bool? Show { get; set; }
+        public Household Household { get; set; }
 
     }
 }
