@@ -169,7 +169,7 @@ namespace ThingsWeNeed.Controllers
 
                     context.SaveChanges();
                     
-                    return Ok(EntityDtoMapper.Map(thing));
+                    return Ok(EntityDtoMapper.Map(thingEntity));
                 }
             }
         }
