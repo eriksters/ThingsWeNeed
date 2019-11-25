@@ -15,7 +15,7 @@ namespace TwnData
 {
     public class TwnContext : DbContext
     {
-        public TwnContext () {
+        public TwnContext () {  //  2
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<TwnContext>());
             //Database.SetInitializer<TwnContext>(new DropCreateDatabaseAlways<TwnContext>());
         }
