@@ -5,10 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ThingsWeNeed.Data.Household;
-using ThingsWeNeed.Data.Thing;
-using ThingsWeNeed.Data.User;
-
 namespace ThingsWeNeed.Shared
 {
     class UserDto

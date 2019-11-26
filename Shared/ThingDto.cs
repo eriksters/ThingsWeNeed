@@ -4,10 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-using ThingsWeNeed.Data.Household;
-using ThingsWeNeed.Data.Thing;
-using ThingsWeNeed.Data.User;
-
 namespace ThingsWeNeed.Shared
 {
     public class ThingDto

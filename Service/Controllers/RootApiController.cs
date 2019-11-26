@@ -6,7 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 
 using ThingsWeNeed.Data.User;
-using ThingsWeNeed.Data.Core;
+
+using ThingsWeNeed.Shared;
 
 namespace ThingsWeNeed.Service.Controllers
 {

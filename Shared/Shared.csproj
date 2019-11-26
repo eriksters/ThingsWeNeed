@@ -7,8 +7,8 @@
     <ProjectGuid>{6C630F11-2F4C-4988-A63F-E39467B5F5D2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ThingsWeNeed.TwnData</RootNamespace>
-    <AssemblyName>TwnData</AssemblyName>
+    <RootNamespace>ThingsWeNeed.Shared</RootNamespace>
+    <AssemblyName>Shared</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

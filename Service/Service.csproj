@@ -259,7 +259,7 @@
       <Name>Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
-      <Project>{6c630f11-2f4c-4988-a63f-e39467b5f5d2}</Project>
+      <Project>{6C630F11-2F4C-4988-A63F-E39467B5F5D2}</Project>
       <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
