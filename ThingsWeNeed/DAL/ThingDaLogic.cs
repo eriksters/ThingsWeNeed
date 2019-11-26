@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
@@ -13,23 +14,9 @@ namespace ThingsWeNeed.DAL
 {
     public class ThingDaLogic : AbstractDaLogic
     {
-        private static ThingDaLogic instance;
-
-        public static ThingDaLogic Instance {
-            get 
-            {
-                if (instance == null)
-                {
-                    instance = new ThingDaLogic(context: new TwnContext());
-                }
-                return instance;
-            }
-        }
-
-        public ThingDaLogic(TwnContext context) : base(context) { } //3
-
-        private ThingDaLogic() : base(new TwnContext()) { }  //5
+        public ThingDaLogic() : base() { }
         
+
         ///  <summary>Cast Thing entity to Thing DTO</summary>
         public Thing GetThingDto(ThingEntity thingEntity, bool includeHousehold)
         {

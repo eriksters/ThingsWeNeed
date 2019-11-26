@@ -18,14 +18,24 @@ namespace ThingsWeNeed.Controllers
         private ThingDaLogic logic;
 
         //  Allow for simple Dependency injection for easier testing
-        public ThingsApiController(TwnContext context)
-        {
-            logic = ThingDaLogic.Instance;
-        }
+        //public ThingsApiController(TwnContext context)
+        //{
+        //    logic = ThingDaLogic.Instance;
+        //}
 
         public ThingsApiController() // 1
         {
-            logic = ThingDaLogic.Instance;
+            logic = new ThingDaLogic();
+        }
+
+        [HttpGet]
+        [Route("api")]
+        public IHttpActionResult Root() {
+            var linkArray = new LinkDto[] {
+                new LinkDto ("api", "self", "GET"),
+                new LinkDto ("api/Things", "thing_all", "GET")
+            };
+            return Ok(new { links = linkArray }); 
         }
 
         /// <summary>
@@ -208,6 +218,39 @@ namespace ThingsWeNeed.Controllers
         //        }
         //    }
         //}
-    
+
+
+        //public IEnumerable<LinkDto> GetLinks(Thing thing) {
+        //    var linkList = new LinkDto[] {
+
+        //        new LinkDto(
+        //            href: "api/Things",
+        //            rel: "",
+        //            method: "GET"
+        //        ),
+
+        //        new LinkDto(
+        //            href: "api/Things",
+        //            rel: "",
+        //            method: "GET"
+        //        ),
+
+        //        new LinkDto(
+        //            href: "",
+        //            rel: "",
+        //            method: ""
+        //        ),
+
+        //        new LinkDto(
+        //            href: "",
+        //            rel: "",
+        //            method: ""
+        //        ),
+
+
+        //    };
+        //}
+
+
     }
 }

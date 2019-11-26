@@ -169,6 +169,7 @@
     <Compile Include="DAL\HouseholdDaLogic.cs" />
     <Compile Include="DAL\ThingDaLogic.cs" />
     <Compile Include="DTOs\Household.cs" />
+    <Compile Include="DTOs\LinkDto.cs" />
     <Compile Include="DTOs\Thing.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

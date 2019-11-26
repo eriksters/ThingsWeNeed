@@ -10,32 +10,30 @@ namespace ThingsWeNeed.DAL
 {
     public abstract class AbstractDaLogic : IDisposable
     {
-        private static AbstractDaLogic instance;
-
         protected static TwnContext DatabaseContext { get; private set; }
 
-        protected AbstractDaLogic(TwnContext context)   //4     //6
+        protected AbstractDaLogic()
         {
             if (DatabaseContext == null)
             {
-                DatabaseContext = context;  //skips     //skips
+                DatabaseContext = new TwnContext();  
             }
         }
 
-        /// <summary>
-        /// Check if the connection is still open. If not, try to open it again
-        /// </summary>
-        /// <returns>true if the connection was open, false if not</returns>
-        public bool CheckConnection()
-        {
-            if (DatabaseContext.Database.Connection.State != ConnectionState.Open)
-            {
-                DatabaseContext.Database.Connection.Open();
-                return false;
-            }
+        ///// <summary>
+        ///// Check if the connection is still open. If not, try to open it again
+        ///// </summary>
+        ///// <returns>true if the connection was open, false if not</returns>
+        //public bool CheckConnection()
+        //{
+        //    if (DatabaseContext.Database.Connection.State != ConnectionState.Open)
+        //    {
+        //        DatabaseContext.Database.Connection.Open();
+        //        return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         public void Save()
         {
