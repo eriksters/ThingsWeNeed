@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{DC1701A8-44AF-4C51-9A16-CBF5B9F70641}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{AF3A0F7E-7EDE-4C59-A841-BD7E7438B209}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{DC1701A8-44AF-4C51-9A16-CBF5B9F70641}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC1701A8-44AF-4C51-9A16-CBF5B9F70641}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC1701A8-44AF-4C51-9A16-CBF5B9F70641}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF3A0F7E-7EDE-4C59-A841-BD7E7438B209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF3A0F7E-7EDE-4C59-A841-BD7E7438B209}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF3A0F7E-7EDE-4C59-A841-BD7E7438B209}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF3A0F7E-7EDE-4C59-A841-BD7E7438B209}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

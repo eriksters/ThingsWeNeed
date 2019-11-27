@@ -8,24 +8,13 @@ namespace ThingsWeNeed.Data.Core
 {
     public class TwnContext : DbContext
     {
-        //  Singleton pattern
-        private static TwnContext instance;
+        public TwnContext() : base()
+        { }
 
-        public static TwnContext Instance {
-            get {
-                if (instance == null)
-                    instance = new TwnContext();
-                return instance;
-            }
-            private set {
-                instance = value;
-            }
-        }
+        public DbSet<ThingEntity> Things { get; set; }
 
-        public DbSet<ThingEntity> Things { get; private set; }
+        public DbSet<HouseholdEntity> Households { get; set; }
 
-        public DbSet<HouseholdEntity> Households { get; private set; }
-
-        public DbSet<UserEntity> Users { get; private set; } 
+        public DbSet<UserEntity> Users { get; set; } 
     }
 }

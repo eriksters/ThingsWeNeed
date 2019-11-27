@@ -22,15 +22,13 @@ namespace ThingsWeNeed.Shared
         [Required(ErrorMessage = "Household Id required")]
         public int HouseholdId { get; set; }
 
-        public bool? Needed { get; set; }
+        public bool Needed { get; set; }
 
-        public double? DefaultPrice { get; set; }
+        public double DefaultPrice { get; set; }
 
-        public bool? Show { get; set; }
+        public bool Show { get; set; }
             
-
-        public HouseholdDto Household { get; set; }
-
+        public dynamic Household { get; set; }
         
     }
 }
