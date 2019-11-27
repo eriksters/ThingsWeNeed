@@ -58,16 +58,19 @@ namespace ThingsWeNeed.Controllers.Thing
         }
 
         [HttpPost]
+        [Route("api/Things")]
         public IHttpActionResult Create([FromBody] ThingDto dto) {
             throw new NotImplementedException();
         }
 
         [HttpPut]
+        [Route("api/Things/{id}")]
         public IHttpActionResult Update(int id, [FromBody] ThingDto dto) {
             throw new NotImplementedException();
         }
 
         [HttpDelete]
+        [Route("api/Things/{id}")]
         public IHttpActionResult Delete(int id) {
             throw new NotImplementedException();
         }
