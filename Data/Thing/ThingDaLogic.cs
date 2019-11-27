@@ -18,6 +18,12 @@ namespace ThingsWeNeed.Data.Thing
             DatabaseContext = new TwnContext();
         }
 
+        /// <summary>
+        /// Get thing DTO by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Thing Data Transfer Object</returns>
+        /// <exception cref="KeyNotFoundException">Datbase entry not found</exception>
         public ThingDto GetById(int id)
         {
             ThingEntity entity = DatabaseContext.Things.Find(id);
@@ -48,8 +54,8 @@ namespace ThingsWeNeed.Data.Thing
         }
 
         public ThingDto Create(
-            int householdId,
             string name, 
+            int householdId,
             bool show,
             bool needed,
             double defaultPrice)
