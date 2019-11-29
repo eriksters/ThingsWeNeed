@@ -26,17 +26,22 @@ namespace ThingsWeNeed.UnitTests.Thing
 
             //  Arrange
             var thing = getTestThing();
-            int id = thing.ThingId;
-            var controller = TestData.GetInjectedController();
+            try
+            {
+                var controller = TestData.GetInjectedController();
 
-            //  Act
-            var result = (OkNegotiatedContentResult<ThingDto>) controller.Get(thing.ThingId);
+                //  Act
+                var result = (OkNegotiatedContentResult<ThingDto>)controller.Get(thing.ThingId);
 
-            //  Assert
-            Assert.IsTrue(result.Content.DefaultPrice == thing.DefaultPrice);
+                //  Assert
+                Assert.IsTrue(result.Content.DefaultPrice == thing.DefaultPrice);
 
-            //  Cleanup
-            cleanup(thing.ThingId);
+                //  Cleanup
+            }
+            finally
+            {
+                cleanup(thing.ThingId);
+            }
         }
 
         [TestMethod]
@@ -47,54 +52,68 @@ namespace ThingsWeNeed.UnitTests.Thing
             var thing2 = getTestThing();
             var controller = TestData.GetInjectedController();
 
-            //  Act
-            var result = (OkNegotiatedContentResult<ICollection<ThingDto>>)controller.GetCollection();
+            try
+            {
+                //  Act
+                var result = (OkNegotiatedContentResult<ICollection<ThingDto>>)controller.GetCollection();
 
-            //  Assert
-            bool found1 = false;
-            bool found2 = false;
-            foreach (var t in result.Content) {
-                if (t.ThingId == thing1.ThingId)
+                //  Assert
+                bool found1 = false;
+                bool found2 = false;
+                foreach (var t in result.Content)
                 {
-                    found1 = true;
+                    if (t.ThingId == thing1.ThingId)
+                    {
+                        found1 = true;
+                    }
+                    else if (t.ThingId == thing2.ThingId)
+                    {
+                        found2 = true;
+                    }
                 }
-                else if (t.ThingId == thing2.ThingId) {
-                    found2 = true;
-                }
+                Assert.IsTrue(found1);
+                Assert.IsTrue(found2);
+
+                //  Cleanup
             }
-
-            Assert.IsTrue(found1);
-            Assert.IsTrue(found2);
-
-            //  Cleanup
-            cleanup(thing1.ThingId);
-            cleanup(thing2.ThingId);
+            finally
+            {
+                
+                cleanup(thing1.ThingId);
+                cleanup(thing2.ThingId);
+            }
         }
 
         [TestMethod]
         public void Create_Ok() {
 
             //  Arrange
-            int id;
             int price = new Random().Next(1000);
             var dto = TestData.TestThing2;
 
             //  Act
-            using (var controller = TestData.GetInjectedController())
-            {
-                dto.DefaultPrice = price;
+            
+            try {
+                using (var controller = TestData.GetInjectedController())
+                {
+                    dto.DefaultPrice = price;
 
-                var result = (OkNegotiatedContentResult<ThingDto>) controller.Create(TestData.TestThing2);
-                id = result.Content.ThingId;
-            }
+                    var result = (OkNegotiatedContentResult<ThingDto>)controller.Create(TestData.TestThing2);
+                    dto.ThingId = result.Content.ThingId;
+                }
 
-            //  Assert
-            using (var context = new TwnContext())
-            {
-                Assert.IsTrue(context.Things.Find(id).DefaultPrice == price);
+                //  Assert
+                using (var context = new TwnContext())
+                {
+                    Assert.IsTrue(context.Things.Find(dto.ThingId).DefaultPrice == price);
+                }
+                
             }
-            //  Cleanup
-            cleanup(id);
+                  //  Cleanup
+            finally
+            {
+                cleanup(dto.ThingId);
+            }
 
         }
 
@@ -102,46 +121,62 @@ namespace ThingsWeNeed.UnitTests.Thing
         public void Update_Ok()
         {
             //  Arrange
+             
             var thing = getTestThing();
             int id = thing.ThingId;
-            OkNegotiatedContentResult<ThingDto> result; 
+            try
+            {
+                OkNegotiatedContentResult<ThingDto> result;
 
             //  Act
-            using (var controller = TestData.GetInjectedController())
-            {
-                result = (OkNegotiatedContentResult<ThingDto>)controller.Update(id, TestData.TestThing2);
-            }
+                using (var controller = TestData.GetInjectedController())
+                {
+                    result = (OkNegotiatedContentResult<ThingDto>)controller.Update(id, TestData.TestThing2);
+                }
 
             //  Assert
-            Assert.IsTrue(result.Content.DefaultPrice == thing.DefaultPrice);
-
-            //  Cleanup
-            cleanup(thing.ThingId);
-
+                Assert.IsTrue(result.Content.DefaultPrice == thing.DefaultPrice);
+            }
+            finally
+            {
+                cleanup(thing.ThingId);
+            }
         }
+
+
 
         [TestMethod]
         public void Delete_Ok()
         {
+
             //  Arrange
+            
             var thing = getTestThing();
             int id = thing.ThingId;
-            var controller = TestData.GetInjectedController();
+            try
+            {
+                var controller = TestData.GetInjectedController();
 
-            //  Act
-            var result = (OkNegotiatedContentResult<ThingDto>)controller.Delete(id);
+                //  Act
+                var result = (OkNegotiatedContentResult<ThingDto>)controller.Delete(id);
 
-            //  Assert
-            Assert.IsTrue(result.Content.DefaultPrice == thing.DefaultPrice);
+                //  Assert
+                Assert.IsTrue(result.Content.DefaultPrice == thing.DefaultPrice);
 
-            //  Cleanup
-            cleanup(id);
+                //  Cleanup
+            }
+            finally
+            {
+                cleanup(id);
+            }
         }
 
 
 
 
         public ThingEntity getTestThing() {
+
+
             TwnContext context = new TwnContext();
 
             var household = context.Households.Add(new HouseholdEntity() {
@@ -161,6 +196,7 @@ namespace ThingsWeNeed.UnitTests.Thing
                 Household = household,
                 DefaultPrice = price
             };
+
             var thingEntity = context.Things.Add(thing);
             context.Households.Add(household);
             using (context)
