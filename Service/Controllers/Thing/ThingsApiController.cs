@@ -15,11 +15,6 @@ namespace ThingsWeNeed.Controllers.Thing
     {
         private ThingDaLogic logic;
 
-        public ThingsApiController(ThingDaLogic logic)
-        {
-            this.logic = logic;
-        }
-
         public ThingsApiController() {
             logic = new ThingDaLogic();
         }
@@ -32,17 +27,12 @@ namespace ThingsWeNeed.Controllers.Thing
                 using (logic)
                 {
                     ThingDto dto = logic.GetById(id);
-                    return Ok(new
-                    {
-                        thing = dto,
-                        links = new LinkDto[] {
-                            new LinkDto( $"api/Things/{id}", "self", "GET"),
-                            new LinkDto( $"api/Things/{id}", "create-thing", "POST"),
-                            new LinkDto( $"api/Things/{id}", "update-thing", "PUT"),
-                            new LinkDto( $"api/Things/{id}", "delete-thing", "DELETE"),
-                            new LinkDto( $"api/Things/{id}/Household", "houshold", "GET")
-                        }
-                    });
+                    dto.Household = new LinkDto($"api/Things/{id}/Household", "houshold", "GET");
+                    dto.Links.Add(new LinkDto($"api/Things/{id}", "self", "GET"));
+                    dto.Links.Add(new LinkDto($"api/Things/{id}", "create-thing", "POST"));
+                    dto.Links.Add(new LinkDto($"api/Things/{id}", "update-thing", "PUT"));
+                    dto.Links.Add(new LinkDto($"api/Things/{id}", "delete-thing", "DELETE"));
+                    return Ok(dto);
                 }
             }
             else
@@ -73,6 +63,11 @@ namespace ThingsWeNeed.Controllers.Thing
         [Route("api/Things/{id}")]
         public IHttpActionResult Delete(int id) {
             throw new NotImplementedException();
+        }
+
+
+        public void InjectLogic(ThingDaLogic logic) {
+            this.logic = logic;
         }
 
     }

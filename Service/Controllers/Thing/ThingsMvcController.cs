@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ThingsWeNeed.Data.Thing;
+using ThingsWeNeed.Shared;
 
 namespace ThingsWeNeed.Service.Controllers.Thing
 {
@@ -19,8 +22,25 @@ namespace ThingsWeNeed.Service.Controllers.Thing
 
         [Route("Things/{id}")]
         [HttpGet]
-        public ActionResult Details(int id) {
-            throw new NotImplementedException();
+        public ActionResult Details([Bind(Include = "id")] int id) {
+            if (!ModelState.IsValid)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ModelState.ToString());
+            }
+            else
+            {
+                ThingDto thing;
+                using (var db = new ThingDaLogic())
+                {
+                    thing = db.GetById(id);
+                }
+
+                ThingDetailsViewModel viewModel = new ThingDetailsViewModel() {
+                    Thing = thing
+                };
+
+                return View("Details", viewModel);
+            }
         }
 
         [Route("Things/Create")]
