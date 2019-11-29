@@ -10,6 +10,8 @@ namespace ThingsWeNeed.Shared
     {
         public ThingDto()
         {
+            Links = new LinkedList<LinkDto>();
+
             Needed = true;
             DefaultPrice = 0;
         }
@@ -27,8 +29,10 @@ namespace ThingsWeNeed.Shared
         public double DefaultPrice { get; set; }
 
         public bool Show { get; set; }
-            
+
         public dynamic Household { get; set; }
+
+        public ICollection<LinkDto> Links { get; private set;}
         
     }
 }
