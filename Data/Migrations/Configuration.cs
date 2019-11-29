@@ -15,7 +15,6 @@ namespace ThingsWeNeed.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "ThingsWeNeed.Data.Core.TwnContext";
         }
 
         protected override void Seed(TwnContext context)
