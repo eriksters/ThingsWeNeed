@@ -11,7 +11,7 @@ namespace ThingsWeNeed.Data.Thing
 {
     public class ThingDaLogic : IDisposable
     {
-        protected TwnContext DatabaseContext { get; private set; }
+        public TwnContext DatabaseContext { get; private set; }
 
         public ThingDaLogic()
         {
@@ -81,6 +81,10 @@ namespace ThingsWeNeed.Data.Thing
 
         public void Dispose() {
             DatabaseContext.Dispose();
+        }
+
+        public void InjectDatabaseContext(TwnContext context) {
+            DatabaseContext = context;
         }
     }
 }
