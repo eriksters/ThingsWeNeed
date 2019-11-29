@@ -10,7 +10,7 @@ namespace ThingsWeNeed.Data.Core
     {
         public TwnContext() : base()
         { }
-
+        
         public DbSet<ThingEntity> Things { get; set; }
 
         public DbSet<HouseholdEntity> Households { get; set; }
