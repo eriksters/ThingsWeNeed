@@ -56,8 +56,7 @@ namespace ThingsWeNeed.UnitTests
         public static ThingDaLogic GetMockedLogic()
         {
             TwnContext context = new TwnContext();
-            context.Database.CreateIfNotExists();
-
+            
             ThingDaLogic logic = new ThingDaLogic();
             logic.InjectDatabaseContext(context);
             return logic;
