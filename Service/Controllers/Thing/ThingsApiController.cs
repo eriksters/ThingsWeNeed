@@ -62,7 +62,18 @@ namespace ThingsWeNeed.Controllers.Thing
         [HttpDelete]
         [Route("api/Things/{id}")]
         public IHttpActionResult Delete(int id) {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                using (logic)
+                {
+                    ThingDto dto = logic.Delete(id);
+                    return Ok(dto);
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
 
