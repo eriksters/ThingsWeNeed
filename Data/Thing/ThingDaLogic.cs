@@ -98,7 +98,29 @@ namespace ThingsWeNeed.Data.Thing
 
         public ThingDto Delete(int id)
         {
-            throw new NotImplementedException();
+            ThingEntity entity = DatabaseContext.Things.Find(id);
+            if (entity != null)
+            {
+                DatabaseContext.Things.Remove(entity);
+
+                ThingDto dto = new ThingDto()
+                {
+                    ThingId = entity.ThingId,
+                    DefaultPrice = entity.DefaultPrice,
+                    Name = entity.Name,
+                    Needed = entity.Needed,
+                    Show = entity.Show,
+                    HouseholdId = entity.HouseholdId
+                };
+
+                DatabaseContext.SaveChanges();
+
+                return dto;
+            }
+            else
+            {
+                throw (new KeyNotFoundException());
+            }
         }
 
         public void Dispose() {
