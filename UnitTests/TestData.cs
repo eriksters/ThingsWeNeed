@@ -30,7 +30,7 @@ namespace ThingsWeNeed.UnitTests
             Needed = false,
             Name = "TestThing",
             Show = false,
-            HouseholdId = 2,
+            HouseholdId = 96,
             ThingId = 2
         };
 

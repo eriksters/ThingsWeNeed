@@ -60,7 +60,29 @@ namespace ThingsWeNeed.Data.Thing
             bool needed,
             double defaultPrice)
         {
-            throw new NotImplementedException();
+
+            ThingEntity entity = new ThingEntity();
+            entity.Name = name;
+            entity.HouseholdId = householdId;
+            entity.Show = show;
+            entity.Needed = needed;
+            entity.DefaultPrice = defaultPrice;
+
+            DatabaseContext.Things.Add(entity);
+            DatabaseContext.SaveChanges();
+
+
+            ThingDto dto = new ThingDto()
+            {
+                ThingId = entity.ThingId,
+                Name = entity.Name,
+                Needed = entity.Needed,
+                Show = entity.Show,
+                DefaultPrice = entity.DefaultPrice,
+                HouseholdId = entity.HouseholdId
+            };
+            
+            return dto;
         }
 
         public void Update(

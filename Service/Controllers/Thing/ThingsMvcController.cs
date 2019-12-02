@@ -45,8 +45,26 @@ namespace ThingsWeNeed.Service.Controllers.Thing
 
         [Route("Things/Create")]
         [HttpGet]
-        public ActionResult Create() {
-            throw new NotImplementedException();
+        public ActionResult Create([Bind(Include = "dto")] ThingDto dto) {
+            if (!ModelState.IsValid)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ModelState.ToString());
+            }
+            else
+            {
+                ThingDto thing;
+                using (var db = new ThingDaLogic())
+                {
+                    thing = db.Create(dto.Name, dto.HouseholdId, dto.Show, dto.Needed, dto.DefaultPrice);
+                }
+
+                ThingDetailsViewModel viewModel = new ThingDetailsViewModel()
+                {
+                    Thing = thing
+                };
+
+                return View("Details", viewModel);
+            }
         }
 
         [Route("Things/{id}/Edit")]

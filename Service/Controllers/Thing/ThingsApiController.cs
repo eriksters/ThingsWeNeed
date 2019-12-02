@@ -50,7 +50,18 @@ namespace ThingsWeNeed.Controllers.Thing
         [HttpPost]
         [Route("api/Things")]
         public IHttpActionResult Create([FromBody] ThingDto dto) {
-            throw new NotImplementedException();
+               if (ModelState.IsValid)
+            {
+                using (logic)
+                {
+                    logic.Create(dto.Name, dto.HouseholdId,  dto.Show, dto.Needed, dto.DefaultPrice);
+                }
+                return Ok(dto);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         [HttpPut]

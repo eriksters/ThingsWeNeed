@@ -21,6 +21,7 @@ namespace ThingsWeNeed.Data.Thing
             this.Needed = false;
             this.Show = true;
         }
+        
 
         [Key]
         public int ThingId { get; set; }
