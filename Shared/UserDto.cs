@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ThingsWeNeed.Shared
 {
-    class UserDto
+    public class UserDto
     {
         public UserDto()
         {
@@ -31,5 +31,7 @@ namespace ThingsWeNeed.Shared
         public string PhoneNumber { get; set; }
 
         public virtual ICollection<HouseholdDto> Households { get; private set; }
+
+        public ICollection<LinkDto> Links { get; private set; }
     }
 }

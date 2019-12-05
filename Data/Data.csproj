@@ -58,6 +58,7 @@
     <Compile Include="Thing\ThingDaLogic.cs" />
     <Compile Include="Thing\ThingEntity.cs" />
     <Compile Include="Core\TwnContext.cs" />
+    <Compile Include="User\UserDaLogic.cs" />
     <Compile Include="User\UserEntity.cs" />
   </ItemGroup>
   <ItemGroup>
