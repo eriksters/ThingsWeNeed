@@ -8,6 +8,7 @@ using ThingsWeNeed.Controllers.Thing;
 using ThingsWeNeed.Data.Core;
 using ThingsWeNeed.Data.Household;
 using ThingsWeNeed.Data.Thing;
+using ThingsWeNeed.Service.Controllers.Household;
 using ThingsWeNeed.Shared;
 
 namespace ThingsWeNeed.UnitTests
@@ -53,11 +54,27 @@ namespace ThingsWeNeed.UnitTests
             return controller;
         }
 
+        public static HouseholdApiController GetHouseholdController()
+        {
+            HouseholdApiController controller = new HouseholdApiController();
+            controller.InjectLogic(GetMockedHouseholdLogic());
+            return controller;
+        }
+
         public static ThingDaLogic GetMockedLogic()
         {
             TwnContext context = new TwnContext();
             
             ThingDaLogic logic = new ThingDaLogic();
+            logic.InjectDatabaseContext(context);
+            return logic;
+        }
+
+        public static HouseholdLogic GetMockedHouseholdLogic()
+        {
+            TwnContext context = new TwnContext();
+
+            HouseholdLogic logic = new HouseholdLogic();
             logic.InjectDatabaseContext(context);
             return logic;
         }

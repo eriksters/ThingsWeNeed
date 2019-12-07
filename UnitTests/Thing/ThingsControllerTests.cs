@@ -144,7 +144,6 @@ namespace ThingsWeNeed.UnitTests.Thing
         }
 
 
-
         [TestMethod]
         public void Delete_Ok()
         {
@@ -172,10 +171,7 @@ namespace ThingsWeNeed.UnitTests.Thing
         }
 
 
-
-
         public ThingEntity getTestThing() {
-
 
             TwnContext context = new TwnContext();
 

@@ -37,9 +37,24 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Serenity.Core, Version=3.9.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serenity.Core.3.9.12\lib\net45\Serenity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Serenity.Data, Version=3.9.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serenity.Data.3.9.12\lib\net45\Serenity.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Household\HouseholdLogic.cs" />
     <Compile Include="Household\HouseholdEntity.cs" />
     <Compile Include="Migrations\201911270045303_InitialCreate.cs" />
     <Compile Include="Migrations\201911270045303_InitialCreate.Designer.cs">
@@ -58,6 +74,7 @@
     <Compile Include="Thing\ThingDaLogic.cs" />
     <Compile Include="Thing\ThingEntity.cs" />
     <Compile Include="Core\TwnContext.cs" />
+    <Compile Include="User\UserLogic.cs" />
     <Compile Include="User\UserEntity.cs" />
   </ItemGroup>
   <ItemGroup>

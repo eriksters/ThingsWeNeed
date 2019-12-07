@@ -44,7 +44,28 @@ namespace ThingsWeNeed.Controllers.Thing
         [HttpGet]
         [Route("api/Things")]
         public IHttpActionResult GetCollection() {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                using (logic)
+                {
+                    var dtoList = logic.GetCollection();
+
+                    //foreach (ThingDto dto in dtoList)
+                    //{
+                    //    dto.Links.Add(new LinkDto($"api/Things/{dto.ThingId}", "self", "GET"));
+                    //    dto.Links.Add(new LinkDto($"api/Things/{dto.ThingId}", "create-thing", "POST"));
+                    //    dto.Links.Add(new LinkDto($"api/Things/{dto.ThingId}", "update-thing", "PUT"));
+                    //    dto.Links.Add(new LinkDto($"api/Things/all", "delete-thing", "DELETE"));
+
+                    //}
+
+                    return Ok(dtoList);
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         [HttpPost]

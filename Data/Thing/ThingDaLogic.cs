@@ -48,9 +48,28 @@ namespace ThingsWeNeed.Data.Thing
             }
         }
 
-        public IEnumerable<ThingDto> GetCollection()
+        public ThingDto[] GetCollection()
         {
-            throw new NotImplementedException();
+            List<ThingEntity> thingsList = DatabaseContext.Things.ToList();
+            List<ThingDto> thingsDtoList = new List<ThingDto>();
+
+            foreach(ThingEntity entity in thingsList)
+            {
+                if(entity != null)
+                {
+                    ThingDto dto = new ThingDto()
+                    {
+                        ThingId = entity.ThingId,
+                        DefaultPrice = entity.DefaultPrice,
+                        Name = entity.Name,
+                        Needed = entity.Needed,
+                        Show = entity.Show,
+                        HouseholdId = entity.HouseholdId
+                    };
+                    thingsDtoList.Add(dto);
+                }
+            }
+            return thingsDtoList.ToArray();
         }
 
         public ThingDto Create(
