@@ -27,5 +27,15 @@ namespace Desktop
             InitializeComponent();
             this.mainWindow = mainWindow;
         }
+
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.GoToThingPage();
+        }
+
+        private void updateBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
