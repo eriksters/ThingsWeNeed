@@ -7,9 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Read Api" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="39" Margin="58,23,0,0" Click="btnApi_Click"/>
-        <TextBox Name="tbxApi" HorizontalAlignment="Left" Height="169" TextWrapping="Wrap" VerticalAlignment="Top" Width="370" Margin="58,98,0,0"/>
-        <DataGrid Name="dataGrid" HorizontalAlignment="Left" Height="169" VerticalAlignment="Top" Width="270" Margin="454,98,0,0" AutoGenerateColumns="True"/>
-
+        
     </Grid>
 </Window>

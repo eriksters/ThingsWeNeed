@@ -1,10 +1,16 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Net.Http;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using ThingsWeNeed.Shared;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace Desktop
 {
@@ -13,64 +19,28 @@ namespace Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
-        static readonly string THINGS_GET_COLLECTION = "https://localhost:44371/api/Things";
-
-        static HttpClient client = new HttpClient();
         public MainWindow()
         {
             InitializeComponent();
-            List<ThingDto> things = new List<ThingDto>();
-            fillThingsList();
+            GoToThingPage();
         }
 
-        private async void btnApi_Click(object sender, RoutedEventArgs e)
+        public void GoToThingPage()
         {
-            ThingDto thing = await GetThingAPIAsync("https://localhost:44371/api/Things/1");
-
-            String sResult = "API Result on /api/Things/1: " + Environment.NewLine + "Name=" + thing.Name + Environment.NewLine + "Id=" + thing.ThingId;
-
-            tbxApi.Text = sResult;
+            ThingPage newPage = new ThingPage(this);
+            Content = newPage;
         }
 
-        // Fill the Thing List with data fro Data Grid
-        private async void fillThingsList()
+        public void GoToUpdatePage()
         {
-            ICollection<ThingDto> things = await GetThingCollectionAPIAsync(THINGS_GET_COLLECTION);
-            dataGrid.ItemsSource = things;
+            ThingUpdatePage newPage = new ThingUpdatePage(this);
+            Content = newPage;
         }
 
-
-        // Get Thing by Id from API
-        static async Task<ThingDto> GetThingAPIAsync(string path)
+        public void GoToCreatePage()
         {
-            string responseBody = "";
-            ThingDto thing = null;
-            HttpResponseMessage response = await client.GetAsync(path);
-
-            if (response.IsSuccessStatusCode)
-            {
-                responseBody = await response.Content.ReadAsStringAsync();
-                thing = JsonConvert.DeserializeObject<ThingDto>(responseBody);
-            }
-
-            return thing;
-        }
-
-
-        // Get Collection of Things from API
-        static async Task<ICollection<ThingDto>> GetThingCollectionAPIAsync(string path)
-        {
-            string responseBody = "";
-            ICollection<ThingDto> thingsResponse = new List<ThingDto>();
-            HttpResponseMessage response = await client.GetAsync(path);
-
-            if (response.IsSuccessStatusCode)
-            {
-                responseBody = await response.Content.ReadAsStringAsync();
-                thingsResponse = JsonConvert.DeserializeObject<ICollection<ThingDto>>(responseBody);
-            }
-
-            return thingsResponse;
+            ThingCreatePage newPage = new ThingCreatePage(this);
+            Content = newPage;
         }
     }
 }
