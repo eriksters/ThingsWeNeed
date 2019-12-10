@@ -42,5 +42,15 @@ namespace Desktop
             ThingCreatePage newPage = new ThingCreatePage(this);
             Content = newPage;
         }
+
+        private void BtnClickUsers(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new Users();
+        }
+
+        private void Main_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+
+        }
     }
 }
