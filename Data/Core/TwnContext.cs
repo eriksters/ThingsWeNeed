@@ -21,6 +21,8 @@ namespace ThingsWeNeed.Data.Core
 
         public DbSet<PurchaseEntity> Purchases { get; set; }
 
+        //public DbSet<UserEntity> Users { get; set; }
+
 
         public static TwnContext Create() {
             return new TwnContext();
