@@ -4,6 +4,7 @@ using ThingsWeNeed.Data.Household;
 using ThingsWeNeed.Data.User;
 using ThingsWeNeed.Data.Thing;
 using ThingsWeNeed.Data.Migrations;
+using ThingsWeNeed.Data.Purchase;
 
 namespace ThingsWeNeed.Data.Core
 {
@@ -19,5 +20,7 @@ namespace ThingsWeNeed.Data.Core
         public DbSet<HouseholdEntity> Households { get; set; }
 
         public DbSet<UserEntity> Users { get; set; } 
+
+        public DbSet<PurchaseEntity> Purchases { get; set; }
     }
 }
