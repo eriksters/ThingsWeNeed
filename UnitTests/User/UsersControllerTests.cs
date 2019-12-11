@@ -15,12 +15,15 @@ using ThingsWeNeed.UnitTests;
 using System.Web.Http;
 using System.Diagnostics;
 using ThingsWeNeed.Data.Household;
+using ThingsWeNeed.Data.User;
 
 namespace ThingsWeNeed.UnitTests.User
 {
     [TestClass]
     public class UsersControllerTests
     {
+        public TwnContext DatabaseContext { get; private set; }
+
         [TestMethod]
         public void Get_Ok()
         {
@@ -48,41 +51,72 @@ namespace ThingsWeNeed.UnitTests.User
         [TestMethod]
         public void GetCollection_Ok()
         {
-            //  Arrange
-            var user1 = getTestUser();
-            var user2 = getTestUser();
-            var controller = TestData.GetInjectedController();
-
+            // Arrange
+            var UserList = getTestUser();
+            int householdId = 6;
             try
             {
-                //  Act
-                var result = (OkNegotiatedContentResult<ICollection<UserDto>>)controller.GetCollection();
+                var controller = TestData.GetInjectedController2();
 
-                //  Assert
-                bool found1 = false;
-                bool found2 = false;
-                foreach (var t in result.Content)
-                {
-                    if (t.UserId == user1.UserId)
-                    {
-                        found1 = true;
-                    }
-                    else if (t.UserId == user2.UserId)
-                    {
-                        found2 = true;
-                    }
-                }
-                Assert.IsTrue(found1);
-                Assert.IsTrue(found2);
+                // Act 
+                var result = (OkNegotiatedContentResult<UserDto[]>)controller.GetCollection(householdId);
 
-                //  Cleanup
+                // Assert
+                Assert.IsTrue(result.Content.Length > 0 ? true : false);
             }
             finally
             {
-
-                cleanup(user1.UserId);
-                cleanup(user2.UserId);
+                cleanup(UserList.UserId);
             }
+        }
+
+        [TestMethod]
+        public void Update_Ok()
+        {
+            // Arrange 
+            var user = getTestUser();
+            // user to update
+            int userId = user.UserId;
+            // household with updated data
+            UserEntity updatedUser = new UserEntity();
+            // data for update
+            string FName = "Apolonijas";
+            string LName = "Mockutes";
+            string PhoneNumber = "+698742541";
+            string Email = "wefdf@gm.lt";
+            string Username = "yeet";
+            // preparing an updated entity
+            updatedUser.UserId = userId;
+            updatedUser.FName = FName;
+            updatedUser.LName = LName;
+            updatedUser.PhoneNumber = PhoneNumber;
+            updatedUser.Email = Email;
+            updatedUser.Username = Username;
+
+            try
+            {
+                var controller = TestData.GetInjectedController2();
+
+                // Act 
+                var result = (OkNegotiatedContentResult<UserDto>)controller.Update(userId, updatedUser);
+
+                // Assert
+                if (result.Content.FName.Equals(FName) && result.Content.LName.Equals(LName) &&
+                    result.Content.PhoneNumber.Equals(PhoneNumber) && result.Content.Username.Equals(Username) &&
+                    result.Content.Email.Equals(Email))
+                {
+                    Assert.IsTrue(true);
+                }
+                else
+                {
+                    Assert.IsTrue(false);
+                }
+            }
+            finally
+            {
+                cleanup(user.UserId);
+            }
+
         }
 
         [TestMethod]
@@ -131,57 +165,29 @@ namespace ThingsWeNeed.UnitTests.User
 
         }
 
-        [TestMethod]
-        public void Update_Ok()
-        {
-            //  Arrange
-
-            var user = getTestUser();
-            int id = user.UserId;
-            try
-            {
-                OkNegotiatedContentResult<UserDto> result;
-
-                //  Act
-                using (var controller = TestData.GetInjectedController2())
-                {
-                    result = (OkNegotiatedContentResult<UserDto>)controller.Update(id, TestData.TestUser2);
-                }
-
-                //  Assert
-                Assert.IsTrue(result.Content.LName == user.LName);
-            }
-            finally
-            {
-                cleanup(user.UserId);
-            }
-        }
 
 
 
         [TestMethod]
         public void Delete_Ok()
         {
-
-            //  Arrange
-
+            // Arrange
             var user = getTestUser();
-            int id = user.UserId;
+            int userId = user.UserId;
+
             try
             {
                 var controller = TestData.GetInjectedController2();
 
-                //  Act
-                var result = (OkNegotiatedContentResult<UserDto>)controller.Delete(id);
+                // Act
+                var result = (OkNegotiatedContentResult<bool>)controller.Delete(userId);
 
-                //  Assert
-                Assert.IsTrue(result.Content.LName == user.LName);
-
-                //  Cleanup
+                // Assert
+                Assert.IsTrue(result.Content);
             }
             finally
             {
-                //cleanup(id);
+                cleanup(userId);
             }
         }
 
@@ -221,6 +227,27 @@ namespace ThingsWeNeed.UnitTests.User
                 User = context.Users.Find(id);
                 context.Users.Remove(User);
                 context.SaveChanges();
+            }
+        }
+
+        public UserDto buildDto(UserEntity entity)
+        {
+            if (entity != null)
+            {
+                UserDto dto = new UserDto()
+                {
+                    UserId = entity.UserId,
+                    FName = entity.FName,
+                    LName = entity.LName,
+                    PhoneNumber = entity.PhoneNumber,
+                    Username = entity.Username,
+                    Email = entity.Email
+                };
+                return dto;
+            }
+            else
+            {
+                throw new KeyNotFoundException();
             }
         }
 

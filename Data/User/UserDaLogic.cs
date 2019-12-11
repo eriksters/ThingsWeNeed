@@ -48,9 +48,22 @@ namespace ThingsWeNeed.Data.User
             }
         }
 
-        public IEnumerable<ThingDto> GetCollection()
+        public UserDto[] GetCollection(int householdId)
         {
-            throw new NotImplementedException();
+            // keep track which households the user belongs to
+            ICollection<UserEntity> entityUsers = DatabaseContext.Households.Find(householdId).Users;
+
+            // list of household dto
+            ICollection<UserDto> userDtos = new List<UserDto>();
+
+            // create household Dto for every household id
+            foreach (UserEntity ue in entityUsers)
+            {
+                userDtos.Add(buildDto(ue));
+            }
+
+            //return the colletion
+            return userDtos.ToArray();
         }
 
         public UserDto Create(
@@ -86,24 +99,32 @@ namespace ThingsWeNeed.Data.User
             return dto;
         }
 
-        public void Update(
-            int UserId,
-            string FName,
-            string LName,
-            string PhoneNumber,
-            string Username,
-            string Email)
+        public UserDto Update(UserEntity entity)
         {
-            throw new NotImplementedException();
+            UserEntity UserEntity = DatabaseContext.Users.Find(entity.UserId);
+            UserEntity.FName= entity.FName;
+            UserEntity.LName = entity.LName;
+            UserEntity.PhoneNumber = entity.PhoneNumber;
+            UserEntity.Username = entity.Username;
+            UserEntity.Email = entity.Email;
+
+            DatabaseContext.SaveChanges();
+
+            UserDto UserDto = buildDto(UserEntity);
+            return UserDto;
         }
 
-        public UserDto Delete(int id)
+        public bool Delete(int id)
         {
-            UserEntity entity = DatabaseContext.Users.Find(id);
+            UserEntity userEntity = DatabaseContext.Users.Find(id);
+            UserEntity userRemoved = DatabaseContext.Users.Remove(userEntity);
+            return userRemoved.UserId == id ? true : false;
+        }
+
+        public UserDto buildDto(UserEntity entity)
+        {
             if (entity != null)
             {
-                DatabaseContext.Users.Remove(entity);
-
                 UserDto dto = new UserDto()
                 {
                     UserId = entity.UserId,
@@ -113,23 +134,23 @@ namespace ThingsWeNeed.Data.User
                     Username = entity.Username,
                     Email = entity.Email
                 };
-
-                DatabaseContext.SaveChanges();
-
                 return dto;
             }
             else
             {
-                throw (new KeyNotFoundException());
+                throw new KeyNotFoundException();
             }
         }
 
-        public void Dispose() {
+
+            public void Dispose() {
             DatabaseContext.Dispose();
         }
 
         public void InjectDatabaseContext(TwnContext context) {
             DatabaseContext = context;
         }
+
+
     }
 }

@@ -13,7 +13,7 @@ namespace ThingsWeNeed.Shared
             Links = new LinkedList<LinkDto>();
 
             Needed = true;
-            DefaultPrice = 0;
+            DefaultPrice = 0; 
         }
 
         public int ThingId { get; set; }

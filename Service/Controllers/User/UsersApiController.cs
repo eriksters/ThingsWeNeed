@@ -40,12 +40,6 @@ namespace ThingsWeNeed.Controllers.User
             }
         }
 
-        [HttpGet]
-        [Route("api/Users")]
-        public IHttpActionResult GetCollection() {
-            throw new NotImplementedException();
-        }
-
         [HttpPost]
         [Route("api/Users")]
         public IHttpActionResult Create([FromBody] UserDto dto) {
@@ -64,20 +58,22 @@ namespace ThingsWeNeed.Controllers.User
         }
 
         [HttpPut]
-        [Route("api/Users/{id}")]
-        public IHttpActionResult Update(int id, [FromBody] UserDto dto) {
-            throw new NotImplementedException();
-        }
-
-        [HttpDelete]
-        [Route("api/Users/{id}")]
-        public IHttpActionResult Delete(int id) {
+        [Route("api/Users/Update/{id}")]
+        public IHttpActionResult Update(int id, UserEntity userEntity)
+        {
             if (ModelState.IsValid)
             {
-                using (logic)
+                if (id == userEntity.UserId)
                 {
-                    UserDto dto = logic.Delete(id);
-                    return Ok(dto);
+                    using (logic)
+                    {
+                        var userDto = logic.Update(userEntity);
+                        return Ok(userDto);
+                    }
+                }
+                else
+                {
+                    return BadRequest("Id's do not match");
                 }
             }
             else
@@ -85,6 +81,45 @@ namespace ThingsWeNeed.Controllers.User
                 return BadRequest(ModelState);
             }
         }
+
+        [HttpGet]
+        // move maybe to user Api Controller
+        [Route("api/User/Households/{householdId}")]
+        // and change this to maybe api/User/{id}/Households
+        public IHttpActionResult GetCollection(int householdId)
+        {
+            if (ModelState.IsValid)
+            {
+                using (logic)
+                {
+                    var householdDtoList = logic.GetCollection(householdId);
+                    return Ok(householdDtoList);
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+
+        [HttpDelete]
+        [Route("api/Users/{id}")]
+        public IHttpActionResult Delete(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                using (logic)
+                {
+                    bool removed = logic.Delete(id);
+                    return Ok(removed);
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+
 
 
         public void InjectLogic(UserDaLogic logic) {

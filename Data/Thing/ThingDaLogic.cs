@@ -48,10 +48,7 @@ namespace ThingsWeNeed.Data.Thing
             }
         }
 
-        public IEnumerable<ThingDto> GetCollection()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public ThingDto Create(
             string name, 
