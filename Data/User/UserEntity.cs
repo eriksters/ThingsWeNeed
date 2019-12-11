@@ -35,7 +35,7 @@ namespace ThingsWeNeed.Data.User
         public string FName { get; set; }
         public string LName { get; set; }
         public string PhoneNumber { get; set; }
-
+        
 
 
         [InverseProperty("Users")]
