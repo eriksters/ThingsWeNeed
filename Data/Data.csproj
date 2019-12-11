@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Household\HouseholdEntity.cs" />
+    <Compile Include="IRestResource.cs" />
     <Compile Include="Migrations\201912101130485_init.cs" />
     <Compile Include="Migrations\201912101130485_init.Designer.cs">
       <DependentUpon>201912101130485_init.cs</DependentUpon>

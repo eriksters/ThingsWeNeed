@@ -14,13 +14,13 @@ namespace ThingsWeNeed.Data.Thing
 {
     public class ThingDaLogic : IDisposable
     {
-        private UserEntity currentUser;
+        private int userId;
         private TwnContext context;
 
-        public ThingDaLogic(TwnContext context, UserEntity currentUser)
+        public ThingDaLogic(TwnContext context, int userId)
         {
             this.context = context;
-            this.currentUser = currentUser;
+            this.userId = userId;
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace ThingsWeNeed.Data.Thing
         {
             ICollection<ThingDto> collection = new List<ThingDto>();
 
-            foreach (HouseholdEntity household in currentUser.Households)
+            foreach (HouseholdEntity household in context.Users.Find(userId).Households)
             {
                 foreach (var entity in household.Things)
                 {

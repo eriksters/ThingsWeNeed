@@ -49,7 +49,6 @@ namespace ThingsWeNeed.UnitTests
         public static ThingsApiController GetInjectedController()
         {
             ThingsApiController controller = new ThingsApiController();
-            controller.InjectLogic(GetMockedLogic());
             return controller;
         }
 
@@ -57,8 +56,8 @@ namespace ThingsWeNeed.UnitTests
         {
             TwnContext context = new TwnContext();
             
-            ThingDaLogic logic = new ThingDaLogic();
-            logic.InjectDatabaseContext(context);
+
+            ThingDaLogic logic = new ThingDaLogic(context, null);
             return logic;
         }
     }

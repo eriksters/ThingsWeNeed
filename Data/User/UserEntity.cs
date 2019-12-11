@@ -10,6 +10,7 @@ using ThingsWeNeed.Data.Thing;
 using ThingsWeNeed.Data.User;
 using ThingsWeNeed.Data.Household;
 using Microsoft.AspNet.Identity.EntityFramework;
+using ThingsWeNeed.Data.Purchase;
 
 namespace ThingsWeNeed.Data.User
 {
@@ -27,6 +28,9 @@ namespace ThingsWeNeed.Data.User
 
         [InverseProperty("Users")]
         public virtual ICollection<HouseholdEntity> Households { get; private set; }
+
+        [InverseProperty("MadeBy")]
+        public virtual ICollection<PurchaseEntity> HouseholdPurchases { get; private set; }
 
     }
 }

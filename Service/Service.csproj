@@ -161,6 +161,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Controllers\Purchases\PurchasesApiController.cs" />
     <Compile Include="Controllers\Users\UsersApiController.cs" />
     <Compile Include="Identity\TwnSignInManager.cs" />
     <Compile Include="Identity\TwnUserManager.cs" />

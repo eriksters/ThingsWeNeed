@@ -4,24 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThingsWeNeed.Data.Core;
+using ThingsWeNeed.Data.User;
 using ThingsWeNeed.Shared;
 
 namespace ThingsWeNeed.Data.Purchase
 {
 
 
-    public class PurchaseDaLogic : IDisposable
+    public class PurchaseDaLogic : IDisposable, IRestResource<PurchaseDto>
     {
-        public TwnContext DatabaseContext { get; private set; }
+        private string userId;
+        private TwnContext context;
 
-        public PurchaseDaLogic()
+        public PurchaseDaLogic(TwnContext context, string userId)
         {
-            DatabaseContext = new TwnContext();
+            this.context = context;
+            this.userId = userId;
         }
 
         public PurchaseDto GetById(int id) {
 
-            var entity = DatabaseContext.Purchases.Find(id);
+            var entity = context.Purchases.Find(id);
 
             if (entity != null)
             {
@@ -39,12 +42,11 @@ namespace ThingsWeNeed.Data.Purchase
 
         public PurchaseDto[] GetCollection() {
 
-            var entities = DatabaseContext.Purchases.ToArray();
+            var entities = context.Purchases.ToArray();
 
             PurchaseDto[] dtos = entities.Select(x => ToDto(x)).ToArray();
 
             return dtos;
-
         }
 
         public void Create(PurchaseDto dto) {
@@ -56,8 +58,8 @@ namespace ThingsWeNeed.Data.Purchase
                 MadeOn = dto.MadeOn,
             };
 
-            DatabaseContext.Purchases.Add(entity);
-            DatabaseContext.SaveChanges();
+            context.Purchases.Add(entity);
+            context.SaveChanges();
 
             dto.PurchaseId = entity.PurchaseId;
         }

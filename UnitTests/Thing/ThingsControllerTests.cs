@@ -96,7 +96,8 @@ namespace ThingsWeNeed.UnitTests.Thing
             //bool needed = true;
             //double defaultPrice = 15;
 
-            ThingDaLogic logic = new ThingDaLogic();
+            TwnContext context = new TwnContext();
+            ThingDaLogic logic = new ThingDaLogic(context, null);
             ThingDto thingDto = null;
 
 
@@ -105,7 +106,7 @@ namespace ThingsWeNeed.UnitTests.Thing
                 thingDto = logic.Create(dto.Name, thingEn.HouseholdId, dto.Show, dto.Needed, dto.DefaultPrice);
                 //thingDto = logic.GetById(213);
 
-                var assertThing = logic.DatabaseContext.Things.Find(thingDto.ThingId);
+                var assertThing = context.Things.Find(thingDto.ThingId);
 
                 Assert.IsNotNull(assertThing);
 
@@ -210,10 +211,10 @@ namespace ThingsWeNeed.UnitTests.Thing
 
             var thingEntity = context.Things.Add(thing);
             context.Households.Add(household);
-            using (context)
-            {
-                context.SaveChanges();
-            }
+            //using (context)
+            //{
+            //    context.SaveChanges();
+            //}
             return thingEntity;
         }
 
@@ -221,13 +222,13 @@ namespace ThingsWeNeed.UnitTests.Thing
 
         private void cleanup(int id) {
             ThingEntity thing;
-            using (TwnContext context = new TwnContext())
-            {
-                thing = context.Things.Find(id);
-                context.Things.Remove(thing);
-                context.Households.Remove(context.Households.Find(thing.HouseholdId));
-                context.SaveChanges();
-            }
+            //using (TwnContext context = new TwnContext())
+            //{
+            //    thing = context.Things.Find(id);
+            //    context.Things.Remove(thing);
+            //    context.Households.Remove(context.Households.Find(thing.HouseholdId));
+            //    context.SaveChanges();
+            //}
         }
     }
 
