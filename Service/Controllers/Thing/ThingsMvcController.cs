@@ -17,7 +17,7 @@ namespace ThingsWeNeed.Service.Controllers.Thing
         [HttpGet]
         public ActionResult All()
         {
-            throw new NotImplementedException();
+            return Content("This page is not yet implemented");
         }
 
         [Route("Things/{id}")]
@@ -30,7 +30,7 @@ namespace ThingsWeNeed.Service.Controllers.Thing
             else
             {
                 ThingDto thing;
-                using (var db = new ThingDaLogic())
+                using (var db = new ThingDaLogic(null, null))
                 {
                     thing = db.GetById(id);
                 }
@@ -53,7 +53,7 @@ namespace ThingsWeNeed.Service.Controllers.Thing
             else
             {
                 ThingDto thing;
-                using (var db = new ThingDaLogic())
+                using (var db = new ThingDaLogic(null, null))
                 {
                     thing = db.Create(dto.Name, dto.HouseholdId, dto.Show, dto.Needed, dto.DefaultPrice);
                 }
