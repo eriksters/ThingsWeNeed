@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ThingsWeNeed.Shared
 {
-    class UserDto
+    public class UserDto
     {
         public UserDto()
         {

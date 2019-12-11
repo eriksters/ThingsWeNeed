@@ -1,21 +1,26 @@
-﻿using System;
+﻿using Microsoft.Owin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 using ThingsWeNeed.Data.Core;
+using ThingsWeNeed.Data.Household;
 using ThingsWeNeed.Data.Thing;
+using ThingsWeNeed.Data.User;
 using ThingsWeNeed.Shared;
 
 namespace ThingsWeNeed.Data.Thing
 {
     public class ThingDaLogic : IDisposable
     {
-        public TwnContext DatabaseContext { get; private set; }
+        private UserEntity currentUser;
+        private TwnContext context;
 
-        public ThingDaLogic()
+        public ThingDaLogic(TwnContext context, UserEntity currentUser)
         {
-            DatabaseContext = new TwnContext();
+            this.context = context;
+            this.currentUser = currentUser;
         }
 
         /// <summary>
@@ -26,7 +31,7 @@ namespace ThingsWeNeed.Data.Thing
         /// <exception cref="KeyNotFoundException">Datbase entry not found</exception>
         public ThingDto GetById(int id)
         {
-            ThingEntity entity = DatabaseContext.Things.Find(id);
+            ThingEntity entity = context.Things.Find(id);
 
             if (entity != null)
             {
@@ -48,9 +53,27 @@ namespace ThingsWeNeed.Data.Thing
             }
         }
 
-        public IEnumerable<ThingDto> GetCollection()
+        public ICollection<ThingDto> GetCollection()
         {
-            throw new NotImplementedException();
+            ICollection<ThingDto> collection = new List<ThingDto>();
+
+            foreach (HouseholdEntity household in currentUser.Households)
+            {
+                foreach (var entity in household.Things)
+                {
+                    collection.Add(new ThingDto()
+                    {
+                        ThingId = entity.ThingId,
+                        DefaultPrice = entity.DefaultPrice,
+                        Name = entity.Name,
+                        Needed = entity.Needed,
+                        Show = entity.Show,
+                        HouseholdId = entity.HouseholdId
+                    });
+                }
+            }
+
+            return collection;
         }
 
         public ThingDto Create(
@@ -68,8 +91,8 @@ namespace ThingsWeNeed.Data.Thing
             entity.Needed = needed;
             entity.DefaultPrice = defaultPrice;
 
-            DatabaseContext.Things.Add(entity);
-            DatabaseContext.SaveChanges();
+            context.Things.Add(entity);
+            context.SaveChanges();
 
 
             ThingDto dto = new ThingDto()
@@ -98,10 +121,10 @@ namespace ThingsWeNeed.Data.Thing
 
         public ThingDto Delete(int id)
         {
-            ThingEntity entity = DatabaseContext.Things.Find(id);
+            ThingEntity entity = context.Things.Find(id);
             if (entity != null)
             {
-                DatabaseContext.Things.Remove(entity);
+                context.Things.Remove(entity);
 
                 ThingDto dto = new ThingDto()
                 {
@@ -113,7 +136,7 @@ namespace ThingsWeNeed.Data.Thing
                     HouseholdId = entity.HouseholdId
                 };
 
-                DatabaseContext.SaveChanges();
+                context.SaveChanges();
 
                 return dto;
             }
@@ -124,11 +147,11 @@ namespace ThingsWeNeed.Data.Thing
         }
 
         public void Dispose() {
-            DatabaseContext.Dispose();
+            context.Dispose();
         }
 
-        public void InjectDatabaseContext(TwnContext context) {
-            DatabaseContext = context;
-        }
+        //public void Injectcontext(TwnContext context) {
+        //    context = context;
+        //}
     }
 }

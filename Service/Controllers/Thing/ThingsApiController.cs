@@ -4,19 +4,43 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
+using ThingsWeNeed.Data.Core;
 using ThingsWeNeed.Data.Thing;
+using ThingsWeNeed.Data.User;
 using ThingsWeNeed.Shared;
+
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin;
+using ThingsWeNeed.Data.Household;
+using Microsoft.Ajax.Utilities;
 
 namespace ThingsWeNeed.Controllers.Thing
 {
 
+    [Authorize]
     public class ThingsApiController : ApiController
     {
-        private ThingDaLogic logic;
+        private ThingDaLogic _logic;
+        private TwnContext _context;
+        private UserEntity _currentUser;
 
-        public ThingsApiController() {
-            logic = new ThingDaLogic();
+
+        public TwnContext DatabaseContext {
+            get => _context ?? new TwnContext();
+            set => _context = value;
+        }
+
+        public ThingDaLogic Logic {
+            get => _logic ?? new ThingDaLogic(DatabaseContext, CurrentUser);
+            set => _logic = value;
+        }
+
+        public UserEntity CurrentUser {
+            get => _currentUser ?? DatabaseContext.Users.Find(Request.GetOwinContext().Authentication.User.Identity.GetUserId());
+            set => _currentUser = value;
+        }
+
+        public ThingsApiController() : base() {
         }
 
         [HttpGet]
@@ -24,9 +48,9 @@ namespace ThingsWeNeed.Controllers.Thing
         public IHttpActionResult Get(int id) {
             if (ModelState.IsValid)
             {
-                using (logic)
+                using (Logic)
                 {
-                    ThingDto dto = logic.GetById(id);
+                    ThingDto dto = Logic.GetById(id);
                     dto.Household = new LinkDto($"api/Things/{id}/Household", "houshold", "GET");
                     dto.Links.Add(new LinkDto($"api/Things/{id}", "self", "GET"));
                     dto.Links.Add(new LinkDto($"api/Things/{id}", "create-thing", "POST"));
@@ -44,24 +68,25 @@ namespace ThingsWeNeed.Controllers.Thing
         [HttpGet]
         [Route("api/Things")]
         public IHttpActionResult GetCollection() {
-            throw new NotImplementedException();
+            return Ok(Logic.GetCollection());
         }
 
         [HttpPost]
         [Route("api/Things")]
         public IHttpActionResult Create([FromBody] ThingDto dto) {
-               if (ModelState.IsValid)
-            {
-                using (logic)
-                {
-                    logic.Create(dto.Name, dto.HouseholdId,  dto.Show, dto.Needed, dto.DefaultPrice);
-                }
-                return Ok(dto);
-            }
-            else
-            {
-                return BadRequest(ModelState);
-            }
+            //   if (ModelState.IsValid)
+            //{
+            //    using (logic)
+            //    {
+            //        logic.Create(dto.Name, dto.HouseholdId,  dto.Show, dto.Needed, dto.DefaultPrice);
+            //    }
+            //    return Ok(dto);
+            //}
+            //else
+            //{
+            //    return BadRequest(ModelState);
+            //}
+            return null;
         }
 
         [HttpPut]
@@ -73,24 +98,25 @@ namespace ThingsWeNeed.Controllers.Thing
         [HttpDelete]
         [Route("api/Things/{id}")]
         public IHttpActionResult Delete(int id) {
-            if (ModelState.IsValid)
-            {
-                using (logic)
-                {
-                    ThingDto dto = logic.Delete(id);
-                    return Ok(dto);
-                }
-            }
-            else
-            {
-                return BadRequest(ModelState);
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    using (logic)
+            //    {
+            //        ThingDto dto = logic.Delete(id);
+            //        return Ok(dto);
+            //    }
+            //}
+            //else
+            //{
+            //    return BadRequest(ModelState);
+            //}
+
+            return null;
         }
 
-
-        public void InjectLogic(ThingDaLogic logic) {
-            this.logic = logic;
-        }
+        //public void InjectLogic(ThingDaLogic logic) {
+        //    this.logic = logic;
+        //}
 
     }
 }
