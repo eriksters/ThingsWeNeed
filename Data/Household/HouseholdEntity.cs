@@ -24,13 +24,14 @@ namespace ThingsWeNeed.Data.Household
         [Required]
         public string Name { get; set; }
 
+        [Required]
         public AddressDto Address { get; set; }
 
         [InverseProperty("Household")]
-        public virtual ICollection<ThingEntity> Things { get; private set; }
+        public virtual ICollection<ThingEntity> Things { get; set; }
 
         [InverseProperty("Households")]
-        public virtual ICollection<UserEntity> Users { get; private set; }
+        public virtual ICollection<UserEntity> Users { get; set; }
 
     }
 }

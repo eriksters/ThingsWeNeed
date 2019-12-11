@@ -16,6 +16,10 @@ namespace ThingsWeNeed.Shared
         public string Name { get; set; }
 
         public AddressDto Address { get; set; }
+
+        public ICollection<ThingDto> Things { get; set; }
+
+        public ICollection<UserDto> Users { get; set; }
     }
 
     [ComplexType]
