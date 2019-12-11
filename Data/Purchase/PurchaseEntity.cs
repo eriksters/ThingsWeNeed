@@ -20,7 +20,7 @@ namespace ThingsWeNeed.Data.Purchase
         public int ThingId { get; set; }
 
         [Required]
-        public int MadeById { get; set; }
+        public string MadeById { get; set; }
 
         [Required]
         public double Price { get; set; }

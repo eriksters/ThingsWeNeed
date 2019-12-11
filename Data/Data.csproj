@@ -67,6 +67,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchase\PurchaseDaLogic.cs" />
+    <Compile Include="Purchase\PurchaseEntity.cs" />
     <Compile Include="Thing\ThingDaLogic.cs" />
     <Compile Include="Thing\ThingEntity.cs" />
     <Compile Include="Core\TwnContext.cs" />
