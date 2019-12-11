@@ -16,13 +16,24 @@ using System.Windows.Shapes;
 namespace Desktop
 {
     /// <summary>
-    /// Interaction logic for Users.xaml
+    /// Interaction logic for HouseholdCreatePage.xaml
     /// </summary>
-    public partial class Users : Page
+    public partial class HouseholdCreatePage : Page
     {
-        public Users()
+        MainWindow mainWindow;
+        public HouseholdCreatePage(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
+        }
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //mainWindow.GoToHouseholdPage();
+        }
+
+        private void createBtn_Click(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }

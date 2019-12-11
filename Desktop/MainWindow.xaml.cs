@@ -45,7 +45,8 @@ namespace Desktop
 
         private void BtnClickUsers(object sender, RoutedEventArgs e)
         {
-            Main.Content = new Users();
+            UsersPage newPage = new UsersPage();
+            Content = newPage;
         }
 
         private void Main_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
