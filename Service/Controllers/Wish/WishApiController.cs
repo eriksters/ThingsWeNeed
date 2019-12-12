@@ -18,7 +18,6 @@ namespace ThingsWeNeed.Service.Controllers.Wish
             logic = new WishLogic();
         }
 
-
         [HttpGet]
         [Route("api/Wish/{id}")]
         public IHttpActionResult Get(int id)
@@ -45,7 +44,28 @@ namespace ThingsWeNeed.Service.Controllers.Wish
         [Route("api/Wishes")]
         public IHttpActionResult GetCollection()
         {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                using (logic)
+                {
+                    var dtoList = logic.GetCollection();
+
+                    foreach (WishDto dto in dtoList)
+                    {
+                        dto.Links.Add(new LinkDto($"api/Wishes/{dto.WishId}", "self", "GET"));
+                        dto.Links.Add(new LinkDto($"api/Wishes/{dto.WishId}", "create-thing", "POST"));
+                        dto.Links.Add(new LinkDto($"api/Wishes/{dto.WishId}", "update-thing", "PUT"));
+                        dto.Links.Add(new LinkDto($"api/Wishes/all", "delete-thing", "DELETE"));
+
+                    }
+
+                    return Ok(dtoList);
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         [HttpPost]
