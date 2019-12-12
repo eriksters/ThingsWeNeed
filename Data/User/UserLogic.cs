@@ -13,7 +13,7 @@ namespace ThingsWeNeed.Data.User
         
         }
 
-        public UserDto GetById(int id)
+        public ThingDto GetById(int id)
         {
             return null;
         }

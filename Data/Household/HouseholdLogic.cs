@@ -109,11 +109,11 @@ namespace ThingsWeNeed.Data.Household
                 throw new KeyNotFoundException();
             }
 
-            ICollection<UserDto> fillUserCollection()
+            ICollection<ThingDto> fillUserCollection()
             {
                 var userEntities = DatabaseContext.Households.Find(entity.HouseholdId).Users;
 
-                ICollection<UserDto> usersDto = new List<UserDto>();
+                ICollection<ThingDto> usersDto = new List<ThingDto>();
 
                 foreach (UserEntity ue in userEntities)
                 {
