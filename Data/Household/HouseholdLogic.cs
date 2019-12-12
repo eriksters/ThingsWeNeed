@@ -111,7 +111,7 @@ namespace ThingsWeNeed.Data.Household
             {
                 var userEntities = DatabaseContext.Households.Find(entity.HouseholdId).Users;
 
-                ICollection<UserDto> usersDto = new List<UserDto>();
+                ICollection<ThingDto> usersDto = new List<ThingDto>();
 
                 foreach (UserEntity ue in userEntities)
                 {

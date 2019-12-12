@@ -11,9 +11,6 @@ namespace ThingsWeNeed.Shared
         public ThingDto()
         {
             Links = new LinkedList<LinkDto>();
-
-            Needed = true;
-            DefaultPrice = 0;
         }
 
         public int ThingId { get; set; }
