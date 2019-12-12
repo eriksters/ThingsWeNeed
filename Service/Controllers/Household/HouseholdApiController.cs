@@ -14,12 +14,12 @@ namespace ThingsWeNeed.Service.Controllers.Household
 {
     public class HouseholdApiController : ApiController
     {
-        private HouseholdLogic householdLogic;
+        private HouseholdDaLogic householdLogic;
         private TwnContext context;
 
         public HouseholdApiController()
         {
-            householdLogic = new HouseholdLogic(context, Request.GetOwinContext().Authentication.User.Identity.GetUserId());
+            householdLogic = new HouseholdDaLogic(context, Request.GetOwinContext().Authentication.User.Identity.GetUserId());
         }
 
         [HttpGet]
@@ -120,7 +120,7 @@ namespace ThingsWeNeed.Service.Controllers.Household
                 return BadRequest(ModelState);
             }
         }
-        public void InjectLogic(HouseholdLogic householdLogic)
+        public void InjectLogic(HouseholdDaLogic householdLogic)
         {
             this.householdLogic = householdLogic;
         }

@@ -161,6 +161,8 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Controllers\Household\HouseholdApiController.cs" />
+    <Compile Include="Controllers\Purchase\PurchaseApiController.cs" />
     <Compile Include="Controllers\Users\UsersApiController.cs" />
     <Compile Include="Identity\TwnSignInManager.cs" />
     <Compile Include="Identity\TwnUserManager.cs" />
@@ -258,7 +260,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\Purchases\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
