@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace ThingsWeNeed.Shared
 {
-    class UserDto
+    public class UserDto
     {
         public UserDto()
         {
-            this.Households = new HashSet<HouseholdDto>();
+
         }
-        
-        public int UserId { get; set; }
+             public int UserId { get; set; }
 
         [Required(ErrorMessage = "Email required")]
         [EmailAddress(ErrorMessage = "Email must be in correct format")]
@@ -29,7 +28,9 @@ namespace ThingsWeNeed.Shared
 
         [Phone(ErrorMessage = "Phone number format incorrect")]
         public string PhoneNumber { get; set; }
-
-        public virtual ICollection<HouseholdDto> Households { get; private set; }
     }
+        
+       
+
+    
 }

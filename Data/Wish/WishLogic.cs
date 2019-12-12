@@ -68,6 +68,7 @@ namespace ThingsWeNeed.Data.Wish
             }
             return wishDtoList.ToArray();
         }
+
         public WishDto Update(int id)
         {
             WishEntity entity = DatabaseContext.Wishes.Find(id);
@@ -154,10 +155,7 @@ namespace ThingsWeNeed.Data.Wish
             }
         }
 
-        public IEnumerable<WishDto> GetCollection()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public void Dispose()
         {

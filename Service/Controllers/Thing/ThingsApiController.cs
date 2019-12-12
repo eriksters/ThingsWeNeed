@@ -49,13 +49,16 @@ namespace ThingsWeNeed.Controllers.Thing
 
         [HttpPost]
         [Route("api/Things")]
-        public IHttpActionResult Create([FromBody] ThingDto dto) {
+        public IHttpActionResult Create()
+        {
             throw new NotImplementedException();
         }
 
+
         [HttpPut]
         [Route("api/Things/{id}")]
-        public IHttpActionResult Update(int id, [FromBody] ThingDto dto) {
+        public IHttpActionResult Update(int id)
+        {
             throw new NotImplementedException();
         }
 

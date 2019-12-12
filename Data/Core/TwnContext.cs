@@ -3,7 +3,7 @@
 using ThingsWeNeed.Data.Household;
 using ThingsWeNeed.Data.User;
 using ThingsWeNeed.Data.Thing;
-using ThingsWeNeed.Data.Migrations;
+using ThingsWeNeed.Data.Wish;
 
 namespace ThingsWeNeed.Data.Core
 {
@@ -13,11 +13,14 @@ namespace ThingsWeNeed.Data.Core
         {
             Database.SetInitializer<TwnContext>(new CreateDatabaseIfNotExists<TwnContext>());
         }
-        
+
         public DbSet<ThingEntity> Things { get; set; }
 
         public DbSet<HouseholdEntity> Households { get; set; }
 
-        public DbSet<UserEntity> Users { get; set; } 
+        public DbSet<UserEntity> Users { get; set; }
+
+        public DbSet<WishEntity> Wishes { get; set; }
+
     }
 }

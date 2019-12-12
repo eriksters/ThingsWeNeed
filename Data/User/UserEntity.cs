@@ -43,11 +43,6 @@ namespace ThingsWeNeed.Data.User
         [InverseProperty("Users")]
         public virtual ICollection<HouseholdEntity> Households { get; private set; }
 
-        
-       
-
-        public virtual ICollection<HouseholdEntity> Households { get; private set; }
->>>>>>> Stashed changes
 
        
     }

@@ -8,12 +8,8 @@ using ThingsWeNeed.Controllers.Thing;
 using ThingsWeNeed.Data.Core;
 using ThingsWeNeed.Data.Household;
 using ThingsWeNeed.Data.Thing;
-<<<<<<< Updated upstream
-using ThingsWeNeed.Service.Controllers.Household;
-=======
 using ThingsWeNeed.Data.Wish;
 using ThingsWeNeed.Service.Controllers.Wish;
->>>>>>> Stashed changes
 using ThingsWeNeed.Shared;
 
 namespace ThingsWeNeed.UnitTests

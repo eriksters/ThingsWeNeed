@@ -54,7 +54,7 @@ namespace ThingsWeNeed.Data.Thing
         }
 
         public ThingDto Create(
-            string name, 
+            string name,
             int householdId,
             bool show,
             bool needed,
@@ -63,16 +63,36 @@ namespace ThingsWeNeed.Data.Thing
             throw new NotImplementedException();
         }
 
-        public void Update(
-            int id,
-            int householdId,
-            string name,
-            bool show,
-            bool needed,
-            double defaultPrice)
+
+        public ThingDto Update(int id)
         {
-            throw new NotImplementedException();
+            ThingEntity entity = DatabaseContext.Things.Find(id);
+
+            if (entity != null)
+            {
+                DatabaseContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+
+            ThingDto dto = new ThingDto()
+            {
+                ThingId = entity.ThingId,
+                DefaultPrice = entity.DefaultPrice,
+                Name = entity.Name,
+                Needed = entity.Needed,
+                Show = entity.Show,
+                HouseholdId = entity.HouseholdId
+            };
+
+                DatabaseContext.SaveChanges();
+
+            return dto;
+                
+
         }
+            else
+            {
+                throw new NotImplementedException();
+    }
+}
 
         public ThingDto Delete(int id)
         {

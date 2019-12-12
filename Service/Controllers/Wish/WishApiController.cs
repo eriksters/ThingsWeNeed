@@ -53,9 +53,9 @@ namespace ThingsWeNeed.Service.Controllers.Wish
                     foreach (WishDto dto in dtoList)
                     {
                         dto.Links.Add(new LinkDto($"api/Wishes/{dto.WishId}", "self", "GET"));
-                        dto.Links.Add(new LinkDto($"api/Wishes/{dto.WishId}", "create-thing", "POST"));
-                        dto.Links.Add(new LinkDto($"api/Wishes/{dto.WishId}", "update-thing", "PUT"));
-                        dto.Links.Add(new LinkDto($"api/Wishes/all", "delete-thing", "DELETE"));
+                        dto.Links.Add(new LinkDto($"api/Wishes/{dto.WishId}", "create-wish", "POST"));
+                        dto.Links.Add(new LinkDto($"api/Wishes/{dto.WishId}", "update-wish", "PUT"));
+                        dto.Links.Add(new LinkDto($"api/Wishes/all", "delete-wish", "DELETE"));
 
                     }
 
