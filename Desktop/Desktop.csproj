@@ -47,6 +47,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -65,35 +66,73 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Pages\Household\HouseholdCreatePage.xaml.cs">
+      <DependentUpon>HouseholdCreatePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Household\HouseholdPage.xaml.cs">
+      <DependentUpon>HouseholdPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Household\HouseholdUpdatePage.xaml.cs">
+      <DependentUpon>HouseholdUpdatePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\UserCreatePage.xaml.cs">
+      <DependentUpon>UserCreatePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\UserPage.xaml.cs">
+      <DependentUpon>UserPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\UserUpdatePage.xaml.cs">
+      <DependentUpon>UserUpdatePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ThingCreatePage.xaml.cs">
+    <Compile Include="Pages\Thing\ThingCreatePage.xaml.cs">
       <DependentUpon>ThingCreatePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ThingPage.xaml.cs">
+    <Compile Include="Pages\Thing\ThingPage.xaml.cs">
       <DependentUpon>ThingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ThingUpdatePage.xaml.cs">
+    <Compile Include="Pages\Thing\ThingUpdatePage.xaml.cs">
       <DependentUpon>ThingUpdatePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Pages\Household\HouseholdCreatePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ThingCreatePage.xaml">
+    <Page Include="Pages\Household\HouseholdPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ThingPage.xaml">
+    <Page Include="Pages\Household\HouseholdUpdatePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ThingUpdatePage.xaml">
+    <Page Include="Pages\Thing\ThingCreatePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\User\UserCreatePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\User\UserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\User\UserUpdatePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Thing\ThingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Thing\ThingUpdatePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

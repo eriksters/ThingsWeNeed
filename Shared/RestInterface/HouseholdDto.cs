@@ -9,7 +9,6 @@ namespace ThingsWeNeed.Shared
 {
     public class HouseholdDto
     {
-
         public int HouseholdId { get; set; }
 
         [Required(ErrorMessage = "A name is required. This can be anything.")]
@@ -19,7 +18,7 @@ namespace ThingsWeNeed.Shared
 
         public ICollection<ThingDto> Things { get; set; }
 
-        public ICollection<UserDto> Users { get; set; }
+        public ICollection<ThingDto> Users { get; set; }
     }
 
     [ComplexType]

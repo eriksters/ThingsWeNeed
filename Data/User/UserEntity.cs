@@ -25,6 +25,7 @@ namespace ThingsWeNeed.Data.User
         public string FName { get; set; }
 
         public string LName { get; set; }
+        
 
         [InverseProperty("Users")]
         public virtual ICollection<HouseholdEntity> Households { get; private set; }

@@ -97,7 +97,7 @@ namespace ThingsWeNeed.Data.Household
                         Country = entity.Address.Country
                     },
                     Things = fillThingsCollection(),
-                    Users = fillUserCollection()
+                    //Users = fillUserCollection()
                 };
                 return dto;
             }

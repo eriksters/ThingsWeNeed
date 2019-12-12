@@ -108,10 +108,12 @@ namespace ThingsWeNeed.Data.Household
 
             //  Wtf is this for?
             ICollection<UserDto> fillUserCollection()
+
+
             {
                 var userEntities = DatabaseContext.Households.Find(entity.HouseholdId).Users;
 
-                ICollection<UserDto> usersDto = new List<UserDto>();
+                ICollection<ThingDto> usersDto = new List<ThingDto>();
 
                 foreach (UserEntity ue in userEntities)
                 {
