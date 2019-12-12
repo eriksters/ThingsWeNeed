@@ -11,7 +11,7 @@ namespace ThingsWeNeed.Data.Purchase
 {
 
 
-    public class PurchaseDaLogic : IDisposable, IRestResource<PurchaseDto>
+    public class PurchaseDaLogic : IRestResource<PurchaseDto>, IDisposable
     {
         private string userId;
         private TwnContext context;
@@ -66,12 +66,12 @@ namespace ThingsWeNeed.Data.Purchase
 
         public void Update(PurchaseDto dto) {
 
-            var entity = DatabaseContext.Purchases.Find(dto.ThingId);
+            var entity = context.Purchases.Find(dto.ThingId);
 
             if (entity != null)
             {
                 entity.Price = dto.Price;
-                DatabaseContext.SaveChanges();
+                context.SaveChanges();
             }
             else
             {
@@ -81,21 +81,18 @@ namespace ThingsWeNeed.Data.Purchase
         }
 
         public PurchaseDto Delete(int id) {
-            var entity = DatabaseContext.Purchases.Find(id);
-            PurchaseDto dto;
+            var entity = context.Purchases.Find(id);
 
             if (entity != null)
             {
-                DatabaseContext.Purchases.Remove(entity);
-                DatabaseContext.SaveChanges();
-                dto = ToDto(entity);
+                context.Purchases.Remove(entity);
+                context.SaveChanges();
+                return(ToDto(entity));
             }
             else
             {
                 throw new KeyNotFoundException();
             }
-
-            return dto;
         }
 
 
@@ -113,7 +110,7 @@ namespace ThingsWeNeed.Data.Purchase
         }
 
         public void Dispose() {
-            DatabaseContext.Dispose();
+            context.Dispose();
         }
     }
 }

@@ -55,12 +55,12 @@ namespace ThingsWeNeed.Service.Controllers.Thing
                 ThingDto thing;
                 using (var db = new ThingDaLogic(null, null))
                 {
-                    thing = db.Create(dto.Name, dto.HouseholdId, dto.Show, dto.Needed, dto.DefaultPrice);
+                    //thing = db.Create(dto.Name, dto.HouseholdId, dto.Show, dto.Needed, dto.DefaultPrice);
                 }
 
                 ThingDetailsViewModel viewModel = new ThingDetailsViewModel()
                 {
-                    Thing = thing
+                    Thing = null
                 };
 
                 return View("Details", viewModel);

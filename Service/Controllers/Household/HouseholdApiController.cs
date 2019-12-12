@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using ThingsWeNeed.Data.Core;
 using ThingsWeNeed.Data.Household;
 using ThingsWeNeed.Shared;
+using Microsoft.Owin;
+using System.Net.Http;
+using Microsoft.AspNet.Identity;
 
 namespace ThingsWeNeed.Service.Controllers.Household
 {
     public class HouseholdApiController : ApiController
     {
         private HouseholdLogic householdLogic;
+        private TwnContext context;
 
         public HouseholdApiController()
         {
-            householdLogic = new HouseholdLogic();
+            householdLogic = new HouseholdLogic(context, Request.GetOwinContext().Authentication.User.Identity.GetUserId());
         }
 
         [HttpGet]

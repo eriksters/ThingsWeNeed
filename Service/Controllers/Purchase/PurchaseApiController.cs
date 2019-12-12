@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using ThingsWeNeed.Data.Core;
 using ThingsWeNeed.Data.Purchase;
 using ThingsWeNeed.Data.Thing;
 using ThingsWeNeed.Shared;
@@ -14,7 +17,7 @@ namespace ThingsWeNeed.Service.Controllers.Purchase
         private PurchaseDaLogic logic;
 
         public PurchaseApiController () {
-            logic = new PurchaseDaLogic();
+            logic = new PurchaseDaLogic(new TwnContext(), Request.GetOwinContext().Authentication.User.Identity.GetUserId());
         }
 
         [HttpGet]
@@ -69,10 +72,13 @@ namespace ThingsWeNeed.Service.Controllers.Purchase
 
                     logic.Create(dto);
 
-                    using (var thingLogic = new ThingDaLogic())
+                    using (var thingLogic = new ThingDaLogic(new TwnContext(), Request.GetOwinContext().Authentication.User.Identity.GetUserId()))
                     {
                         var thingDto = thingLogic.GetById(dto.ThingId);
-                        //thingLogic.Update(dto.ThingId, thingDto.HouseholdId, thingDto.Name, thingDto.Show, false, thingDto.DefaultPrice);
+
+                        thingDto.Needed = false;
+
+                        thingLogic.Update(thingDto);
                     }
 
                     createLinks(dto);
@@ -130,10 +136,6 @@ namespace ThingsWeNeed.Service.Controllers.Purchase
             dto.Thing = new LinkDto(rel: "thing", href: $"api/Things/{dto.ThingId}", method: "GET");
             dto.MadeBy = new LinkDto(rel: "user", href: $"api/Users/{dto.MadeById}", method: "GET");
 
-        }
-
-        public void InjectLogic(PurchaseDaLogic logic) {
-            this.logic = logic;
         }
     }
 }

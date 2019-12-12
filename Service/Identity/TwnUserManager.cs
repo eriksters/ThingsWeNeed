@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using ThingsWeNeed.Data.Core;
 using ThingsWeNeed.Data.User;
+using ThingsWeNeed.Shared;
 
 namespace ThingsWeNeed.Service.Identity
 {
@@ -30,6 +31,13 @@ namespace ThingsWeNeed.Service.Identity
             };
 
             return manager;
+        }
+
+        public void Update(UserDto dto) {
+            UserEntity entity = Store.FindByIdAsync(dto.Id).GetAwaiter().GetResult();
+            entity.FName = dto.FName;
+            entity.LName = dto.LName;
+            UpdateAsync(entity);
         }
     }
 }

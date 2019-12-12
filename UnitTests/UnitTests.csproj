@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Household\HouseholdControllerTests.cs" />
     <Compile Include="TestData.cs" />
     <Compile Include="Thing\ThingsControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -14,7 +14,7 @@ namespace ThingsWeNeed.Shared
             this.Households = new HashSet<HouseholdDto>();
         }
         
-        public int UserId { get; set; }
+        public string Id { get; set; }
 
         [Required(ErrorMessage = "Email required")]
         [EmailAddress(ErrorMessage = "Email must be in correct format")]

@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
@@ -10,6 +7,7 @@ using System.Web.Http;
 using ThingsWeNeed.Data.User;
 using ThingsWeNeed.Service.Identity;
 using ThingsWeNeed.Shared;
+using ThingsWeNeed.Shared.REST;
 
 namespace ThingsWeNeed.Service.Controllers.Users
 {
@@ -125,12 +123,30 @@ namespace ThingsWeNeed.Service.Controllers.Users
 
         [HttpPost]
         [Route("api/Users/LogOff")]
-        public async Task<IHttpActionResult> LogOff() {
+        public IHttpActionResult LogOff() {
 
             Request.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
 
             return Ok();
         }
+
+        [HttpPut]
+        [Route("api/Users")]
+        public IHttpActionResult Update(UserDto dto) {
+
+            if (ModelState.IsValid)
+            {
+                dto.Id = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
+                UserManager.Update(dto);
+                return Ok(dto);
+            }
+            else 
+            {
+                return BadRequest(ModelState);
+            }
+        }
+
+
 
         private IHttpActionResult GetErrorResult(IdentityResult identityRes) {
 

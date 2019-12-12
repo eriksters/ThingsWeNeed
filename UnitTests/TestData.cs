@@ -52,13 +52,11 @@ namespace ThingsWeNeed.UnitTests
             return controller;
         }
 
-        public static ThingDaLogic GetMockedLogic()
-        {
-            TwnContext context = new TwnContext();
-            
-
-            ThingDaLogic logic = new ThingDaLogic(context, null);
-            return logic;
-        }
+        //public static ThingDaLogic GetMockedLogic()
+        //{
+        //    TwnContext context = new TwnContext();
+        //    ThingDaLogic logic = new ThingDaLogic(context, -1);
+        //    return logic;
+        //}
     }
 }

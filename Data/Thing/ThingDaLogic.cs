@@ -12,12 +12,12 @@ using ThingsWeNeed.Shared;
 
 namespace ThingsWeNeed.Data.Thing
 {
-    public class ThingDaLogic : IDisposable
+    public class ThingDaLogic : IRestResource<ThingDto>, IDisposable 
     {
-        private int userId;
+        private string userId;
         private TwnContext context;
 
-        public ThingDaLogic(TwnContext context, int userId)
+        public ThingDaLogic(TwnContext context, string userId)
         {
             this.context = context;
             this.userId = userId;
@@ -53,7 +53,7 @@ namespace ThingsWeNeed.Data.Thing
             }
         }
 
-        public ICollection<ThingDto> GetCollection()
+        public ThingDto[] GetCollection()
         {
             ICollection<ThingDto> collection = new List<ThingDto>();
 
@@ -73,48 +73,25 @@ namespace ThingsWeNeed.Data.Thing
                 }
             }
 
-            return collection;
+            return collection.ToArray();
         }
 
-        public ThingDto Create(
-            string name, 
-            int householdId,
-            bool show,
-            bool needed,
-            double defaultPrice)
+        public void Create(ThingDto dto)
         {
-
             ThingEntity entity = new ThingEntity();
-            entity.Name = name;
-            entity.HouseholdId = householdId;
-            entity.Show = show;
-            entity.Needed = needed;
-            entity.DefaultPrice = defaultPrice;
+            entity.Name = dto.Name;
+            entity.HouseholdId = dto.HouseholdId;
+            entity.Show = dto.Show;
+            entity.Needed = dto.Needed;
+            entity.DefaultPrice = dto.DefaultPrice;
 
             context.Things.Add(entity);
             context.SaveChanges();
 
-
-            ThingDto dto = new ThingDto()
-            {
-                ThingId = entity.ThingId,
-                Name = entity.Name,
-                Needed = entity.Needed,
-                Show = entity.Show,
-                DefaultPrice = entity.DefaultPrice,
-                HouseholdId = entity.HouseholdId
-            };
-            
-            return dto;
+            dto.ThingId = entity.ThingId;
         }
 
-        public void Update(
-            int id,
-            int householdId,
-            string name,
-            bool show,
-            bool needed,
-            double defaultPrice)
+        public void Update(ThingDto dto)
         {
             throw new NotImplementedException();
         }

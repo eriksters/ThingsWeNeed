@@ -31,7 +31,7 @@ namespace ThingsWeNeed.Controllers.Thing
         }
 
         public ThingDaLogic Logic {
-            get => _logic ?? new ThingDaLogic(DatabaseContext, CurrentUser);
+            get => _logic ?? new ThingDaLogic(DatabaseContext, CurrentUser.Id);
             set => _logic = value;
         }
 

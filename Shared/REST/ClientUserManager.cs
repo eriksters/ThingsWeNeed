@@ -23,7 +23,7 @@ namespace ThingsWeNeed.Shared.REST
         ///     Login user with username and password
         /// </summary>
         /// <returns>Error strings, null if OK</returns>
-        public async Task<string[]> Login(LoginBinder binder)
+        public string[] Login(LoginBinder binder)
         {
             string[] result;
 
@@ -51,7 +51,7 @@ namespace ThingsWeNeed.Shared.REST
         /// </summary>
         /// <param name="binder"></param>
         /// <returns>Error strings, null if OK</returns>
-        public async Task<string[]> Register(RegisterBinder binder) {
+        public string[] Register(RegisterBinder binder) {
 
             string[] result;
             using (var client = CreateWebClient())
@@ -76,7 +76,7 @@ namespace ThingsWeNeed.Shared.REST
         /// <summary>
         ///     Logs user off. Session token is deleted from client.
         /// </summary>
-        public async Task LogOff() {
+        public void LogOff() {
             using (var client = CreateWebClient())
             {
                 client.DownloadString(Uri + "/LogOff");
@@ -95,16 +95,26 @@ namespace ThingsWeNeed.Shared.REST
         /// </summary>
         /// <param name="dto"></param>
         /// <returns>Updated account details</returns>
-        public async Task<UserDto> Edit(UserDto dto)
+        public UserDto Edit(UserDto dto)
         {
-            throw new NotImplementedException();
+            UserDto result;
+            using (var client = CreateWebClient())
+            {
+                string retString = client.DownloadString(Uri);
+
+                client.UploadString(Uri, JsonConvert.SerializeObject(dto));
+
+                result = (UserDto)JsonConvert.DeserializeObject(retString, typeof(UserDto));
+            }
+
+            return result;
         }
 
         /// <summary>
-        ///     Get user account details
+        ///     Get current user account details
         /// </summary>
         /// <returns>User account details</returns>
-        public async Task<UserDto> Get() 
+        public UserDto Get() 
         {
             UserDto result;
             using (var client = CreateWebClient())

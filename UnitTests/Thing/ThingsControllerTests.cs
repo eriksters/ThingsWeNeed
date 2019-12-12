@@ -98,15 +98,14 @@ namespace ThingsWeNeed.UnitTests.Thing
 
             TwnContext context = new TwnContext();
             ThingDaLogic logic = new ThingDaLogic(context, null);
-            ThingDto thingDto = null;
 
 
             //  Act
             try {
-                thingDto = logic.Create(dto.Name, thingEn.HouseholdId, dto.Show, dto.Needed, dto.DefaultPrice);
+                logic.Create(dto);
                 //thingDto = logic.GetById(213);
 
-                var assertThing = context.Things.Find(thingDto.ThingId);
+                var assertThing = context.Things.Find(dto.ThingId);
 
                 Assert.IsNotNull(assertThing);
 
@@ -121,7 +120,7 @@ namespace ThingsWeNeed.UnitTests.Thing
             {
                 try
                 {
-                    cleanup(thingDto.ThingId);
+                    cleanup(dto.ThingId);
                     cleanup(thingEn.ThingId);
                 }
                 catch { }
