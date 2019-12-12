@@ -9,6 +9,8 @@ using System.ComponentModel.DataAnnotations;
 using ThingsWeNeed.Data.Thing;
 using ThingsWeNeed.Data.User;
 using ThingsWeNeed.Data.Household;
+using ThingsWeNeed.Shared;
+using ThingsWeNeed.Data.Wish;
 
 namespace ThingsWeNeed.Data.User
 {
@@ -41,5 +43,12 @@ namespace ThingsWeNeed.Data.User
         [InverseProperty("Users")]
         public virtual ICollection<HouseholdEntity> Households { get; private set; }
 
+        
+       
+
+        public virtual ICollection<HouseholdEntity> Households { get; private set; }
+>>>>>>> Stashed changes
+
+       
     }
 }

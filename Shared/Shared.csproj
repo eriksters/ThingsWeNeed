@@ -53,6 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThingDto.cs" />
     <Compile Include="UserDto.cs" />
+    <Compile Include="WishDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
