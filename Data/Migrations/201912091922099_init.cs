@@ -3,7 +3,7 @@ namespace ThingsWeNeed.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
@@ -51,6 +51,21 @@ namespace ThingsWeNeed.Data.Migrations
                 .PrimaryKey(t => t.UserId);
             
             CreateTable(
+                "TWN.Wish",
+                c => new
+                    {
+                        WishId = c.Int(nullable: false, identity: true),
+                        MaxPrice = c.Double(nullable: false),
+                        Name = c.String(nullable: false),
+                        ExtraPay = c.Double(nullable: false),
+                        MadeById = c.Int(nullable: false),
+                        GrantedOn = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.WishId)
+                .ForeignKey("TWN.AppUser", t => t.MadeById, cascadeDelete: true)
+                .Index(t => t.MadeById);
+            
+            CreateTable(
                 "dbo.HouseholdEntityUserEntities",
                 c => new
                     {
@@ -67,13 +82,16 @@ namespace ThingsWeNeed.Data.Migrations
         
         public override void Down()
         {
+            DropForeignKey("TWN.Wish", "MadeById", "TWN.AppUser");
             DropForeignKey("dbo.HouseholdEntityUserEntities", "UserEntity_UserId", "TWN.AppUser");
             DropForeignKey("dbo.HouseholdEntityUserEntities", "HouseholdEntity_HouseholdId", "TWN.Households");
             DropForeignKey("TWN.Thing", "HouseholdId", "TWN.Households");
             DropIndex("dbo.HouseholdEntityUserEntities", new[] { "UserEntity_UserId" });
             DropIndex("dbo.HouseholdEntityUserEntities", new[] { "HouseholdEntity_HouseholdId" });
+            DropIndex("TWN.Wish", new[] { "MadeById" });
             DropIndex("TWN.Thing", new[] { "HouseholdId" });
             DropTable("dbo.HouseholdEntityUserEntities");
+            DropTable("TWN.Wish");
             DropTable("TWN.AppUser");
             DropTable("TWN.Thing");
             DropTable("TWN.Households");

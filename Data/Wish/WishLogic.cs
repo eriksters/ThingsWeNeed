@@ -44,6 +44,30 @@ namespace ThingsWeNeed.Data.Wish
             }
            
         }
+
+        public WishDto[] GetCollection()
+        {
+            List<WishEntity> wishesList = DatabaseContext.Wishes.ToList();
+            List<WishDto> wishDtoList = new List<WishDto>();
+
+            foreach (WishEntity entity in wishesList)
+            {
+                if (entity != null)
+                {
+                    WishDto dto = new WishDto()
+                    {
+                        WishId = entity.WishId,
+                        //UserId = entity.UserId,
+                        ExtraPay = entity.ExtraPay,
+                        MaxPrice = entity.MaxPrice,
+                        GrantedOn = entity.GrantedOn,
+                        Name = entity.Name
+                    };
+                    wishDtoList.Add(dto);
+                }
+            }
+            return wishDtoList.ToArray();
+        }
         public WishDto Update(int id)
         {
             WishEntity entity = DatabaseContext.Wishes.Find(id);
@@ -100,6 +124,9 @@ namespace ThingsWeNeed.Data.Wish
                 throw (new KeyNotFoundException());
             }
         }
+
+
+
         public WishDto Delete(int id)
         {
             var entity = DatabaseContext.Wishes.Find(id);
