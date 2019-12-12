@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ThingsWeNeed.Shared;
+using ThingsWeNeed.Shared.REST;
 using ThingsWeNeed.Shared.RestInterface.Rest;
 
 namespace Desktop.Pages.User
@@ -22,9 +11,9 @@ namespace Desktop.Pages.User
     /// </summary>
     public partial class UserCreatePage : Page
     {
+        ClientUserManager userManager;
         UserRest userRest;
         MainWindow mainWindow;
-
 
         public UserCreatePage(MainWindow mainWindow)
         {
@@ -44,22 +33,24 @@ namespace Desktop.Pages.User
 
         private void createBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (usernameTextBox.Text == null || emailTextBox.Text == null)
+            if (usernameTextBox.Text == null || emailTextBox.Text == null || passwordTextBox.Password == null || confirmPasswordTextBox == null)
             {
-                MessageBox.Show("Username and Email are required.");
+                MessageBox.Show("Username, Email and Password are required.");
             }
             else
             {
-                UserDto user = new UserDto()
+                RegisterBinder userRegister = new RegisterBinder()
                 {
                     Email = emailTextBox.Text,
                     FName = firstNameTextBox.Text,
                     LName = lastNameTextBox.Text,
                     PhoneNumber = phoneNumberTextBox.Text,
                     Username = usernameTextBox.Text,
+                    Password = passwordTextBox.Password,
+                    ConfirmPassword = confirmPasswordTextBox.Password,
                 };
 
-                userRest.Create(user);
+                userManager.Register(userRegister);
             }
         }
     }

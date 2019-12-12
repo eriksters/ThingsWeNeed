@@ -46,12 +46,6 @@ namespace Desktop.Pages
 
         }
 
-        private void deleteBtn_Click(object sender, RoutedEventArgs e)
-        {
-            HouseholdDto household = (HouseholdDto)myDataGrid.SelectedItem;
-            householdRest.Delete(household.HouseholdId);
-        }
-
         private void updateBtn_Click(object sender, RoutedEventArgs e)
         {
             HouseholdDto household = (HouseholdDto)myDataGrid.SelectedItem;

@@ -26,7 +26,6 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
                                 <Button x:Name="updateBtn" Content="Update" Click="updateBtn_Click"/>
-                                <Button x:Name="deleteBtn" Content="Delete" Click="deleteBtn_Click"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

@@ -39,8 +39,8 @@ namespace Desktop
         private void deleteBtn_Click(object sender, RoutedEventArgs e)
         {
 
-            UserDto user = (UserDto)myDataGrid.SelectedItem;
-            userRest.Delete(user.UserId);
+            //UserDto user = (UserDto)myDataGrid.SelectedItem;
+            //userRest.Delete(user.UserId);
         }
 
         private void createBtn_Click(object sender, RoutedEventArgs e)
@@ -51,7 +51,7 @@ namespace Desktop
         private void updateBtn_Click(object sender, RoutedEventArgs e)
         {
             UserDto user = (UserDto)myDataGrid.SelectedItem;
-            mainWindow.GoToUserUpdatePage(user.UserId);
+            //mainWindow.GoToUserUpdatePage(user.UserId);
         }
 
         private void householdBtn_Click(object sender, RoutedEventArgs e)

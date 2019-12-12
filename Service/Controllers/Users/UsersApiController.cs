@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
@@ -41,9 +42,10 @@ namespace ThingsWeNeed.Service.Controllers.Users
                 if (ModelState.IsValid)
                 {
                     if (binder != null) {
+
                         
                         // Password sign in 
-                        var res = await SignInManager.PasswordSignInAsync(binder.Username, binder.Password, isPersistent: false, shouldLockout: false);
+                        var res = SignInManager.PasswordSignInAsync(binder.Username, binder.Password, isPersistent: false, shouldLockout: false).GetAwaiter().GetResult();
 
                         if (res == SignInStatus.Success)
                         {

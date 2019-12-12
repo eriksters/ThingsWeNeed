@@ -36,12 +36,6 @@ namespace Desktop
             myDataGrid.ItemsSource = things;
         }
 
-        private void deleteBtn_Click(object sender, RoutedEventArgs e)
-        {
-            ThingDto thing = (ThingDto)myDataGrid.SelectedItem;
-            thingRest.Delete(thing.ThingId);
-        }
-
         private void updateBtn_Click(object sender, RoutedEventArgs e)
         {
             ThingDto thing = (ThingDto)myDataGrid.SelectedItem;

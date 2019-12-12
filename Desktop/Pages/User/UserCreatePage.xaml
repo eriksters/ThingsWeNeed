@@ -12,15 +12,19 @@
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Create User" FontSize="50" VerticalAlignment="Top" Margin="10,10,0,0" Height="80" Width="295"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Username" FontSize="25" VerticalAlignment="Top" Margin="10,90,0,0" Height="43" Width="115"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Email" FontSize="25" VerticalAlignment="Top" Margin="10,138,0,0" Height="43" Width="165"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="First Name" FontSize="25" VerticalAlignment="Top" Margin="433,90,0,0" Height="43" Width="181"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Last Name" FontSize="25" VerticalAlignment="Top" Margin="433,138,0,0" Height="43" Width="165"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="First Name" FontSize="25" VerticalAlignment="Top" Margin="0,234,0,0" Height="43" Width="181"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Last Name" FontSize="25" VerticalAlignment="Top" Margin="0,282,0,0" Height="43" Width="165"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Phone Number" FontSize="25" VerticalAlignment="Top" Margin="0,186,0,0" Height="43" Width="181"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Password" FontSize="25" VerticalAlignment="Top" Margin="427,90,0,0" Height="43" Width="115"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Confirm Password" FontSize="25" VerticalAlignment="Top" Margin="427,138,0,0" Height="43" Width="115"/>
         <TextBox x:Name="phoneNumberTextBox" HorizontalAlignment="Left" Height="43" Margin="195,186,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
-        <TextBox x:Name="lastNameTextBox" HorizontalAlignment="Left" Height="43" Margin="573,138,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
+        <TextBox x:Name="lastNameTextBox" HorizontalAlignment="Left" Height="43" Margin="195,282,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
         <TextBox x:Name="emailTextBox" HorizontalAlignment="Left" Height="43" Margin="195,138,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
-        <TextBox x:Name="firstNameTextBox" HorizontalAlignment="Left" Height="43" Margin="573,90,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
+        <TextBox x:Name="firstNameTextBox" HorizontalAlignment="Left" Height="43" Margin="195,234,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
         <TextBox x:Name="usernameTextBox" HorizontalAlignment="Left" Height="43" Margin="195,90,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
+        <PasswordBox x:Name="passwordTextBox" HorizontalAlignment="Left" Margin="542,138,0,0" VerticalAlignment="Top" Height="43" Width="216"/>
+        <PasswordBox x:Name="confirmPasswordTextBox" HorizontalAlignment="Left" Margin="542,90,0,0" VerticalAlignment="Top" Height="43" Width="216"/>
         <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Left" Margin="91,353,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="cancelBtn_Click"/>
         <Button x:Name="createBtn" Content="Create" HorizontalAlignment="Left" Margin="280,353,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="createBtn_Click"/>
-    </Grid>
+         </Grid>
 </Page>

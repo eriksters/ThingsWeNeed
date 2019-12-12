@@ -98,6 +98,7 @@ namespace ThingsWeNeed.Data.Household
                     },
                     Things = fillThingsCollection(),
                     Users = fillUserCollection()
+
                 };
                 return dto;
             }

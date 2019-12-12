@@ -22,17 +22,6 @@ namespace ThingsWeNeed.Shared.REST
             }
         }
 
-        public HouseholdDto Delete(int id)
-        {
-            using (var client = CreateWebClient())
-            {
-                string returnString = client.UploadString(Uri + $"/{id}", "DELETE", "");
-                HouseholdDto dto = (HouseholdDto)JsonConvert.DeserializeObject(returnString, typeof(HouseholdDto));
-
-                return dto;
-            }
-        }
-
         public HouseholdDto Get(int id)
         {
             using (var client = CreateWebClient())

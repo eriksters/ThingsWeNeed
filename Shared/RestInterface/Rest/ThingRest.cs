@@ -22,17 +22,6 @@ namespace ThingsWeNeed.Shared.REST
             }
         }
 
-        public ThingDto Delete(int id)
-        {
-            using (var client = CreateWebClient())
-            {
-                string returnString = client.UploadString(Uri + $"/{id}", "DELETE", "");
-                ThingDto dto = (ThingDto)JsonConvert.DeserializeObject(returnString, typeof(ThingDto));
-
-                return dto;
-            }
-        }
-
         public ThingDto Get(int id)
         {
             using (var client = CreateWebClient())

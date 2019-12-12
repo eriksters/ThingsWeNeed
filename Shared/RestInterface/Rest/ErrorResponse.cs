@@ -33,11 +33,13 @@ namespace ThingsWeNeed.Shared.REST
             //var obj = JsonConvert.DeserializeObject(errorString);
 
             ErrorResponse resp = (ErrorResponse) JsonConvert.DeserializeObject(errorString, typeof(ErrorResponse));
-
-            foreach (string error in resp.ModelState.Values.FirstOrDefault()) {
-                resp.Errors.Add(error);
+            if (resp.ModelState != null)
+            {
+                foreach (string error in resp.ModelState.Values.FirstOrDefault())
+                {
+                    resp.Errors.Add(error);
+                }
             }
-
             return resp;
         }
     }

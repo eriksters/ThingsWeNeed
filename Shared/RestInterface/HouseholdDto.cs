@@ -18,7 +18,7 @@ namespace ThingsWeNeed.Shared
 
         public ICollection<ThingDto> Things { get; set; }
 
-        public ICollection<ThingDto> Users { get; set; }
+        public ICollection<UserDto> Users { get; set; }
     }
 
     [ComplexType]

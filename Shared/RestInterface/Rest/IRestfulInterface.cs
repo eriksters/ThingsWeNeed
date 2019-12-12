@@ -14,8 +14,6 @@ namespace ThingsWeNeed.Shared.REST
 
         T Create(T toCreate);
 
-        T Delete(int id);
-
         T Update(T updated);
     }
 }

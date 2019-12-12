@@ -23,17 +23,6 @@ namespace ThingsWeNeed.Shared.RestInterface.Rest
             }
         }
 
-        public UserDto Delete(int id)
-        {
-            using (var client = CreateWebClient())
-            {
-                string returnString = client.UploadString(Uri + $"/{id}", "DELETE", "");
-                UserDto dto = (UserDto)JsonConvert.DeserializeObject(returnString, typeof(UserDto));
-
-                return dto;
-            }
-        }
-
         public UserDto Get(int id)
         {
             using (var client = CreateWebClient())
