@@ -14,34 +14,32 @@ namespace Desktop
     /// </summary>
     public partial class ThingPage : Page
     {
-        ClientUserManager userManager;
         ThingRest thingRest;
         MainWindow mainWindow;
 
-        public ThingPage(MainWindow loginWindow)
+        public ThingPage(MainWindow thingWindow)
         {
             if(thingRest == null)
             {
                 thingRest = new ThingRest();
             }
 
-            if (userManager == null)
-            {
-                userManager = new ClientUserManager();
-            }
-
             InitializeComponent();
             List<ThingDto> things = new List<ThingDto>();
             fillThingsList();
-            this.mainWindow = loginWindow;
-
-            currentUsernameTextBlock.Text = "Current user: " + userManager.Get().Result.Username;
+            this.mainWindow = thingWindow;
         }
 
         private void fillThingsList()
         {
             ICollection<ThingDto> things = thingRest.GetCollection();
             myDataGrid.ItemsSource = things;
+        }
+
+        private void deleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ThingDto thing = (ThingDto)myDataGrid.SelectedItem;
+            thingRest.Delete(thing.ThingId);
         }
 
         private void updateBtn_Click(object sender, RoutedEventArgs e)
@@ -68,16 +66,6 @@ namespace Desktop
         private void usersNavBtn_Click(object sender, RoutedEventArgs e)
         {
             mainWindow.GoToUserPage();
-        }
-
-        private async void logoutBtn_Click(object sender, RoutedEventArgs e)
-        {
-            await userManager.LogOff();
-
-            if (userManager.LogOff().IsCompleted)
-            {
-                mainWindow.GoToLoginPage();
-            }
         }
     }
 }

@@ -19,13 +19,17 @@ namespace Desktop
         public MainWindow()
         {
             RestClient.SetDomain("https://localhost:44371");
+
             manager = new ClientUserManager();
-            string[] errors = manager.Login(new LoginBinder { 
-                Username = "TestUser", 
-                Password = "Password1"})
-                .GetAwaiter().GetResult();
+            
             InitializeComponent();
-            GoToThingPage();
+            GoToLoginPage();
+        }
+
+        public void GoToLoginPage()
+        {
+            LoginPage newPage = new LoginPage(this);
+            Content = newPage;
         }
 
         public void GoToThingPage()

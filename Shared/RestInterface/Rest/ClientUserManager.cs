@@ -95,7 +95,7 @@ namespace ThingsWeNeed.Shared.REST
         /// </summary>
         /// <param name="dto"></param>
         /// <returns>Updated account details</returns>
-        public async Task<ThingDto> Edit(ThingDto dto)
+        public async Task<UserDto> Edit(UserDto dto)
         {
             throw new NotImplementedException();
         }
@@ -104,14 +104,14 @@ namespace ThingsWeNeed.Shared.REST
         ///     Get user account details
         /// </summary>
         /// <returns>User account details</returns>
-        public async Task<ThingDto> Get() 
+        public async Task<UserDto> Get() 
         {
-            ThingDto result;
+            UserDto result;
             using (var client = CreateWebClient())
             {
                 string retString = client.DownloadString(Uri);
 
-                result = (ThingDto) JsonConvert.DeserializeObject(retString, typeof(ThingDto));
+                result = (UserDto) JsonConvert.DeserializeObject(retString, typeof(UserDto));
             }
 
             return result;

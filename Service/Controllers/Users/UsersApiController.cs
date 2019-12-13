@@ -148,6 +148,22 @@ namespace ThingsWeNeed.Service.Controllers.Users
             }
         }
 
+        [HttpGet]
+        [Route("api/Users")]
+        public IHttpActionResult GetCurrent() {
+            IHttpActionResult result = null;
+
+
+            if (Request.GetOwinContext().Authentication.User.Identity.IsAuthenticated)
+            {
+                string userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
+
+                result = Ok(UserManager.FindById(userId));
+            }
+
+            return result;
+        }
+
 
 
         private IHttpActionResult GetErrorResult(IdentityResult identityRes) {

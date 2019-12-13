@@ -32,7 +32,7 @@ namespace Desktop
 
         private void createBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (nameTextBox.Text == null || HouseholdIdTextBox.Text == null)
+            if (nameTextBox.Text == "" || householdIdTextBox.Text == "")
             {
                 MessageBox.Show("Name and Household ID are required.");
             }
@@ -43,14 +43,14 @@ namespace Desktop
 
                 try
                 {
-                    householdId = Int32.Parse(HouseholdIdTextBox.Text);
+                    householdId = Int32.Parse(householdIdTextBox.Text);
                 }
                 catch (FormatException a)
                 {
                     MessageBox.Show("Household ID must be a number.");
                 }
 
-                if (defaultPriceTextBox != null)
+                if (defaultPriceTextBox.Text != "")
                 {
                     try
                     {

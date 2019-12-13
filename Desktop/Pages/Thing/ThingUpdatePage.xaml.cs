@@ -39,7 +39,7 @@ namespace Desktop
 
         private void updateBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (nameTextBox.Text == null)
+            if (nameTextBox.Text == "")
             {
                 MessageBox.Show("Name is required.");
             }
@@ -47,7 +47,7 @@ namespace Desktop
             {
                 double defaultPrice = 0;
 
-                if (defaultPriceTextBox != null)
+                if (defaultPriceTextBox.Text != "")
                 {
                     try
                     {

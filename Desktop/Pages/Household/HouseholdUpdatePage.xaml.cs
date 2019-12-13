@@ -40,7 +40,7 @@ namespace Desktop.Pages.Household
 
         private void updateBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (nameTextBox.Text == null)
+            if (nameTextBox.Text == "")
             {
                 MessageBox.Show("Name is required.");
             }

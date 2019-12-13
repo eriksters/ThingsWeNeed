@@ -9,7 +9,8 @@
       Title="UserPage">
 
     <Grid>
-        <DataGrid Name="myDataGrid" HorizontalAlignment="Left" Height="370" VerticalAlignment="Top" Width="772" Margin="10,10,0,0" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="False">
+        <TextBlock x:Name="currentUsernameTextBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="19" Width="653"/>
+        <DataGrid Name="myDataGrid" HorizontalAlignment="Left" Height="345" VerticalAlignment="Top" Width="772" Margin="10,35,0,0" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding UserId}" />
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
@@ -27,7 +28,6 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
                                 <Button x:Name="updateBtn" Content="Update" Click="updateBtn_Click"/>
-                                <Button x:Name="householdBtn" Content="Delete" Click="householdBtn_Click"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -38,5 +38,6 @@
         <Button x:Name="usersNavBtn" Content="Users Page" HorizontalAlignment="Left" Margin="581,389,0,0" VerticalAlignment="Top" Width="98" Click="usersNavBtn_Click" Height="20"/>
         <Button x:Name="householdsNavBtn" Content="Households Page" HorizontalAlignment="Left" Margin="478,389,0,0" VerticalAlignment="Top" Width="98" Click="householdsNavBtn_Click" Height="20"/>
         <Button x:Name="thingsNavBtn" Content="Things Page" HorizontalAlignment="Left" Margin="684,389,0,0" VerticalAlignment="Top" Width="98" Click="thingsNavBtn_Click" Height="20"/>
+        <Button x:Name="logoutBtn" Content="Logout" HorizontalAlignment="Left" Margin="684,10,0,0" VerticalAlignment="Top" Width="98" Click="logoutBtn_Click" Height="20"/>
     </Grid>
 </Page>
