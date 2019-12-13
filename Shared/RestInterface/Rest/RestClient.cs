@@ -27,7 +27,7 @@ namespace ThingsWeNeed.Shared.REST
         }
 
 
-        protected static string AuthToken { get; set; }
+        public static string AuthToken { get; set; }
         
         //public RestClient(string uri)
         //{

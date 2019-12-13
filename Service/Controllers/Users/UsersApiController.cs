@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using ThingsWeNeed.Data.Core;
+using ThingsWeNeed.Data.Household;
 using ThingsWeNeed.Data.User;
 using ThingsWeNeed.Service.Identity;
 using ThingsWeNeed.Shared;
@@ -158,7 +160,7 @@ namespace ThingsWeNeed.Service.Controllers.Users
             {
                 string userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
 
-                result = Ok(UserManager.FindById(userId));
+                result = Ok(UserManager.Get(userId));
             }
 
             return result;
@@ -177,6 +179,28 @@ namespace ThingsWeNeed.Service.Controllers.Users
             }
 
             return BadRequest(ModelState);
+        }
+
+        private void addLinks(UserDto dto)
+        {
+
+            string userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
+
+            using (var hhLogic = new HouseholdDaLogic(new TwnContext(), userId)) {
+                
+                var households = hhLogic.GetCollection(userId);
+
+                foreach (HouseholdDto hhDto in households) {
+                    dto.Households.Add(new HouseholdDto() { 
+                        HouseholdId = 1,
+                        Name = "TP"
+                    });
+                }
+
+            }
+
+
+
         }
     }
 }

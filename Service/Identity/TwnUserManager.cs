@@ -39,5 +39,22 @@ namespace ThingsWeNeed.Service.Identity
             entity.LName = dto.LName;
             UpdateAsync(entity);
         }
+
+        public UserDto Get (string userId) {
+
+            var entity = base.FindByIdAsync(userId).GetAwaiter().GetResult();
+
+            UserDto dto = new UserDto() { 
+                Email = entity.Email,
+                FName = entity.FName,
+                LName = entity.LName,
+                Id = entity.Id,
+                Username = entity.UserName,
+                PhoneNumber = entity.PhoneNumber
+            };
+
+            return dto;
+
+        } 
     }
 }

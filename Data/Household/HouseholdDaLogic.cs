@@ -30,7 +30,7 @@ namespace ThingsWeNeed.Data.Household
             HouseholdEntity entity = DatabaseContext.Households.Find(id);
             return buildDto(entity);
         }
-        public HouseholdDto[] GetCollection(int userId)
+        public HouseholdDto[] GetCollection(string userId)
         {
             // keep track which households the user belongs to
             ICollection<HouseholdEntity> entityHouseholds = DatabaseContext.Users.Find(userId).Households;

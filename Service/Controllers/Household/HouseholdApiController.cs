@@ -44,7 +44,7 @@ namespace ThingsWeNeed.Service.Controllers.Household
         // move maybe to user Api Controller
         [Route("api/Households/User/{userId}")]
         // and change this to maybe api/User/{id}/Households
-        public IHttpActionResult GetCollection(int userId)
+        public IHttpActionResult GetCollection(string userId)
         {
             if (ModelState.IsValid)
             {
