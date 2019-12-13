@@ -10,7 +10,7 @@ namespace ThingsWeNeed.Shared
             this.Households = new HashSet<HouseholdDto>();
         }
         
-        public string Id { get; set; }
+        public int UserId { get; set; }
 
         [Required(ErrorMessage = "Email required")]
         [EmailAddress(ErrorMessage = "Email must be in correct format")]

@@ -16,10 +16,10 @@
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="City" FontSize="25" VerticalAlignment="Top" Margin="414,90,0,0" Height="43" Width="165"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Post Code" FontSize="25" VerticalAlignment="Top" Margin="414,138,0,0" Height="43" Width="165"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Country" FontSize="25" VerticalAlignment="Top" Margin="414,186,0,0" Height="43" Width="165"/>
-        <TextBox x:Name="cityTextBox" HorizontalAlignment="Left" Height="43" Margin="552,90,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
+        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="43" Margin="148,90,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
         <TextBox x:Name="address1TextBox" HorizontalAlignment="Left" Height="43" Margin="148,138,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
         <TextBox x:Name="address2TextBox" HorizontalAlignment="Left" Height="43" Margin="148,186,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
-        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="43" Margin="148,90,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
+        <TextBox x:Name="cityTextBox" HorizontalAlignment="Left" Height="43" Margin="552,90,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
         <TextBox x:Name="postCodeTextBox" HorizontalAlignment="Left" Height="43" Margin="552,138,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
         <TextBox x:Name="countryTextBox" HorizontalAlignment="Left" Height="43" Margin="552,186,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
         <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Left" Margin="46,353,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="cancelBtn_Click"/>

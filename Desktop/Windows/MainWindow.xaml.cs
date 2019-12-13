@@ -2,6 +2,7 @@
 using Desktop.Pages.Household;
 using Desktop.Pages.User;
 using System.Windows;
+using ThingsWeNeed.Shared;
 using ThingsWeNeed.Shared.REST;
 
 namespace Desktop
@@ -12,12 +13,23 @@ namespace Desktop
     public partial class MainWindow : Window
     {
         public int currentId;
+        public string currentUserId;
+        public ClientUserManager manager;
 
         public MainWindow()
         {
             RestClient.SetDomain("https://localhost:44371");
+
+            manager = new ClientUserManager();
+            
             InitializeComponent();
-            GoToThingPage();
+            GoToLoginPage();
+        }
+
+        public void GoToLoginPage()
+        {
+            LoginPage newPage = new LoginPage(this);
+            Content = newPage;
         }
 
         public void GoToThingPage()
@@ -70,9 +82,9 @@ namespace Desktop
             Content = newPage;
         }
 
-        public void GoToUserUpdatePage(int id)
+        public void GoToUserUpdatePage(string id)
         {
-            currentId = id;
+            currentUserId = id;
             UserUpdatePage newPage = new UserUpdatePage(this);
             Content = newPage;
         }

@@ -14,6 +14,7 @@ namespace Desktop.Pages
     /// </summary>
     public partial class HouseholdPage : Page
     {
+        ClientUserManager userManager;
         HouseholdRest householdRest;
         MainWindow mainWindow;
 
@@ -24,10 +25,17 @@ namespace Desktop.Pages
                 householdRest = new HouseholdRest();
             }
 
+            if (userManager == null)
+            {
+                userManager = new ClientUserManager();
+            }
+
             InitializeComponent();
             List<HouseholdDto> households = new List<HouseholdDto>();
             fillHouseholdsList();
             this.mainWindow = householdWindow;
+
+            currentUsernameTextBlock.Text = "Current user: " + userManager.Get().Result.Username;
         }
 
         private void fillHouseholdsList()
@@ -44,12 +52,6 @@ namespace Desktop.Pages
         private void usersBtn_Click(object sender, RoutedEventArgs e)
         {
 
-        }
-
-        private void deleteBtn_Click(object sender, RoutedEventArgs e)
-        {
-            HouseholdDto household = (HouseholdDto)myDataGrid.SelectedItem;
-            householdRest.Delete(household.HouseholdId);
         }
 
         private void updateBtn_Click(object sender, RoutedEventArgs e)
@@ -76,6 +78,16 @@ namespace Desktop.Pages
         private void thingsNavBtn_Click(object sender, RoutedEventArgs e)
         {
             mainWindow.GoToThingPage();
+        }
+
+        private async void logoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            await userManager.LogOff();
+
+            if(userManager.LogOff().IsCompleted)
+            {
+                mainWindow.GoToLoginPage();
+            }
         }
     }
 }

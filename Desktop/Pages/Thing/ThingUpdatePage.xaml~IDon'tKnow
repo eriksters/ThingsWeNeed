@@ -17,8 +17,8 @@
         <TextBlock x:Name="householdIdTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Margin="211,234,0,0" Height="43" Width="217"/>
         <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="ID:" FontSize="50" VerticalAlignment="Top" Margin="503,0,0,0" Height="65" Width="60"/>
         <TextBlock x:Name="idTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Margin="568,10,0,0" Height="55" Width="222"/>
-        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="43" Margin="211,90,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
         <TextBox x:Name="defaultPriceTextBox" HorizontalAlignment="Left" Height="43" Margin="211,138,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
+        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="43" Margin="211,90,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
         <CheckBox x:Name="neededCheckBox" HorizontalAlignment="Left" Margin="208,190,0,0" VerticalAlignment="Top" Height="19" Width="26">
             <CheckBox.LayoutTransform>
                 <ScaleTransform ScaleX="2.5" ScaleY="2.5" />

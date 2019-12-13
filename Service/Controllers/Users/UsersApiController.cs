@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
@@ -41,9 +42,10 @@ namespace ThingsWeNeed.Service.Controllers.Users
                 if (ModelState.IsValid)
                 {
                     if (binder != null) {
+
                         
                         // Password sign in 
-                        var res = await SignInManager.PasswordSignInAsync(binder.Username, binder.Password, isPersistent: false, shouldLockout: false);
+                        var res = SignInManager.PasswordSignInAsync(binder.Username, binder.Password, isPersistent: false, shouldLockout: false).GetAwaiter().GetResult();
 
                         if (res == SignInStatus.Success)
                         {
@@ -144,6 +146,22 @@ namespace ThingsWeNeed.Service.Controllers.Users
             {
                 return BadRequest(ModelState);
             }
+        }
+
+        [HttpGet]
+        [Route("api/Users")]
+        public IHttpActionResult GetCurrent() {
+            IHttpActionResult result = null;
+
+
+            if (Request.GetOwinContext().Authentication.User.Identity.IsAuthenticated)
+            {
+                string userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
+
+                result = Ok(UserManager.FindById(userId));
+            }
+
+            return result;
         }
 
 
