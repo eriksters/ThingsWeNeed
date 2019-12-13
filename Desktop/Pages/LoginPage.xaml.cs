@@ -44,7 +44,16 @@ namespace Desktop.Pages
                 Password = passwordTextBox.Password,
             };
 
-            await userManager.Login(loginBinder);
+            string[] errors = userManager.Login(loginBinder);
+
+            if (errors.Length == 0) 
+            {
+                //Login successful
+            } 
+            else
+            {
+                //Login Failed
+            }
         }
 
         private void registerBtn_Click(object sender, RoutedEventArgs e)

@@ -45,20 +45,28 @@ namespace ThingsWeNeed.Service.Controllers.Users
                 {
                     if (binder != null) {
 
-                        
-                        // Password sign in 
-                        var res = SignInManager.PasswordSignInAsync(binder.Username, binder.Password, isPersistent: false, shouldLockout: false).GetAwaiter().GetResult();
 
-                        if (res == SignInStatus.Success)
+                        // Password sign in 
+                        try
                         {
-                            //  All OK
-                            result = Ok();
+                            var res = SignInManager.PasswordSignInAsync(binder.Username, binder.Password, isPersistent: false, shouldLockout: false).GetAwaiter().GetResult();
+                            if (res == SignInStatus.Success)
+                            {
+                                //  All OK
+                                result = Ok();
+                            }
+                            else
+                            {
+                                //  Login unsuccessful
+                                result = Unauthorized();
+                            }
                         }
-                        else
+                        catch (Exception e) 
                         {
-                            //  Login unsuccessful
                             result = Unauthorized();
                         }
+
+                        
                     }
                     else
                     {

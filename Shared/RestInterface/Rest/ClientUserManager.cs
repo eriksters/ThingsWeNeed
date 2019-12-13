@@ -21,10 +21,9 @@ namespace ThingsWeNeed.Shared.REST
         ///     Login user with username and password
         /// </summary>
         /// <returns>Error strings, null if OK</returns>
-        public async Task<string[]> Login(LoginBinder binder)
+        public string[] Login(LoginBinder binder)
         {
             string[] result;
-
 
             using (var client = CreateWebClient())
             {
@@ -38,7 +37,15 @@ namespace ThingsWeNeed.Shared.REST
                 }
                 catch (WebException e)
                 {
-                    result = ErrorResponse.Handle(e).Errors.ToArray();
+                    ErrorResponse errResp = ErrorResponse.Handle(e);
+                    if (errResp != null)
+                    {
+                        result = errResp.Errors.ToArray();
+                    }
+                    else
+                    {
+                        result = new string[] { "Login failed" };
+                    }
                 }
             }
             return result;
