@@ -70,6 +70,8 @@
     <Compile Include="Thing\ThingEntity.cs" />
     <Compile Include="Core\TwnContext.cs" />
     <Compile Include="User\UserEntity.cs" />
+    <Compile Include="Wish\WishEntity.cs" />
+    <Compile Include="Wish\WishLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.csproj">

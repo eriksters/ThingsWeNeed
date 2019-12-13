@@ -91,9 +91,23 @@ namespace ThingsWeNeed.Data.Thing
             dto.ThingId = entity.ThingId;
         }
 
+
         public void Update(ThingDto dto)
         {
-            throw new NotImplementedException();
+            ThingEntity entity = context.Things.Find(dto.ThingId);
+
+            if (entity != null)
+            {
+                context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+
+                entity.Show = dto.Show;
+                entity.Needed = dto.Needed;
+                entity.Name = dto.Name;
+                entity.DefaultPrice = dto.DefaultPrice;
+                
+                context.SaveChanges();
+            }
+            
         }
 
         public ThingDto Delete(int id)

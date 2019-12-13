@@ -8,6 +8,8 @@ using ThingsWeNeed.Controllers.Thing;
 using ThingsWeNeed.Data.Core;
 using ThingsWeNeed.Data.Household;
 using ThingsWeNeed.Data.Thing;
+using ThingsWeNeed.Data.Wish;
+using ThingsWeNeed.Service.Controllers.Wish;
 using ThingsWeNeed.Shared;
 
 namespace ThingsWeNeed.UnitTests
@@ -34,6 +36,16 @@ namespace ThingsWeNeed.UnitTests
             ThingId = 2
         };
 
+        public static readonly WishDto TestWish1 = new WishDto
+        {
+            MaxPrice = 99,
+            ExtraPay = 1,
+            GrantedOn = DateTime.Today,
+            WishId = 1,
+            UserId = 1,
+            Name = "noose"     
+        };
+
         public static readonly HouseholdDto TestHousehold1 = new HouseholdDto
         {
             Address = new AddressDto() {
@@ -46,7 +58,23 @@ namespace ThingsWeNeed.UnitTests
             Name = "TestHouse"
         };
 
-        public static ThingsApiController GetInjectedController()
+        public static WishApiController GetInjecteddController()
+        {
+            WishApiController controller = new WishApiController();
+            controller.InjectLogic(GetMockeddLogic());
+            return controller;
+        }
+
+        public static WishLogic GetMockeddLogic()
+        {
+            TwnContext context = new TwnContext();
+
+            WishLogic logic = new WishLogic();
+            logic.InjectDatabaseContext(context);
+            return logic;
+        }
+
+            public static ThingsApiController GetInjectedController()
         {
             ThingsApiController controller = new ThingsApiController();
             return controller;

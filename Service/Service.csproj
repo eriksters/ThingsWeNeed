@@ -200,6 +200,8 @@
     <Compile Include="Controllers\Thing\ThingDetailsViewModel.cs" />
     <Compile Include="Controllers\Thing\ThingsApiController.cs" />
     <Compile Include="Controllers\Thing\ThingsMvcController.cs" />
+    <Compile Include="Controllers\Wish\WishApiController.cs" />
+    <Compile Include="Controllers\Wish\WishDetailsViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -236,6 +238,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include=".editorconfig" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -260,6 +263,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\WishApi\" />
+    <Folder Include="Views\Wish\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

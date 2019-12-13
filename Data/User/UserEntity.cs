@@ -11,6 +11,7 @@ using ThingsWeNeed.Data.User;
 using ThingsWeNeed.Data.Household;
 using Microsoft.AspNet.Identity.EntityFramework;
 using ThingsWeNeed.Data.Purchase;
+using ThingsWeNeed.Data.Wish;
 
 namespace ThingsWeNeed.Data.User
 {
@@ -20,6 +21,9 @@ namespace ThingsWeNeed.Data.User
         public UserEntity()
         {
             this.Households = new HashSet<HouseholdEntity>();
+            this.HouseholdPurchases = new HashSet<PurchaseEntity>();
+            this.MadeWishes = new HashSet<WishEntity>();
+            this.GrantedWishes = new HashSet<WishEntity>();
         }
 
         public string FName { get; set; }
@@ -32,6 +36,12 @@ namespace ThingsWeNeed.Data.User
 
         [InverseProperty("MadeBy")]
         public virtual ICollection<PurchaseEntity> HouseholdPurchases { get; private set; }
+
+        [InverseProperty("MadeBy")]
+        public virtual ICollection<WishEntity> MadeWishes { get; private set; }
+
+        [InverseProperty("GrantedBy")]
+        public virtual ICollection<WishEntity> GrantedWishes { get; private set; }
 
     }
 }

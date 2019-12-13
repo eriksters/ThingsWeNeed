@@ -89,9 +89,11 @@ namespace ThingsWeNeed.Controllers.Thing
             return null;
         }
 
+
         [HttpPut]
         [Route("api/Things/{id}")]
-        public IHttpActionResult Update(int id, [FromBody] ThingDto dto) {
+        public IHttpActionResult Update(int id)
+        {
             throw new NotImplementedException();
         }
 
