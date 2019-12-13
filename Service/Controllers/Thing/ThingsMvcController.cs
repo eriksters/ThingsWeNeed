@@ -11,13 +11,30 @@ namespace ThingsWeNeed.Service.Controllers.Thing
 {
     public class ThingsMvcController : Controller
     {
-        [Route]
         [Route("Things")]
-        [Route("Things/All")]
         [HttpGet]
         public ActionResult All()
         {
-            throw new NotImplementedException();
+            ICollection<ThingDto> things;
+
+            if (!ModelState.IsValid)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ModelState.ToString());
+            }
+            else
+            {
+                using (var thingLogic = new ThingDaLogic())
+                {
+                    things = thingLogic.GetCollection();
+                }
+
+                ThingDetailsViewModel viewModel = new ThingDetailsViewModel()
+                {
+                    Things = things
+                };
+
+                return View("NeedsList", viewModel);
+            }
         }
 
         [Route("Things/{id}")]

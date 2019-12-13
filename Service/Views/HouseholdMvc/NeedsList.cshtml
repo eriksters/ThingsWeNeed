@@ -1,0 +1,126 @@
+﻿@model ThingsWeNeed.Service.Controllers.Household.HouseholdViewModel
+    
+@{ 
+    ViewBag.Title = "View"; 
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+
+<script src="~/Scripts/ViewsScripts/ThingsListScripts.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/Site.css"> 
+    
+    @*This is a test and should appear in the EriksTestBranch after the next commit*@
+
+<div class="jumbotron">
+    <a href="Views/Needs/AddThing.cshtml">Add thing</a>
+    <div id="row">
+        @*@if (Model.User != null)
+        {
+            if (Model.User.Households.Count > 0)
+            {*@
+                @foreach (var household in (IEnumerable <ThingsWeNeed.Shared.HouseholdDto>)Model.Households)
+                {
+                    <h2>@household.Name needs</h2>
+                    <form class="some-form">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Thing</th>
+                                    <th>Last Bought</th>
+                                    <th>Buy</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (household.Things.Count > 0)
+                                {
+                                    foreach (var t in household.Things)
+                                    {
+                                        <tr id="@t.ThingId">
+                                            <td>
+                                                <div class="options-button-frame">
+                                                    <button class="options-button" type="button" id="@t.ThingId" name="@t.Name"><img src="images/optionbutton.png" </button>
+                                                </div>
+
+                                                <!-- The Modal -->
+                                                <div id="myModal" class="modal" role="dialog">
+                                                    <div class="modal-dialog" role="document">
+
+                                                        <!-- Modal content -->
+                                                        <div class="modal-content">
+                                                            <div>
+                                                                <h4 id="modal-header">Options</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h5>Change status</h5>
+                                                                <select id="status-select">
+                                                                    <option value="needed">Needed</option>
+                                                                    <option value="enough">Enough</option>
+                                                                </select>
+                                                                <button type="button" id="remove-button">Remove</button>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" id="modal-close-button" class="btn btn-default" data-dismiss="modal">Close></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </td>
+                                            <td>@t.Name</td>
+                                            <<td>
+                                                @*@if (t.Purchases.Count > 0) 
+                                                {
+                                                    DateTime lastBought = t.Purchases.OrderBy(f => f.MadeOn).First().MadeOn; int numberOfDays = (DateTime.Now - lastBought).Days;
+                                                    <text>@numberOfDays days ago</text>
+                                                }
+                                                else
+                                                {
+                                                    <text>Not bought</text>
+                                                }*@
+
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success buy_button" title="Buy">
+                                                    Buy
+                                                </button>
+                                                <div class='input-group btn_stopper' style="min-width: 106px; display: none; height: 10px">
+                                                    @{ string displayPrice = ""+t.DefaultPrice; }
+                                                    <input type='text' class='form-control price_input' value="@displayPrice" />
+                                                    <span class='input-group-btn'>
+                                                        <input type='button' class='btn btn-danger cancel_button' value='X' title="Cancel" />
+                                                    </span>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="3" style="text-align: center">
+                                            No things to display
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </form>
+                }
+            }
+            @*else
+            {
+                <h4>You are not in any households yet.</h4> }
+        }
+        else
+        {
+            <text>Somthing went wrong very much. No user passed to view!</text>
+        }*@
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button id="save_button" data-request-url="@Url.Action(" Purchase ", "Needs ")" class="btn btn-danger" title="Save"> Save </button>
+        </div>
+    </div>
+</div>
