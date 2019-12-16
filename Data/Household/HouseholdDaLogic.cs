@@ -17,12 +17,15 @@ namespace ThingsWeNeed.Data.Household
     public class HouseholdDaLogic : IDisposable
     {
         public TwnContext DatabaseContext { get; private set; }
+        private string userId;
+
         public ThingDaLogic thingDaLogic;
 
         public HouseholdDaLogic(TwnContext context, string userId)
         {
             DatabaseContext = new TwnContext();
             thingDaLogic = new ThingDaLogic(context, userId);
+            this.userId = userId;
         }
 
         public HouseholdDto GetById(int id)

@@ -15,7 +15,7 @@ namespace ThingsWeNeed.Data.Wish
     {
         public  WishEntity()
         {
-
+            this.Show = true;
         }
         [Key]
     public int WishId { get; set; }

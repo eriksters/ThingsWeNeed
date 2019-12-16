@@ -64,9 +64,9 @@ namespace Desktop.Pages.User
                     ConfirmPassword = confirmPasswordTextBox.Password,
                 };
 
-                await userManager.Register(registerBinder);
+                var res = await userManager.Register(registerBinder);
 
-                if(userManager.Register(registerBinder) == null)
+                if(res.Length == 0)
                 {
                     mainWindow.GoToThingPage();
                 }

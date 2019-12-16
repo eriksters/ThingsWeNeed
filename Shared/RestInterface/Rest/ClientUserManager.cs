@@ -67,7 +67,7 @@ namespace ThingsWeNeed.Shared.REST
 
                     HandleCookies(client.ResponseHeaders);
 
-                    result = null;
+                    result = new string[0];
                 }
                 catch (WebException e)
                 {

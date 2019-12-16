@@ -37,6 +37,7 @@ namespace ThingsWeNeed.Service.Identity
             UserEntity entity = Store.FindByIdAsync(dto.Id).GetAwaiter().GetResult();
             entity.FName = dto.FName;
             entity.LName = dto.LName;
+            entity.PhoneNumber = dto.PhoneNumber;
             UpdateAsync(entity);
         }
 

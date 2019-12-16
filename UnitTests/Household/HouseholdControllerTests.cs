@@ -246,7 +246,7 @@ namespace ThingsWeNeed.UnitTests.Household
             {
                 Email = "user1@gmail.com",
                 Username = "UserThe1",
-                PenisSize = 10.0f,
+
                 FName = "Us",
                 LName = "Er",
                 PhoneNumber = "0987654321",
@@ -258,7 +258,7 @@ namespace ThingsWeNeed.UnitTests.Household
             {
                 Email = "user2@gmail.com",
                 Username = "UserThe2",
-                PenisSize = 20.0f,
+
                 FName = "Us",
                 LName = "Er",
                 PhoneNumber = "1234567890",

@@ -74,19 +74,18 @@ namespace ThingsWeNeed.Controllers.Thing
         [HttpPost]
         [Route("api/Things")]
         public IHttpActionResult Create([FromBody] ThingDto dto) {
-            //   if (ModelState.IsValid)
-            //{
-            //    using (logic)
-            //    {
-            //        logic.Create(dto.Name, dto.HouseholdId,  dto.Show, dto.Needed, dto.DefaultPrice);
-            //    }
-            //    return Ok(dto);
-            //}
-            //else
-            //{
-            //    return BadRequest(ModelState);
-            //}
-            return null;
+            if (ModelState.IsValid)
+            {
+                using (Logic)
+                {
+                    Logic.Create(dto);
+                }
+                return Ok(dto);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
 
@@ -100,20 +99,18 @@ namespace ThingsWeNeed.Controllers.Thing
         [HttpDelete]
         [Route("api/Things/{id}")]
         public IHttpActionResult Delete(int id) {
-            //if (ModelState.IsValid)
-            //{
-            //    using (logic)
-            //    {
-            //        ThingDto dto = logic.Delete(id);
-            //        return Ok(dto);
-            //    }
-            //}
-            //else
-            //{
-            //    return BadRequest(ModelState);
-            //}
-
-            return null;
+            if (ModelState.IsValid)
+            {
+                using (Logic)
+                {
+                    ThingDto dto = Logic.Delete(id);
+                    return Ok(dto);
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         //public void InjectLogic(ThingDaLogic logic) {

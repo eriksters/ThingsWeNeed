@@ -1,0 +1,109 @@
+﻿@using System.Activities.Expressions
+@using System.Runtime.Remoting.Messaging
+
+<!DOCTYPE html>
+<style>
+    input[type=checkbox] ~ label {
+        background: purple;
+        height: 50px;
+        color: #fff;
+        padding: 16px;
+        display: block;
+        align-items: center;
+    }
+
+
+    input[type=checkbox]:checked ~ label ~ .content {
+        opacity: 0;
+        height: 0;
+        display: none;
+    }
+
+    input[type=checkbox]:checked ~ label ~ .content2 {
+        height: auto;
+        padding: 16px;
+        display: block;
+        clear: both;
+        opacity: initial;
+    }
+
+
+    .content {
+        height: auto;
+        padding: 16px;
+        display: block;
+        clear: both;
+    }
+
+    .content2 {
+        opacity: 0;
+        height: 0;
+        display: none;
+    }
+
+    .div1 {
+        height: auto;
+        padding: 16px;
+        display: block;
+        clear: both;
+    }
+
+    .labelno {
+        opacity: 0;
+        height: 0;
+        display: none;
+    }
+</style>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>New Thing</title>
+</head>
+<body>
+    <div class="container jumbotron">
+        <h3>Add to list</h3>
+        <label>Is it a personal wish?</label>
+        <input type="checkbox" id="toggle">
+        <label class="labelno" style="text-align: center;" for="toggle">Personal wish</label>
+        <p class="one">
+            <div class="content col-lg-4">
+                <label for="thingname" class="control-label">Thing name:</label>
+                <input name='thingname' type='text' class="form-control input-sm" placeholder="Milk">
+            </div>
+        </p>
+        <div class="content2 col-lg-4">
+            <label for="wishname" class="control-label">Wish name:</label>
+            <input name='wishname' type='text' class="form-control input-sm" placeholder="Skittles ">
+        </div>
+        <div class="content col-lg-4">
+            <label for="average" class="control-label">Average price:</label>
+            <input name='average' type='text' class="form-control input-sm" placeholder="10">
+        </div>
+        <div class="content2 col-lg-4">
+            <label for="max" class="control-label">Max price:</label>
+            <input name='max' type='text' class="form-control input-sm" placeholder="30">
+        </div>
+        <div class="content2 col-lg-4">
+            <label for="extra" class="control-label">Extra pay:</label>
+            <input name='extra' type='text' class="form-control input-sm" placeholder="5">
+        </div>
+        <div class="div1 col-lg-4">
+            <label for="household" class="control-label">Household:</label>
+            <Select class="form-control input-sm" name="household">
+                <option>household1</option>
+                <option>household2</option>
+                <option>household3</option>
+            </Select>
+        </div>
+        <div class="div1 col-lg-4">
+            <button style="padding: 6px 40px; min-width: 60px"
+                    type="button"
+                    class="btn btn-success buy_button" title="Add">
+                Add
+            </button>
+        </div>
+    </div>
+</body>
+</html>
+
