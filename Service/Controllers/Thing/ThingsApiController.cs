@@ -91,9 +91,12 @@ namespace ThingsWeNeed.Controllers.Thing
         }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 =======
 <<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         [HttpPut]
         [Route("api/Things/{id}")]

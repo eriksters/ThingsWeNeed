@@ -49,6 +49,19 @@ namespace ThingsWeNeed.UnitTests
 
 <<<<<<< Updated upstream
 =======
+        public static readonly WishDto TestWish1 = new WishDto
+        {
+            MaxPrice = 99,
+            ExtraPay = 1,
+            GrantedOn = DateTime.Today,
+            WishId = 1,
+            MadeOn = DateTime.Today,
+            Name = "noose"     
+        };
+
+>>>>>>> Stashed changes
+<<<<<<< Updated upstream
+=======
 <<<<<<< Updated upstream
 =======
 >>>>>>> Stashed changes
@@ -88,8 +101,29 @@ namespace ThingsWeNeed.UnitTests
         public static ThingsApiController GetInjectedController()
 =======
 /*
+        public static WishApiController GetInjecteddController()
+=======
+/*
 >>>>>>> Stashed changes
         public static WishApiController GetInjecteddController()
+        {
+            WishApiController controller = new WishApiController();
+            controller.InjectLogic(GetMockeddLogic());
+            return controller;
+        }
+
+        public static WishLogic GetMockeddLogic()
+        {
+            TwnContext context = new TwnContext();
+
+            WishLogic logic = new WishLogic();
+            logic.InjectDatabaseContext(context);
+            return logic;
+        }
+        */
+
+            public static ThingsApiController GetInjectedController()
+>>>>>>> Stashed changes
         {
             WishApiController controller = new WishApiController();
             controller.InjectLogic(GetMockeddLogic());
