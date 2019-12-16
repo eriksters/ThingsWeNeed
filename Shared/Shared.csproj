@@ -37,9 +37,13 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,11 +52,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LinkDto.cs" />
-    <Compile Include="HouseholdDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ThingDto.cs" />
-    <Compile Include="UserDto.cs" />
+    <Compile Include="RestInterface\WishDto.cs" />
+    <Compile Include="RestInterface\HouseholdDto.cs" />
+    <Compile Include="RestInterface\LinkDto.cs" />
+    <Compile Include="RestInterface\LoginBinder.cs" />
+    <Compile Include="RestInterface\PurchaseDto.cs" />
+    <Compile Include="RestInterface\RegisterBinder.cs" />
+    <Compile Include="RestInterface\Rest\UserRest.cs" />
+    <Compile Include="RestInterface\Rest\ClientUserManager.cs" />
+    <Compile Include="RestInterface\Rest\ErrorResponse.cs" />
+    <Compile Include="RestInterface\Rest\HouseholdRest.cs" />
+    <Compile Include="RestInterface\Rest\IRestfulInterface.cs" />
+    <Compile Include="RestInterface\Rest\PurchaseRest.cs" />
+    <Compile Include="RestInterface\Rest\RestClient.cs" />
+    <Compile Include="RestInterface\Rest\ThingRest.cs" />
+    <Compile Include="RestInterface\Rest\WishRest.cs" />
+    <Compile Include="RestInterface\ThingDto.cs" />
+    <Compile Include="RestInterface\UserDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

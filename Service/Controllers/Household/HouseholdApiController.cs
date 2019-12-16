@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using ThingsWeNeed.Data.Core;
 using ThingsWeNeed.Data.Household;
 using ThingsWeNeed.Shared;
+using Microsoft.Owin;
+using System.Net.Http;
+using Microsoft.AspNet.Identity;
 
 namespace ThingsWeNeed.Service.Controllers.Household
 {
     public class HouseholdApiController : ApiController
     {
-        private HouseholdLogic householdLogic;
+        private HouseholdDaLogic householdLogic;
+        private TwnContext context;
 
         public HouseholdApiController()
         {
-            householdLogic = new HouseholdLogic();
+            householdLogic = new HouseholdDaLogic(context, Request.GetOwinContext().Authentication.User.Identity.GetUserId());
         }
 
         [HttpGet]
@@ -39,7 +44,7 @@ namespace ThingsWeNeed.Service.Controllers.Household
         // move maybe to user Api Controller
         [Route("api/Households/User/{userId}")]
         // and change this to maybe api/User/{id}/Households
-        public IHttpActionResult GetCollection(int userId)
+        public IHttpActionResult GetCollection(string userId)
         {
             if (ModelState.IsValid)
             {
@@ -115,7 +120,7 @@ namespace ThingsWeNeed.Service.Controllers.Household
                 return BadRequest(ModelState);
             }
         }
-        public void InjectLogic(HouseholdLogic householdLogic)
+        public void InjectLogic(HouseholdDaLogic householdLogic)
         {
             this.householdLogic = householdLogic;
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,6 +22,7 @@ namespace ThingsWeNeed.Data.Thing
             this.Needed = false;
             this.Show = true;
         }
+        
 
         [Key]
         public int ThingId { get; set; }

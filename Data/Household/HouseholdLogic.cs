@@ -1,5 +1,4 @@
-﻿using Serenity.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
@@ -19,13 +18,11 @@ namespace ThingsWeNeed.Data.Household
     {
         public TwnContext DatabaseContext { get; private set; }
         public ThingDaLogic thingDaLogic;
-        public UserLogic userLogic;
 
-        public HouseholdLogic()
+        public HouseholdLogic(TwnContext context, string userId)
         {
             DatabaseContext = new TwnContext();
-            thingDaLogic = new ThingDaLogic();
-            userLogic = new UserLogic();
+            thingDaLogic = new ThingDaLogic(context, userId);
         }
 
         public HouseholdDto GetById(int id)
@@ -109,17 +106,20 @@ namespace ThingsWeNeed.Data.Household
                 throw new KeyNotFoundException();
             }
 
+            //  Wtf is this for?
             ICollection<UserDto> fillUserCollection()
+
+
             {
                 var userEntities = DatabaseContext.Households.Find(entity.HouseholdId).Users;
 
-                ICollection<UserDto> usersDto = new List<UserDto>();
+                ICollection<ThingDto> usersDto = new List<ThingDto>();
 
                 foreach (UserEntity ue in userEntities)
                 {
                     if (ue != null)
                     {
-                        usersDto.Add(userLogic.GetById(ue.UserId));
+                        //usersDto.Add(userLogic.GetById(ue.UserId));
                     }
                 }
                 return usersDto;

@@ -83,40 +83,51 @@ namespace ThingsWeNeed.UnitTests.Thing
                 cleanup(thing2.ThingId);
             }
         }
-
+/*
         [TestMethod]
         public void Create_Ok() {
 
             //  Arrange
-            int price = new Random().Next(1000);
-            var dto = TestData.TestThing2;
+            var dto = TestData.TestThing1;
+            var thingEn = getTestThing();
+            //string name = "Toothpaste";
+            //int householdId = 96;
+            //bool show = false;
+            //bool needed = true;
+            //double defaultPrice = 15;
+
+            TwnContext context = new TwnContext();
+            ThingDaLogic logic = new ThingDaLogic(context, null);
+
 
             //  Act
-            
             try {
-                using (var controller = TestData.GetInjectedController())
-                {
-                    dto.DefaultPrice = price;
+                logic.Create(dto);
+                //thingDto = logic.GetById(213);
 
-                    var result = (OkNegotiatedContentResult<ThingDto>)controller.Create(TestData.TestThing2);
-                    dto.ThingId = result.Content.ThingId;
-                }
+                var assertThing = context.Things.Find(dto.ThingId);
 
-                //  Assert
-                using (var context = new TwnContext())
-                {
-                    Assert.IsTrue(context.Things.Find(dto.ThingId).DefaultPrice == price);
-                }
-                
+                Assert.IsNotNull(assertThing);
+
+                //Assert.IsTrue(thingDto.Name.Equals(name));
+                //Assert.IsTrue(thingDto.HouseholdId == householdId);
+                //Assert.IsFalse(thingDto.Show);
+                //Assert.IsTrue(thingDto.Needed);
+                //Assert.IsTrue(thingDto.DefaultPrice == defaultPrice);
             }
                   //  Cleanup
             finally
             {
-                cleanup(dto.ThingId);
+                try
+                {
+                    cleanup(dto.ThingId);
+                    cleanup(thingEn.ThingId);
+                }
+                catch { }
             }
-
+            
         }
-
+        
         [TestMethod]
         public void Update_Ok()
         {
@@ -131,7 +142,7 @@ namespace ThingsWeNeed.UnitTests.Thing
             //  Act
                 using (var controller = TestData.GetInjectedController())
                 {
-                    result = (OkNegotiatedContentResult<ThingDto>)controller.Update(id, TestData.TestThing2);
+                    result = (OkNegotiatedContentResult<ThingDto>)controller.Update(id);
                 }
 
             //  Assert
@@ -142,6 +153,7 @@ namespace ThingsWeNeed.UnitTests.Thing
                 cleanup(thing.ThingId);
             }
         }
+        */
 
 
         [TestMethod]
@@ -171,7 +183,10 @@ namespace ThingsWeNeed.UnitTests.Thing
         }
 
 
+
+
         public ThingEntity getTestThing() {
+
 
             TwnContext context = new TwnContext();
 
@@ -195,10 +210,10 @@ namespace ThingsWeNeed.UnitTests.Thing
 
             var thingEntity = context.Things.Add(thing);
             context.Households.Add(household);
-            using (context)
-            {
-                context.SaveChanges();
-            }
+            //using (context)
+            //{
+            //    context.SaveChanges();
+            //}
             return thingEntity;
         }
 
@@ -206,13 +221,13 @@ namespace ThingsWeNeed.UnitTests.Thing
 
         private void cleanup(int id) {
             ThingEntity thing;
-            using (TwnContext context = new TwnContext())
-            {
-                thing = context.Things.Find(id);
-                context.Things.Remove(thing);
-                context.Households.Remove(context.Households.Find(thing.HouseholdId));
-                context.SaveChanges();
-            }
+            //using (TwnContext context = new TwnContext())
+            //{
+            //    thing = context.Things.Find(id);
+            //    context.Things.Remove(thing);
+            //    context.Households.Remove(context.Households.Find(thing.HouseholdId));
+            //    context.SaveChanges();
+            //}
         }
     }
 
