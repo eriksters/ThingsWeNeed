@@ -15,8 +15,7 @@
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="First Name" FontSize="25" VerticalAlignment="Top" Margin="433,90,0,0" Height="43" Width="181"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Last Name" FontSize="25" VerticalAlignment="Top" Margin="433,138,0,0" Height="43" Width="165"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Phone Number" FontSize="25" VerticalAlignment="Top" Margin="0,186,0,0" Height="43" Width="181"/>
-        <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="ID:" FontSize="50" VerticalAlignment="Top" Margin="503,13,0,0" Height="65" Width="60"/>
-        <TextBlock x:Name="idTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Margin="568,23,0,0" Height="55" Width="222"/>
+        <TextBlock x:Name="idTextBlock" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="ID:" FontSize="50" VerticalAlignment="Top" Margin="503,13,0,0" Height="65" Width="287"/>
         <TextBox x:Name="usernameTextBox" HorizontalAlignment="Left" Height="43" Margin="195,90,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
         <TextBox x:Name="emailTextBox" HorizontalAlignment="Left" Height="43" Margin="195,138,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>
         <TextBox x:Name="phoneNumberTextBox" HorizontalAlignment="Left" Height="43" Margin="195,186,0,0" TextWrapping="Wrap" Text="" FontSize="25" VerticalAlignment="Top" Width="217"/>

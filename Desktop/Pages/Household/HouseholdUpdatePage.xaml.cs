@@ -31,6 +31,8 @@ namespace Desktop.Pages.Household
             cityTextBox.Text = currentHousehold.Address.City;
             postCodeTextBox.Text = currentHousehold.Address.PostCode;
             countryTextBox.Text = currentHousehold.Address.Country;
+
+            idTextBlock.Text = "ID: " + currentHousehold.HouseholdId.ToString();
         }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)

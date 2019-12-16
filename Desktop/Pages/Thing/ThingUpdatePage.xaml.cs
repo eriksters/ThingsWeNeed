@@ -30,6 +30,8 @@ namespace Desktop
             defaultPriceTextBox.Text = currentThing.DefaultPrice.ToString();
             neededCheckBox.IsChecked = currentThing.Needed;
             householdIdTextBlock.Text = currentThing.HouseholdId.ToString();
+
+            idTextBlock.Text = "ID: " + currentThing.ThingId.ToString();
         }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
@@ -68,7 +70,16 @@ namespace Desktop
                     Show = true,
                 };
 
-                thingRest.Update(thing);
+                ThingDto dto = thingRest.Update(thing);
+
+                if (dto != null)
+                {
+                    mainWindow.GoToThingPage();
+                }
+                else
+                {
+                    MessageBox.Show("Something went wrong!");
+                }
             }
         }
     }

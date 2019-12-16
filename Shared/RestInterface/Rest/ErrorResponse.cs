@@ -34,13 +34,13 @@ namespace ThingsWeNeed.Shared.REST
 
             ErrorResponse resp = (ErrorResponse) JsonConvert.DeserializeObject(errorString, typeof(ErrorResponse));
 
-            if (resp != null)
-            {
-                foreach (string error in resp.ModelState.Values.FirstOrDefault())
-                {
-                    resp.Errors.Add(error);
-                }
-            }
+            //if (resp != null)
+            //{
+            //    foreach (string error in resp.ModelState.Values.FirstOrDefault())
+            //    {
+            //        resp.Errors.Add(error);
+            //    }
+            //}
 
             return resp;
         }

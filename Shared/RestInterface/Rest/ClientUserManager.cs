@@ -33,7 +33,7 @@ namespace ThingsWeNeed.Shared.REST
 
                     HandleCookies(client.ResponseHeaders);
 
-                    result = null;
+                    result = new string[] { };
                 }
                 catch (WebException e)
                 {
@@ -85,6 +85,8 @@ namespace ThingsWeNeed.Shared.REST
             using (var client = CreateWebClient())
             {
                 client.DownloadString(Uri + "/LogOff");
+
+                HandleCookies(client.ResponseHeaders);
             }
 
             AuthToken = null;

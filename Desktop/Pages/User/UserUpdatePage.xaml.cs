@@ -37,6 +37,8 @@ namespace Desktop.Pages.User
             phoneNumberTextBox.Text = currentUser.PhoneNumber;
             firstNameTextBox.Text = currentUser.FName;
             lastNameTextBox.Text = currentUser.LName;
+
+            idTextBlock.Text = "ID: " + currentUser.Id;
         }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)

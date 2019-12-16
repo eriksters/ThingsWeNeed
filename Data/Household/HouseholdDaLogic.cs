@@ -50,6 +50,7 @@ namespace ThingsWeNeed.Data.Household
             //return the colletion
             return householdDtos.ToArray();
         }
+
         public HouseholdDto Update(HouseholdEntity entity)
         {
             HouseholdEntity householdEntity = DatabaseContext.Households.Find(entity.HouseholdId);
@@ -73,9 +74,17 @@ namespace ThingsWeNeed.Data.Household
             return householdRemoved.HouseholdId == id ? true : false;
         }
 
-        public HouseholdDto Create(HouseholdEntity newHousehold)
+        public HouseholdDto Create(HouseholdDto newHousehold)
         {
-            HouseholdEntity householdEntity = DatabaseContext.Households.Add(newHousehold);
+
+
+            HouseholdEntity householdEntity = new HouseholdEntity()
+            {
+                Address = newHousehold.Address,
+                Name = newHousehold.Name,
+            };
+                
+            DatabaseContext.Households.Add(householdEntity);
             DatabaseContext.SaveChanges();
 
             HouseholdDto householdDto = buildDto(householdEntity);

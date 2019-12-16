@@ -36,8 +36,10 @@ namespace Desktop.Pages
             this.mainWindow = loginWindow;
         }
 
-        private async void loginBtn_Click(object sender, RoutedEventArgs e)
+        private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
+
+
             LoginBinder loginBinder = new LoginBinder()
             {
                 Username = usernameTextBox.Text,
@@ -46,13 +48,13 @@ namespace Desktop.Pages
 
             string[] errors = userManager.Login(loginBinder);
 
-            if (errors.Length == 0) 
+            if (errors.Length == 0 && RestClient.AuthToken != null) 
             {
-                //Login successful
+                mainWindow.GoToThingPage();
             } 
             else
             {
-                //Login Failed
+                MessageBox.Show("Something went wrong!");
             }
         }
 

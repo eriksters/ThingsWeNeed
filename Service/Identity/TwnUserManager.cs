@@ -56,6 +56,6 @@ namespace ThingsWeNeed.Service.Identity
 
             return dto;
 
-        } 
+        }
     }
 }

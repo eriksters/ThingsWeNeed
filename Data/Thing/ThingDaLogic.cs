@@ -12,7 +12,7 @@ using ThingsWeNeed.Shared;
 
 namespace ThingsWeNeed.Data.Thing
 {
-    public class ThingDaLogic : IRestResource<ThingDto>, IDisposable 
+    public class ThingDaLogic : IRestResource<ThingDto>, IDisposable
     {
         private string userId;
         private TwnContext context;
@@ -57,20 +57,17 @@ namespace ThingsWeNeed.Data.Thing
         {
             ICollection<ThingDto> collection = new List<ThingDto>();
 
-            foreach (HouseholdEntity household in context.Users.Find(userId).Households)
+            foreach (ThingEntity entity in context.Things)
             {
-                foreach (var entity in household.Things)
+                collection.Add(new ThingDto()
                 {
-                    collection.Add(new ThingDto()
-                    {
-                        ThingId = entity.ThingId,
-                        DefaultPrice = entity.DefaultPrice,
-                        Name = entity.Name,
-                        Needed = entity.Needed,
-                        Show = entity.Show,
-                        HouseholdId = entity.HouseholdId
-                    });
-                }
+                    ThingId = entity.ThingId,
+                    DefaultPrice = entity.DefaultPrice,
+                    Name = entity.Name,
+                    Needed = entity.Needed,
+                    Show = entity.Show,
+                    HouseholdId = entity.HouseholdId
+                });
             }
 
             return collection.ToArray();
@@ -92,22 +89,19 @@ namespace ThingsWeNeed.Data.Thing
         }
 
 
-        public void Update(ThingDto dto)
+        public ThingDto Update(ThingEntity entity)
         {
-            ThingEntity entity = context.Things.Find(dto.ThingId);
+            ThingEntity thingEntity = context.Things.Find(entity.ThingId);
+            thingEntity.Name = entity.Name;
+            thingEntity.Needed = entity.Needed;
+            thingEntity.Show = entity.Show;
+            thingEntity.HouseholdId = entity.HouseholdId;
+            thingEntity.ThingId = entity.ThingId;
 
-            if (entity != null)
-            {
-                context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
 
-                entity.Show = dto.Show;
-                entity.Needed = dto.Needed;
-                entity.Name = dto.Name;
-                entity.DefaultPrice = dto.DefaultPrice;
-                
-                context.SaveChanges();
-            }
-            
+            ThingDto thingDto = buildDto(thingEntity);
+            return thingDto;
         }
 
         public ThingDto Delete(int id)
@@ -137,12 +131,34 @@ namespace ThingsWeNeed.Data.Thing
             }
         }
 
-        public void Dispose() {
+        public void Dispose()
+        {
             context.Dispose();
         }
 
         //public void Injectcontext(TwnContext context) {
         //    context = context;
         //}
+
+        public ThingDto buildDto(ThingEntity entity)
+        {
+            if (entity != null)
+            {
+                ThingDto dto = new ThingDto()
+                {
+                    ThingId = entity.ThingId,
+                    HouseholdId = entity.HouseholdId,
+                    DefaultPrice = entity.DefaultPrice,
+                    Name = entity.Name,
+                    Needed = entity.Needed,
+                    Show = entity.Show,
+                };
+                return dto;
+            }
+            else
+            {
+                throw new KeyNotFoundException();
+            }
+        }
     }
 }

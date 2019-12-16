@@ -14,6 +14,7 @@ namespace Desktop
     /// </summary>
     public partial class ThingPage : Page
     {
+        ClientUserManager userManager;
         ThingRest thingRest;
         MainWindow mainWindow;
 
@@ -24,10 +25,17 @@ namespace Desktop
                 thingRest = new ThingRest();
             }
 
+            if (userManager == null)
+            {
+                userManager = new ClientUserManager();
+            }
+
             InitializeComponent();
             List<ThingDto> things = new List<ThingDto>();
             fillThingsList();
             this.mainWindow = thingWindow;
+
+            currentUsernameTextBlock.Text = "Current user: " + userManager.Get().Result.Username;
         }
 
         private void fillThingsList()
@@ -40,6 +48,7 @@ namespace Desktop
         {
             ThingDto thing = (ThingDto)myDataGrid.SelectedItem;
             thingRest.Delete(thing.ThingId);
+            fillThingsList();
         }
 
         private void updateBtn_Click(object sender, RoutedEventArgs e)
@@ -66,6 +75,17 @@ namespace Desktop
         private void usersNavBtn_Click(object sender, RoutedEventArgs e)
         {
             mainWindow.GoToUserPage();
+        }
+
+        private void logoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            userManager.LogOff();
+
+            if (userManager.LogOff().IsCompleted)
+            {
+                mainWindow.GoToLoginPage();
+                RestClient.AuthToken = null;
+            }
         }
     }
 }

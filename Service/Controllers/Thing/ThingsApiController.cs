@@ -91,9 +91,27 @@ namespace ThingsWeNeed.Controllers.Thing
 
         [HttpPut]
         [Route("api/Things/{id}")]
-        public IHttpActionResult Update(int id)
+        public IHttpActionResult Update(int id, ThingEntity thingEntity)
         {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                if (id == thingEntity.ThingId)
+                {
+                    using (Logic)
+                    {
+                        var thingDto = Logic.Update(thingEntity);
+                        return Ok(thingDto);
+                    }
+                }
+                else
+                {
+                    return BadRequest("Id's do not match");
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         [HttpDelete]

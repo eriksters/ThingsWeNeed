@@ -71,7 +71,16 @@ namespace Desktop
                     Show = true,
                 };
 
-                thingRest.Create(thing);
+                ThingDto response = thingRest.Create(thing);
+
+                if (response != null)
+                {
+                    mainWindow.GoToThingPage();
+                }
+                else
+                {
+                    MessageBox.Show("You fucked up!");
+                }
             }
         }
     }

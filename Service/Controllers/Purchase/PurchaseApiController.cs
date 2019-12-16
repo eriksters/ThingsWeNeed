@@ -78,7 +78,7 @@ namespace ThingsWeNeed.Service.Controllers.Purchase
 
                         thingDto.Needed = false;
 
-                        thingLogic.Update(thingDto);
+                        //thingLogic.Update(thingDto);
                     }
 
                     createLinks(dto);

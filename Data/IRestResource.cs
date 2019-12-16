@@ -14,7 +14,7 @@ namespace ThingsWeNeed.Data
 
         void Create(T toCreate);
 
-        void Update(T toUpdate);
+        //void Update(T toUpdate);
 
         T Delete(int id);
     }

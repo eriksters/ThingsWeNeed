@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace ThingsWeNeed.Service.Controllers.Household
 {
+    [Authorize]
     public class HouseholdApiController : ApiController
     {
         private HouseholdDaLogic householdLogic;
@@ -19,7 +20,8 @@ namespace ThingsWeNeed.Service.Controllers.Household
 
         public HouseholdApiController()
         {
-            householdLogic = new HouseholdDaLogic(context, Request.GetOwinContext().Authentication.User.Identity.GetUserId());
+            context = new TwnContext();
+            
         }
 
         [HttpGet]
@@ -104,8 +106,8 @@ namespace ThingsWeNeed.Service.Controllers.Household
         }
 
         [HttpPost]
-        [Route("api/Households/Create")]
-        public IHttpActionResult Create(HouseholdEntity newHousehold)
+        [Route("api/Households")]
+        public IHttpActionResult Create(HouseholdDto newHousehold)
         {
             if (ModelState.IsValid)
             {

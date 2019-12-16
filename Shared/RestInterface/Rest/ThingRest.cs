@@ -42,7 +42,7 @@ namespace ThingsWeNeed.Shared.REST
                 return dto;
             }
         }
-
+        
         public ICollection<ThingDto> GetCollection()
         {
             using (var client = CreateWebClient())
@@ -55,7 +55,13 @@ namespace ThingsWeNeed.Shared.REST
 
         public ThingDto Update(ThingDto updated)
         {
-            throw new NotImplementedException();
+            using (var client = CreateWebClient())
+            {
+                string returnString = client.UploadString(Uri + $"/{updated.ThingId}", "PUT", JsonConvert.SerializeObject(updated));
+                ThingDto dto = (ThingDto)JsonConvert.DeserializeObject(returnString, typeof(ThingDto));
+                
+                return dto;
+            }
         }
     }
 }

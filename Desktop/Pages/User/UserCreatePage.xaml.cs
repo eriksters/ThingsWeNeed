@@ -66,9 +66,13 @@ namespace Desktop.Pages.User
 
                 var res = await userManager.Register(registerBinder);
 
-                if(res.Length == 0)
+                if(res.Length == 0 && UserRest.AuthToken != null)
                 {
                     mainWindow.GoToThingPage();
+                }
+                else
+                {
+                    MessageBox.Show("Something went wrong!");
                 }
             }
         }
