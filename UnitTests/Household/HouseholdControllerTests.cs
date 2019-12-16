@@ -245,8 +245,6 @@ namespace ThingsWeNeed.UnitTests.Household
             var user1 = context.Users.Add(new UserEntity()
             {
                 Email = "user1@gmail.com",
-                Username = "UserThe1",
-                PenisSize = 10.0f,
                 FName = "Us",
                 LName = "Er",
                 PhoneNumber = "0987654321",
@@ -256,9 +254,7 @@ namespace ThingsWeNeed.UnitTests.Household
             // add a user2
             var user2 = context.Users.Add(new UserEntity()
             {
-                Email = "user2@gmail.com",
-                Username = "UserThe2",
-                PenisSize = 20.0f,
+                Email = "user2@gmail.com",          
                 FName = "Us",
                 LName = "Er",
                 PhoneNumber = "1234567890",

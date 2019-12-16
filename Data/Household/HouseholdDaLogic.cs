@@ -117,7 +117,7 @@ namespace ThingsWeNeed.Data.Household
                 {
                     if (ue != null)
                     {
-                        //usersDto.Add(userLogic.GetById(ue.UserId));
+                     //   usersDto.Add(userLogic.GetById(ue.UserId));
                     }
                 }
                 return usersDto;

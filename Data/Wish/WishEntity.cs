@@ -15,7 +15,11 @@ namespace ThingsWeNeed.Data.Wish
     {
         public  WishEntity()
         {
+<<<<<<< Updated upstream
 
+=======
+            this.Show = true;
+>>>>>>> Stashed changes
         }
         [Key]
     public int WishId { get; set; }
@@ -43,10 +47,13 @@ namespace ThingsWeNeed.Data.Wish
         public virtual UserEntity GrantedBy { get; set; }
 
 
+<<<<<<< Updated upstream
         /*
                 [ForeignKey("MadeById")]
                 public virtual UserEntity Made { get; set; }
 
             */
+=======
+>>>>>>> Stashed changes
     }
 }

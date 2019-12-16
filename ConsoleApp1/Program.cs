@@ -55,7 +55,7 @@ namespace ConsoleApp1
             //      dto = complete thing, ready for use
 
 
-            return "Oi";
+            return errors;
             
         }
     }

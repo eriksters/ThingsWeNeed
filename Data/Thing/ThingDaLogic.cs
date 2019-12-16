@@ -110,6 +110,8 @@ namespace ThingsWeNeed.Data.Thing
             
         }
 
+
+
         public ThingDto Delete(int id)
         {
             ThingEntity entity = context.Things.Find(id);
@@ -141,8 +143,8 @@ namespace ThingsWeNeed.Data.Thing
             context.Dispose();
         }
 
-        //public void Injectcontext(TwnContext context) {
-        //    context = context;
-        //}
+      //  public void Injectcontext(TwnContext context) {
+      //   context = context;
+      // }
     }
 }

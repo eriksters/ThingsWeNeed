@@ -22,7 +22,8 @@ namespace ThingsWeNeed.UnitTests.Thing
     public class ThingsControllerTests
     {
         [TestMethod]
-        public void Get_Ok() {
+        public void Get_Ok()
+        {
 
             //  Arrange
             var thing = getTestThing();
@@ -78,44 +79,100 @@ namespace ThingsWeNeed.UnitTests.Thing
             }
             finally
             {
-                
+
                 cleanup(thing1.ThingId);
                 cleanup(thing2.ThingId);
             }
         }
+<<<<<<< Updated upstream
 /*
+=======
+<<<<<<< Updated upstream
+
+>>>>>>> Stashed changes
         [TestMethod]
         public void Create_Ok() {
+=======
+        
+                [TestMethod]
+                public void Create_Ok() {
 
+                    //  Arrange
+                    var dto = TestData.TestThing1;
+                    var thingEn = getTestThing();
+                    string name = "Toothpaste";
+                    int householdId = 96;
+                    bool show = false;
+                    bool needed = true;
+                    double defaultPrice = 15;
+
+                    TwnContext context = new TwnContext();
+                    ThingDaLogic logic = new ThingDaLogic(context, null);
+
+
+                    //  Act
+                    try {
+                        logic.Create(dto);
+                        var thingDto = logic.GetById(213);
+
+                        var assertThing = context.Things.Find(dto.ThingId);
+
+                        Assert.IsNotNull(assertThing);
+>>>>>>> Stashed changes
+
+                        Assert.IsTrue(thingDto.Name.Equals(name));
+                        Assert.IsTrue(thingDto.HouseholdId == householdId);
+                        Assert.IsFalse(thingDto.Show);
+                        Assert.IsTrue(thingDto.Needed);
+                        Assert.IsTrue(thingDto.DefaultPrice == defaultPrice);
+                    }
+                          //  Cleanup
+                    finally
+                    {
+                        try
+                        {
+                            cleanup(dto.ThingId);
+                            cleanup(thingEn.ThingId);
+                        }
+                        catch { }
+                    }
+
+                }
+
+                [TestMethod]
+                public void Update_Ok()
+                {
+    
             //  Arrange
             var dto = TestData.TestThing1;
             var thingEn = getTestThing();
-            //string name = "Toothpaste";
-            //int householdId = 96;
-            //bool show = false;
-            //bool needed = true;
-            //double defaultPrice = 15;
+            string name = "Milk";
+            int householdId = 96;
+            bool show = false;
+            bool needed = true;
+            double defaultPrice = 10;
 
             TwnContext context = new TwnContext();
             ThingDaLogic logic = new ThingDaLogic(context, null);
 
 
             //  Act
-            try {
-                logic.Create(dto);
-                //thingDto = logic.GetById(213);
+            try
+            {
+                logic.Update(dto);
+                var thingDto = logic.GetById(213);
 
                 var assertThing = context.Things.Find(dto.ThingId);
 
                 Assert.IsNotNull(assertThing);
 
-                //Assert.IsTrue(thingDto.Name.Equals(name));
-                //Assert.IsTrue(thingDto.HouseholdId == householdId);
-                //Assert.IsFalse(thingDto.Show);
-                //Assert.IsTrue(thingDto.Needed);
-                //Assert.IsTrue(thingDto.DefaultPrice == defaultPrice);
+                Assert.IsTrue(thingDto.Name.Equals(name));
+                Assert.IsTrue(thingDto.HouseholdId == householdId);
+                Assert.IsFalse(thingDto.Show);
+                Assert.IsTrue(thingDto.Needed);
+                Assert.IsTrue(thingDto.DefaultPrice == defaultPrice);
             }
-                  //  Cleanup
+            //  Cleanup
             finally
             {
                 try
@@ -125,7 +182,12 @@ namespace ThingsWeNeed.UnitTests.Thing
                 }
                 catch { }
             }
+<<<<<<< Updated upstream
             
+=======
+<<<<<<< Updated upstream
+
+>>>>>>> Stashed changes
         }
         
         [TestMethod]
@@ -153,45 +215,55 @@ namespace ThingsWeNeed.UnitTests.Thing
                 cleanup(thing.ThingId);
             }
         }
+<<<<<<< Updated upstream
         */
+=======
 
-
-        [TestMethod]
-        public void Delete_Ok()
-        {
-
-            //  Arrange
-            
-            var thing = getTestThing();
-            int id = thing.ThingId;
-            try
-            {
-                var controller = TestData.GetInjectedController();
-
-                //  Act
-                var result = (OkNegotiatedContentResult<ThingDto>)controller.Delete(id);
-
-                //  Assert
-                Assert.IsTrue(result.Content.DefaultPrice == thing.DefaultPrice);
-
-                //  Cleanup
-            }
-            finally
-            {
-                cleanup(id);
-            }
+=======
         }
+>>>>>>> Stashed changes
+
+>>>>>>> Stashed changes
+
+                [TestMethod]
+                public void Delete_Ok()
+                {
+
+                    //  Arrange
+
+                    var thing = getTestThing();
+                    int id = thing.ThingId;
+                    try
+                    {
+                        var controller = TestData.GetInjectedController();
+
+                        //  Act
+                        var result = (OkNegotiatedContentResult<ThingDto>)controller.Delete(id);
+
+                        //  Assert
+                        Assert.IsTrue(result.Content.DefaultPrice == thing.DefaultPrice);
+
+                        //  Cleanup
+                    }
+                    finally
+                    {
+                        cleanup(id);
+                    }
+                }
 
 
+        
 
-
-        public ThingEntity getTestThing() {
+        public ThingEntity getTestThing()
+        {
 
 
             TwnContext context = new TwnContext();
 
-            var household = context.Households.Add(new HouseholdEntity() {
-                Address = new AddressDto() {
+            var household = context.Households.Add(new HouseholdEntity()
+            {
+                Address = new AddressDto()
+                {
                     Address1 = "TestStreet 1",
                     City = "TestCity",
                     Country = "DK",
@@ -201,7 +273,8 @@ namespace ThingsWeNeed.UnitTests.Thing
             });
 
             double price = new Random().Next(0, 1000);
-            var thing = new ThingEntity() {
+            var thing = new ThingEntity()
+            {
                 Needed = true,
                 Name = "TestThing",
                 Household = household,
@@ -210,26 +283,28 @@ namespace ThingsWeNeed.UnitTests.Thing
 
             var thingEntity = context.Things.Add(thing);
             context.Households.Add(household);
-            //using (context)
-            //{
-            //    context.SaveChanges();
-            //}
+            using (context)
+            {
+                context.SaveChanges();
+            }
             return thingEntity;
         }
 
 
 
-        private void cleanup(int id) {
+        private void cleanup(int id)
+        {
             ThingEntity thing;
-            //using (TwnContext context = new TwnContext())
-            //{
-            //    thing = context.Things.Find(id);
-            //    context.Things.Remove(thing);
-            //    context.Households.Remove(context.Households.Find(thing.HouseholdId));
-            //    context.SaveChanges();
-            //}
+            using (TwnContext context = new TwnContext())
+            {
+                thing = context.Things.Find(id);
+                context.Things.Remove(thing);
+                context.Households.Remove(context.Households.Find(thing.HouseholdId));
+                context.SaveChanges();
+            }
+
         }
     }
-
-   
 }
+
+           
