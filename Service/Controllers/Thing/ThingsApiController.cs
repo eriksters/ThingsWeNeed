@@ -31,13 +31,8 @@ namespace ThingsWeNeed.Controllers.Thing
         }
 
         public ThingDaLogic Logic {
-            get => _logic ?? new ThingDaLogic(DatabaseContext, CurrentUser.Id);
+            get => _logic ?? new ThingDaLogic(DatabaseContext, User.Identity.GetUserId());
             set => _logic = value;
-        }
-
-        public UserEntity CurrentUser {
-            get => _currentUser ?? DatabaseContext.Users.Find(Request.GetOwinContext().Authentication.User.Identity.GetUserId());
-            set => _currentUser = value;
         }
 
         public ThingsApiController() : base() {
@@ -51,11 +46,13 @@ namespace ThingsWeNeed.Controllers.Thing
                 using (Logic)
                 {
                     ThingDto dto = Logic.GetById(id);
-                    dto.Household = new LinkDto($"api/Things/{id}/Household", "houshold", "GET");
-                    dto.Links.Add(new LinkDto($"api/Things/{id}", "self", "GET"));
-                    dto.Links.Add(new LinkDto($"api/Things/{id}", "create-thing", "POST"));
-                    dto.Links.Add(new LinkDto($"api/Things/{id}", "update-thing", "PUT"));
-                    dto.Links.Add(new LinkDto($"api/Things/{id}", "delete-thing", "DELETE"));
+
+                    //dto.Household = new LinkDto($"api/Things/{id}/Household", "houshold", "GET");
+                    //dto.Links.Add(new LinkDto($"api/Things/{id}", "self", "GET"));
+                    //dto.Links.Add(new LinkDto($"api/Things/{id}", "create-thing", "POST"));
+                    //dto.Links.Add(new LinkDto($"api/Things/{id}", "update-thing", "PUT"));
+                    //dto.Links.Add(new LinkDto($"api/Things/{id}", "delete-thing", "DELETE"));
+
                     return Ok(dto);
                 }
             }
@@ -74,6 +71,15 @@ namespace ThingsWeNeed.Controllers.Thing
         [HttpPost]
         [Route("api/Things")]
         public IHttpActionResult Create([FromBody] ThingDto dto) {
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var retDto = Logic.Create(dto);
+
+            return Ok(retDto);
+
+
             //   if (ModelState.IsValid)
             //{
             //    using (logic)
@@ -86,7 +92,7 @@ namespace ThingsWeNeed.Controllers.Thing
             //{
             //    return BadRequest(ModelState);
             //}
-            return null;
+            //return null;
         }
 
 
@@ -96,6 +102,8 @@ namespace ThingsWeNeed.Controllers.Thing
         {
             throw new NotImplementedException();
         }
+
+        
 
         [HttpDelete]
         [Route("api/Things/{id}")]

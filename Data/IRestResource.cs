@@ -12,9 +12,9 @@ namespace ThingsWeNeed.Data
 
         T[] GetCollection();
 
-        void Create(T toCreate);
+        T Create(T toCreate);
 
-        void Update(T toUpdate);
+        T Update(T toUpdate);
 
         T Delete(int id);
     }

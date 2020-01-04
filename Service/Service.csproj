@@ -162,8 +162,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="Controllers\Household\HouseholdApiController.cs" />
+    <Compile Include="Controllers\Household\HouseholdsMvcController.cs" />
     <Compile Include="Controllers\Purchase\PurchaseApiController.cs" />
+    <Compile Include="Controllers\RootMvcController.cs" />
     <Compile Include="Controllers\Users\UsersApiController.cs" />
+    <Compile Include="Controllers\Users\UsersMvcController.cs" />
     <Compile Include="Identity\TwnSignInManager.cs" />
     <Compile Include="Identity\TwnUserManager.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -207,6 +210,11 @@
     </Compile>
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\HouseholdCreateViewModel.cs" />
+    <Compile Include="ViewModels\HouseholdListViewModel.cs" />
+    <Compile Include="ViewModels\HouseholdUpdateViewModel.cs" />
+    <Compile Include="ViewModels\MultiViewModel.cs" />
+    <Compile Include="ViewModels\ThingListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -240,11 +248,21 @@
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include=".editorconfig" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\householdCreateScripts.js" />
+    <Content Include="Scripts\householdListScripts.js" />
+    <Content Include="Scripts\householdScripts.js" />
+    <Content Include="Scripts\householdUpdateScripts.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\ThingsMvc\Details.cshtml" />
+    <Content Include="Views\ThingsMvc\Index.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -254,15 +272,21 @@
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\Site.css" />
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\ThingsMvc\Details.cshtml" />
+    <Content Include="Views\HouseholdsMvc\Create.cshtml" />
+    <Content Include="Views\HouseholdsMvc\Update.cshtml" />
+    <Content Include="Views\PurchasesMvc\Update" />
+    <Content Include="Views\ThingsMvc\Create.cshtml" />
+    <Content Include="Views\ThingsMvc\Update.cshtml" />
+    <Content Include="Views\UsersMvc\Login.cshtml" />
+    <Content Include="Views\UsersMvc\Manage.cshtml" />
+    <Content Include="Views\UsersMvc\Register.cshtml" />
+    <Content Include="Views\HouseholdsMvc\List.cshtml" />
+    <Content Include="Views\ThingsMvc\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\RootMvc\" />
     <Folder Include="Views\WishApi\" />
     <Folder Include="Views\Wish\" />
   </ItemGroup>

@@ -9,9 +9,11 @@ using ThingsWeNeed.Shared;
 using Microsoft.Owin;
 using System.Net.Http;
 using Microsoft.AspNet.Identity;
+using ThingsWeNeed.Service.Identity;
 
 namespace ThingsWeNeed.Service.Controllers.Household
 {
+    [RoutePrefix("api/Households")]
     public class HouseholdApiController : ApiController
     {
         private HouseholdDaLogic householdLogic;
@@ -19,11 +21,12 @@ namespace ThingsWeNeed.Service.Controllers.Household
 
         public HouseholdApiController()
         {
-            householdLogic = new HouseholdDaLogic(context, Request.GetOwinContext().Authentication.User.Identity.GetUserId());
+            context = TwnContext.Create();
+            householdLogic = new HouseholdDaLogic(context, User.Identity.GetUserId());
         }
 
         [HttpGet]
-        [Route("api/Households/{id}")]
+        [Route("{id}")]
         public IHttpActionResult Get(int id)
         {
             if (ModelState.IsValid)
@@ -42,15 +45,15 @@ namespace ThingsWeNeed.Service.Controllers.Household
 
         [HttpGet]
         // move maybe to user Api Controller
-        [Route("api/Households/User/{userId}")]
+        [Route("")]
         // and change this to maybe api/User/{id}/Households
-        public IHttpActionResult GetCollection(string userId)
+        public IHttpActionResult GetCollection()
         {
             if (ModelState.IsValid)
             {
                 using (householdLogic)
                 {
-                    var householdDtoList = householdLogic.GetCollection(userId);
+                    var householdDtoList = householdLogic.GetCollection();
                     return Ok(householdDtoList);
                 }
             }
@@ -61,22 +64,16 @@ namespace ThingsWeNeed.Service.Controllers.Household
         }
 
         [HttpPut]
-        [Route("api/Households/Update/{id}")]
-        public IHttpActionResult Update(int id, HouseholdEntity householdEntity)
+        [Route("{id}")]
+        public IHttpActionResult Update(int id, [FromBody] HouseholdDto dto)
         {
             if (ModelState.IsValid)
             {
-                if (id == householdEntity.HouseholdId)
+                using (householdLogic)
                 {
-                    using (householdLogic)
-                    {
-                        var householdDto = householdLogic.Update(householdEntity);
-                        return Ok(householdDto);
-                    }
-                }
-                else
-                {
-                    return BadRequest("Id's do not match");
+                    dto.HouseholdId = id;
+                    var householdDto = householdLogic.Update(dto);
+                    return Ok(householdDto);
                 }   
             }
             else
@@ -86,15 +83,15 @@ namespace ThingsWeNeed.Service.Controllers.Household
         }
 
         [HttpDelete]
-        [Route("api/Households/{id}")]
+        [Route("{id}")]
         public IHttpActionResult Delete(int id)
         {
             if (ModelState.IsValid)
             {
                 using (householdLogic)
                 {
-                    bool removed = householdLogic.Delete(id);
-                    return Ok(removed);
+                    HouseholdDto retDto = householdLogic.Delete(id);
+                    return Ok(retDto);
                 }
             }
             else
@@ -104,15 +101,22 @@ namespace ThingsWeNeed.Service.Controllers.Household
         }
 
         [HttpPost]
-        [Route("api/Households/Create")]
-        public IHttpActionResult Create(HouseholdEntity newHousehold)
+        [Route("")]
+        public IHttpActionResult Create([FromBody] HouseholdDto newHousehold)
         {
             if (ModelState.IsValid)
             {
                 using (householdLogic)
                 {
                     HouseholdDto householdDto = householdLogic.Create(newHousehold);
+
+                    using (var manager = TwnUserManager.Create(null, HttpContext.Current.GetOwinContext()))
+                    {
+                        manager.JoinHousehold(User.Identity.GetUserId(), householdDto.HouseholdId);
+                    }
+
                     return Ok(householdDto);
+
                 }
             }
             else

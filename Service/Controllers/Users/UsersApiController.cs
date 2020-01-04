@@ -136,7 +136,6 @@ namespace ThingsWeNeed.Service.Controllers.Users
         [HttpPost]
         [Route("api/Users/LogOff")]
         public IHttpActionResult LogOff() {
-
             Request.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
 
             return Ok();
@@ -158,6 +157,38 @@ namespace ThingsWeNeed.Service.Controllers.Users
             }
         }
 
+        [HttpDelete]
+        [Route("api/Users/Households/{id}")]
+        public IHttpActionResult LeaveHousehold(int id)
+        {
+            UserManager.LeaveHousehold(User.Identity.GetUserId(), id);
+
+            HouseholdDto retDto;
+
+            using (var householdData = new HouseholdDaLogic(new TwnContext(), User.Identity.GetUserId()))
+            {
+                retDto = householdData.GetById(id);
+            }
+
+            return Ok(retDto);
+        }
+
+        [HttpPut]
+        [Route("api/Users/Households/{id}")]
+        public IHttpActionResult JoinHousehold(int id)
+        {
+            UserManager.JoinHousehold(User.Identity.GetUserId(), id);
+
+            HouseholdDto retDto;
+            
+            using (var householdData = new HouseholdDaLogic(new TwnContext(), User.Identity.GetUserId()))
+            {
+                retDto = householdData.GetById(id);
+            }
+
+            return Ok(retDto);
+        }
+
         [HttpGet]
         [Route("api/Users")]
         public IHttpActionResult GetCurrent() {
@@ -166,9 +197,7 @@ namespace ThingsWeNeed.Service.Controllers.Users
 
             if (Request.GetOwinContext().Authentication.User.Identity.IsAuthenticated)
             {
-                string userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
-
-                result = Ok(UserManager.Get(userId));
+                result = Ok(UserManager.Get(User.Identity.GetUserId()));
             }
 
             return result;
@@ -189,26 +218,26 @@ namespace ThingsWeNeed.Service.Controllers.Users
             return BadRequest(ModelState);
         }
 
-        private void addLinks(UserDto dto)
-        {
+        //private void addLinks(UserDto dto)
+        //{
 
-            string userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
+        //    string userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
 
-            using (var hhLogic = new HouseholdDaLogic(new TwnContext(), userId)) {
+        //    using (var hhLogic = new HouseholdDaLogic(new TwnContext(), userId)) {
                 
-                var households = hhLogic.GetCollection(userId);
+        //        var households = hhLogic.GetCollection();
 
-                foreach (HouseholdDto hhDto in households) {
-                    dto.Households.Add(new HouseholdDto() { 
-                        HouseholdId = 1,
-                        Name = "TP"
-                    });
-                }
+        //        foreach (HouseholdDto hhDto in households) {
+        //            dto.Households.Add(new HouseholdDto() { 
+        //                HouseholdId = 1,
+        //                Name = "TP"
+        //            });
+        //        }
 
-            }
+        //    }
 
 
 
-        }
+        ////}
     }
 }

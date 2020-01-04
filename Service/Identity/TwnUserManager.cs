@@ -16,11 +16,15 @@ namespace ThingsWeNeed.Service.Identity
     {
         public TwnUserManager(UserStore<UserEntity> userStore) : base(userStore)
         {
+            DatabaseContext = (TwnContext) userStore.Context;
         }
 
+        private TwnContext DatabaseContext;
+        
         public static TwnUserManager Create(IdentityFactoryOptions<TwnUserManager> options, IOwinContext context) {
+            
             var manager = new TwnUserManager(new UserStore<UserEntity>(context.Get<TwnContext>()));
-
+            
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 8,
@@ -56,5 +60,31 @@ namespace ThingsWeNeed.Service.Identity
             return dto;
 
         } 
+
+        public void LeaveHousehold(string userId, int householdId)
+        {
+            UserEntity user = Store.FindByIdAsync(userId).GetAwaiter().GetResult();
+
+            var household = user.Households.FirstOrDefault(x => x.HouseholdId == householdId);
+
+            if (household == null) 
+                throw new KeyNotFoundException($"User is not in this household");
+
+            user.Households.Remove(household);
+            DatabaseContext.SaveChanges();
+        }
+
+        public void JoinHousehold(string userId, int householdId)
+        {
+            var household = DatabaseContext.Households.Find(householdId);
+
+            if (household == null)
+                throw new KeyNotFoundException("Household not found");
+
+            var user = Store.FindByIdAsync(userId).GetAwaiter().GetResult();
+            
+            user.Households.Add(household);
+            DatabaseContext.SaveChanges();
+        }
     }
 }

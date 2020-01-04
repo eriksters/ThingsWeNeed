@@ -14,13 +14,15 @@ using ThingsWeNeed.Shared;
 
 namespace ThingsWeNeed.Data.Household
 {
-    public class HouseholdDaLogic : IDisposable
+    public class HouseholdDaLogic : IRestResource<HouseholdDto>, IDisposable
     {
         public TwnContext DatabaseContext { get; private set; }
         public ThingDaLogic thingDaLogic;
+        private string userId;
 
         public HouseholdDaLogic(TwnContext context, string userId)
         {
+            this.userId = userId;
             DatabaseContext = new TwnContext();
             thingDaLogic = new ThingDaLogic(context, userId);
         }
@@ -28,34 +30,57 @@ namespace ThingsWeNeed.Data.Household
         public HouseholdDto GetById(int id)
         {
             HouseholdEntity entity = DatabaseContext.Households.Find(id);
+
+            if (entity == null)
+                throw new KeyNotFoundException($"Household with id [{id}] not found");
+
             return buildDto(entity);
         }
-        public HouseholdDto[] GetCollection(string userId)
+
+
+        public HouseholdDto[] GetCollection()
         {
-            // keep track which households the user belongs to
-            ICollection<HouseholdEntity> entityHouseholds = DatabaseContext.Users.Find(userId).Households;
+            //// keep track which households the user belongs to
+            //ICollection<HouseholdEntity> entityHouseholds = DatabaseContext.Users.Find(userId).Households;
 
-            // list of household dto
-            ICollection<HouseholdDto> householdDtos = new List<HouseholdDto>();
+            //// list of household dto
+            //ICollection<HouseholdDto> householdDtos = new List<HouseholdDto>();
 
-            // create household Dto for every household id
-            foreach (HouseholdEntity he in entityHouseholds)
+            //// create household Dto for every household id
+            //foreach (HouseholdEntity he in entityHouseholds)
+            //{
+            //    householdDtos.Add(buildDto(he));
+            //}
+
+            ////return the colletion
+            //return householdDtos.ToArray();
+
+            var user = DatabaseContext.Users.Find(userId);
+
+            if (user == null)
+                throw new KeyNotFoundException("User not found");
+
+            var householdList = new List<HouseholdDto>();
+            foreach (var household in user.Households)
             {
-                householdDtos.Add(buildDto(he));
+                householdList.Add(buildDto(household));
             }
+            
+            return householdList.ToArray();
 
-            //return the colletion
-            return householdDtos.ToArray();
+            //throw new NotImplementedException();
         }
-        public HouseholdDto Update(HouseholdEntity entity)
+
+
+        public HouseholdDto Update(HouseholdDto dto)
         {
-            HouseholdEntity householdEntity = DatabaseContext.Households.Find(entity.HouseholdId);
-            householdEntity.Name = entity.Name;
-            householdEntity.Address.Address1 = entity.Address.Address1;
-            householdEntity.Address.Address2 = entity.Address.Address2;
-            householdEntity.Address.City = entity.Address.City;
-            householdEntity.Address.PostCode = entity.Address.PostCode;
-            householdEntity.Address.Country = entity.Address.Country;
+            HouseholdEntity householdEntity = DatabaseContext.Households.Find(dto.HouseholdId);
+
+            if (householdEntity == null)
+                throw new KeyNotFoundException($"Household with id [{dto.HouseholdId}] not found");
+
+            householdEntity.Name = dto.Name;
+            householdEntity.Address = dto.Address;
 
             DatabaseContext.SaveChanges();
 
@@ -63,21 +88,30 @@ namespace ThingsWeNeed.Data.Household
             return householdDto;
         }
 
-        public bool Delete(int id)
+        public HouseholdDto Delete(int id)
         {
             HouseholdEntity householdEntity = DatabaseContext.Households.Find(id);
+
+            if (householdEntity == null)
+                throw new KeyNotFoundException($"Household with id [{id}] not found");
+
             HouseholdEntity householdRemoved = DatabaseContext.Households.Remove(householdEntity);
-            return householdRemoved.HouseholdId == id ? true : false;
+            
+            return buildDto(householdRemoved);
         }
 
-        public HouseholdDto Create(HouseholdEntity newHousehold)
+
+        public HouseholdDto Create(HouseholdDto newHousehold)
         {
-            HouseholdEntity householdEntity = DatabaseContext.Households.Add(newHousehold);
+            HouseholdEntity entity = new HouseholdEntity() {
+                Address = newHousehold.Address,
+                Name = newHousehold.Name,
+            };
+
+            DatabaseContext.Households.Add(entity);
             DatabaseContext.SaveChanges();
-
-            HouseholdDto householdDto = buildDto(householdEntity);
-
-            return householdDto;
+            
+            return buildDto(entity);
         }
 
         public HouseholdDto buildDto(HouseholdEntity entity)
@@ -96,7 +130,6 @@ namespace ThingsWeNeed.Data.Household
                         PostCode = entity.Address.PostCode,
                         Country = entity.Address.Country
                     },
-                    Things = fillThingsCollection(),
                     //Users = fillUserCollection()
                 };
                 return dto;
@@ -106,6 +139,7 @@ namespace ThingsWeNeed.Data.Household
                 throw new KeyNotFoundException();
             }
 
+            /*
             //  Wtf is this for?
             ICollection<UserDto> fillUserCollection()
             {
@@ -137,6 +171,7 @@ namespace ThingsWeNeed.Data.Household
                 }
                 return thingsDto;
             }
+            */
         }
         public void Dispose()
         {

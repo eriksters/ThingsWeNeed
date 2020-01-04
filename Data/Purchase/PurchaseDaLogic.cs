@@ -9,8 +9,6 @@ using ThingsWeNeed.Shared;
 
 namespace ThingsWeNeed.Data.Purchase
 {
-
-
     public class PurchaseDaLogic : IRestResource<PurchaseDto>, IDisposable
     {
         private string userId;
@@ -28,7 +26,7 @@ namespace ThingsWeNeed.Data.Purchase
 
             if (entity != null)
             {
-                var dto = ToDto(entity);
+                var dto = toDto(entity);
 
                 return dto;
             }
@@ -36,20 +34,18 @@ namespace ThingsWeNeed.Data.Purchase
             {
                 throw new KeyNotFoundException();
             }
-
-
         }
 
         public PurchaseDto[] GetCollection() {
 
             var entities = context.Purchases.ToArray();
 
-            PurchaseDto[] dtos = entities.Select(x => ToDto(x)).ToArray();
+            PurchaseDto[] dtos = entities.Select(x => toDto(x)).ToArray();
 
             return dtos;
         }
 
-        public void Create(PurchaseDto dto) {
+        public PurchaseDto Create(PurchaseDto dto) {
             var entity = new PurchaseEntity()
             {
                 ThingId = dto.ThingId,
@@ -62,9 +58,40 @@ namespace ThingsWeNeed.Data.Purchase
             context.SaveChanges();
 
             dto.PurchaseId = entity.PurchaseId;
+
+            throw new NotImplementedException();
         }
 
-        public void Update(PurchaseDto dto) {
+        public PurchaseDto[] CreateCollection(PurchaseDto[] dtoCol)
+        {
+            PurchaseEntity[] entityArray = new PurchaseEntity[dtoCol.Length];
+
+            for (int i = 0; i < dtoCol.Length; i++)
+            {
+                var entity = new PurchaseEntity
+                {
+                    MadeById = userId,
+                    MadeOn = dtoCol[i].MadeOn,
+                    Price = dtoCol[i].Price,
+                    ThingId = dtoCol[i].ThingId,
+                };
+
+                context.Purchases.Add(entity);
+                entityArray[i] = entity;
+            }
+            context.SaveChanges();
+
+            PurchaseDto[] retDtoCol = new PurchaseDto[entityArray.Length];
+
+            for (int i = 0; i < entityArray.Length; i++)
+            {
+                retDtoCol[i] = toDto(entityArray[i]);
+            }
+
+            return retDtoCol;
+        }
+
+        public PurchaseDto Update(PurchaseDto dto) {
 
             var entity = context.Purchases.Find(dto.ThingId);
 
@@ -78,7 +105,11 @@ namespace ThingsWeNeed.Data.Purchase
                 throw new KeyNotFoundException();
             }
 
+            throw new NotImplementedException();
+
         }
+
+
 
         public PurchaseDto Delete(int id) {
             var entity = context.Purchases.Find(id);
@@ -87,7 +118,7 @@ namespace ThingsWeNeed.Data.Purchase
             {
                 context.Purchases.Remove(entity);
                 context.SaveChanges();
-                return(ToDto(entity));
+                return(toDto(entity));
             }
             else
             {
@@ -95,22 +126,20 @@ namespace ThingsWeNeed.Data.Purchase
             }
         }
 
-
-        public static PurchaseDto ToDto(PurchaseEntity entity) {
-            var dto = new PurchaseDto()
-            {
-                Price = entity.Price,
-                MadeById = entity.MadeById,
-                ThingId = entity.ThingId,
-                PurchaseId = entity.PurchaseId,
-                MadeOn = entity.MadeOn,
-            };
-
-            return dto;
-        }
-
         public void Dispose() {
             context.Dispose();
+        }
+
+        private PurchaseDto toDto (PurchaseEntity entity)
+        {
+            return new PurchaseDto 
+            { 
+                MadeById = entity.MadeById,
+                Price = entity.Price,
+                ThingId = entity.ThingId,
+                MadeOn = entity.MadeOn,
+                PurchaseId = entity.PurchaseId
+            };
         }
     }
 }

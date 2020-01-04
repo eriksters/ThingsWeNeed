@@ -17,7 +17,7 @@ namespace ThingsWeNeed.Service.Controllers.Purchase
         private PurchaseDaLogic logic;
 
         public PurchaseApiController () {
-            logic = new PurchaseDaLogic(new TwnContext(), Request.GetOwinContext().Authentication.User.Identity.GetUserId());
+            logic = new PurchaseDaLogic(new TwnContext(), User.Identity.GetUserId());
         }
 
         [HttpGet]
@@ -58,32 +58,38 @@ namespace ThingsWeNeed.Service.Controllers.Purchase
             return Ok(dtos);
         }
 
+        /// <summary>
+        ///     Purchase multiple things
+        /// </summary>
         [HttpPost]
         [Route("api/Purchases")]
-        public IHttpActionResult Create(PurchaseDto dto)
+        public IHttpActionResult Create([FromBody] PurchaseDto[] dtoCol)
         {
             IHttpActionResult result;
 
-            if (ModelState.IsValid && dto != null) {
+            if (ModelState.IsValid && dtoCol != null)
+            {
 
                 using (logic)
                 {
-                    dto.MadeOn = DateTime.Now;
 
-                    logic.Create(dto);
-
-                    using (var thingLogic = new ThingDaLogic(new TwnContext(), Request.GetOwinContext().Authentication.User.Identity.GetUserId()))
+                    foreach (PurchaseDto dto in dtoCol)
                     {
-                        var thingDto = thingLogic.GetById(dto.ThingId);
+                        dto.MadeOn = DateTime.Now;
+                    }
 
-                        thingDto.Needed = false;
+                    var retDtoCol = logic.CreateCollection(dtoCol);
 
-                        thingLogic.Update(thingDto);
+                    using (var thingLogic = new ThingDaLogic(new TwnContext(), User.Identity.GetUserId()))
+                    {
+                        var thingDto = thingLogic.UpdateCollectionNeeded();
                     }
 
                     createLinks(dto);
 
+
                     result = Ok(dto);
+
                 }
             }
             else
