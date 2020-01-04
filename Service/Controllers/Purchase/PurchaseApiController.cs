@@ -73,22 +73,23 @@ namespace ThingsWeNeed.Service.Controllers.Purchase
                 using (logic)
                 {
 
-                    foreach (PurchaseDto dto in dtoCol)
+                    int[] boughtIdArray = new int[dtoCol.Length];
+                    for (int i = 0; i < dtoCol.Length; i -=- 1)
                     {
-                        dto.MadeOn = DateTime.Now;
+                        dtoCol[i].MadeOn = DateTime.Now;
+                        boughtIdArray[i] = dtoCol[i].ThingId;
                     }
 
-                    var retDtoCol = logic.CreateCollection(dtoCol);
+                    PurchaseDto[] retDtoCol = logic.CreateCollection(dtoCol);
 
                     using (var thingLogic = new ThingDaLogic(new TwnContext(), User.Identity.GetUserId()))
                     {
-                        var thingDto = thingLogic.UpdateCollectionNeeded();
+                        var thingDto = thingLogic.UpdateCollectionNotNeeded(boughtIdArray);
                     }
 
-                    createLinks(dto);
+                    //createLinks(null);   //TODO
 
-
-                    result = Ok(dto);
+                    result = Ok(retDtoCol);  //TODO
 
                 }
             }

@@ -1,15 +1,17 @@
 ﻿@model ThingsWeNeed.Service.ViewModels.ThingListViewModel
+@Scripts.Render("~/Scripts/thingListScripts.js")
+@Scripts.Render("~/Scripts/thingScripts.js")
 
 <div class="container">
     <div class="jumbotron">
-
+        <a href="/Things/create">Create new</a>
         
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>Needed</th>
                     <th>Name</th>
-                    <th>Actions</th>
+                    <th width="200">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,7 +27,7 @@
                                 </span>
                             </span>
 
-                            <span class="input-group-btn buy">
+                            <span class="btn-group buy">
                                 <button type="button" class="btn btn-success" onClick="buyButtonClicked(@thing.ThingId)">Buy</button>
                                 <button type="button" class="btn btn-default" onClick="window.location = '/Things/@thing.ThingId'">Edit</button>
                             </span>
@@ -37,65 +39,5 @@
         
         <button type="button" class="btn btn-success" onclick="finishClicked()">Finish shopping</button>
 
-                
-        <script>
-
-            var buyList = [];
-
-            function buyButtonClicked(id) {
-                buyList.push(id);
-                var $row = $("tr#" + id);
-                $row.find("span.price").show();
-                $row.find("span.buy").hide();
-
-                console.log(buyList);
-            }
-
-            function cancelButtonClicked(id) {
-                for( var i = 0; i < buyList.length; i++){ 
-                    if ( buyList[i] === id) {
-                        buyList.splice(i, 1); 
-                    }
-                }
-                var $row = $("tr#" + id);
-                $row.find("span.price").hide();
-                $row.find("span.buy").show();
-
-                console.log("Cancel clicked");
-                console.log(buyList);
-            }
-
-            function Purchase(ThingId, Price) {
-                this.ThingId = ThingId;
-                this.Price = Price;
-            }   
-
-            function finishClicked() {
-                
-                var purchaseObjArray = [];
-
-                for ( var i = 0; i < buyList.length; i++ ) {
-                    var price = $("tr#" + buyList[i]).find("input.price-input")[0].value;
-                    purchaseObjArray[i] = new Purchase(buyList[i], price);
-                }
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/Purchases',
-                    data: JSON.stringify(purchaseObjArray),
-                    contentType: 'application/json',
-                    success: function (response) {
-                        console.log(response);
-                    },
-                    error: function (response) {
-                        console.log(response);
-                    }
-                });
-
-                console.log("finished");
-                console.log(purchaseObjArray);
-            }
-
-        </script>
     </div>
 </div>

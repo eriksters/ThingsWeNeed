@@ -29,3 +29,22 @@ function logoff(successCallback, errorCallback) {
         }
     });
 }
+
+
+function register(data, successCallback, errorCallback) {
+    console.log("Sending register data");
+    $.ajax({
+        type: "POST",
+        url: "/api/Users/register",
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        
+        success: function (response) {
+            successCallback(response);
+        },
+
+        error: function (response) {
+            errorCallback(response);
+        }
+    });
+}

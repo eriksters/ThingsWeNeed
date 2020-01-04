@@ -22,7 +22,8 @@ namespace ThingsWeNeed.Service.Owin
             app.UseCookieAuthentication(new CookieAuthenticationOptions { 
                 Provider = new CookieAuthenticationProvider(),
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                ExpireTimeSpan = TimeSpan.FromHours(6)
+                ExpireTimeSpan = TimeSpan.FromHours(6),
+                LoginPath = new PathString("/Users/Login")
             });
         }
     }

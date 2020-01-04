@@ -215,6 +215,7 @@
     <Compile Include="ViewModels\HouseholdUpdateViewModel.cs" />
     <Compile Include="ViewModels\MultiViewModel.cs" />
     <Compile Include="ViewModels\ThingListViewModel.cs" />
+    <Compile Include="ViewModels\ThingUpdateViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

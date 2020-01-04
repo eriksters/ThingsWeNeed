@@ -85,7 +85,16 @@ namespace ThingsWeNeed.Service.Controllers.Thing
         [Route("{id}")]
         public ActionResult Update(int id)
         {
-            throw new NotImplementedException();
+            ThingUpdateViewModel viewModel;
+
+            using (var logic = new ThingDaLogic(new TwnContext(), User.Identity.GetUserId())) {
+                viewModel = new ThingUpdateViewModel()
+                {
+                    Thing = logic.GetById(id)
+                };
+            };
+        
+            return View("Update", viewModel);
         }
 
         //public ActionResult Create([Bind(Include = "dto")] ThingDto dto) {

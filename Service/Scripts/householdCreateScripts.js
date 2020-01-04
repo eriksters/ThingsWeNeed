@@ -10,7 +10,7 @@
 function createSuccessCallback(household) {
     console.log("Household created successfully");
     console.log(household);
-    window.location.replace("/Households/create");  //TODO redirect to correct url
+    window.location.replace("/Households");
 }
 
 //  TODO Handle household creation errors
