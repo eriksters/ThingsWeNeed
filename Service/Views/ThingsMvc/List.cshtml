@@ -15,24 +15,35 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var thing in Model.Things) {
-                    <tr id="@thing.ThingId">
-                        <td>@thing.Needed</td>
-                        <td>@thing.Name</td>
-                        <td>
-                            <span class="input-group price" style="display:none">
-                                <input type="text" class="form-control price-input" placeholder="Price">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" onclick="cancelButtonClicked(@thing.ThingId)">X</button>
-                                </span>
+                @foreach (var thing in Model.Things)
+                {
+                <tr id="@thing.ThingId">
+                    @{String Needed = null;
+                        if (thing.Needed == true)
+                        {
+                            Needed = "Needed";
+                        }
+                        else
+                        {
+                            Needed = "Not needed";
+                        }
+                    }
+                    <td>@Needed</td>
+                    <td>@thing.Name</td>
+                    <td>
+                        <span class="input-group price" style="display:none">
+                            <input type="text" class="form-control price-input" placeholder="Price">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" onclick="cancelButtonClicked(@thing.ThingId)">X</button>
                             </span>
+                        </span>
 
-                            <span class="btn-group buy">
-                                <button type="button" class="btn btn-success" onClick="buyButtonClicked(@thing.ThingId)">Buy</button>
-                                <button type="button" class="btn btn-default" onClick="window.location = '/Things/@thing.ThingId'">Edit</button>
-                            </span>
-                        </td>
-                    </tr>
+                        <span class="btn-group buy">
+                            <button type="button" class="btn btn-success" onClick="buyButtonClicked(@thing.ThingId)">Buy</button>
+                            <button type="button" class="btn btn-default" onClick="window.location = '/Things/@thing.ThingId'">Edit</button>
+                        </span>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

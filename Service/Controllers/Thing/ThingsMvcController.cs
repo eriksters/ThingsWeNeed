@@ -119,11 +119,5 @@ namespace ThingsWeNeed.Service.Controllers.Thing
         //    }
         //}
 
-        //[Route("Things/{id}/Edit")]
-        //[HttpGet]
-        //public ActionResult Update(int id) {
-        //    throw new NotImplementedException();
-        //}
-
     }
 }

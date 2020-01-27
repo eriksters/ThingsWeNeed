@@ -98,9 +98,21 @@ namespace ThingsWeNeed.Controllers.Thing
 
         [HttpPut]
         [Route("api/Things/{id}")]
-        public IHttpActionResult Update(int id)
+        public IHttpActionResult Update(int id, [FromBody] ThingDto dto)
         {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                using (_logic)
+                {
+                    dto.ThingId = id;
+                    var thingDto = _logic.Update(dto);
+                    return Ok(thingDto);
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         

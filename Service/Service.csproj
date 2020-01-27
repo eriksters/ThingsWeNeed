@@ -258,6 +258,13 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\thingCreateScripts.js" />
+    <Content Include="Scripts\thingListScripts.js" />
+    <Content Include="Scripts\thingScripts.js" />
+    <Content Include="Scripts\thingUpdateScripts.js" />
+    <Content Include="Scripts\userLoginScripts.js" />
+    <Content Include="Scripts\userRegisterScripts.js" />
+    <Content Include="Scripts\userScripts.js" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\ThingsMvc\Details.cshtml" />
